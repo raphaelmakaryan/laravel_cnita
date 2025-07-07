@@ -126,6 +126,12 @@ a {
         width: 15% !important;
         font-size: large;
     }
+
+
+    #detailProduct {
+        margin-top: 8rem !important;
+        margin-bottom: 11rem !important;
+    }
 }
 
 /*! PETIT ECRAN PC*/
