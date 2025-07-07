@@ -8,7 +8,7 @@ class HomeController extends Controller
 {
     public function index()
     {
-        echo "coucou";
+        //echo "coucou";
         return view("homepage");
     }
 }
