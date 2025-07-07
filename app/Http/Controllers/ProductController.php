@@ -14,7 +14,6 @@ class ProductController extends Controller
 
     public function detail($id)
     {
-        echo  'Fiche du produit ' .  $id;
-        return view("product-details");
+        return view("product-details", ["product"=>$id]);
     }
 }
