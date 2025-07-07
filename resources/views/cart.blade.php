@@ -1,0 +1,1 @@
+<h1>Bienvenue dans la page panier !</h1>

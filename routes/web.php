@@ -5,7 +5,7 @@ use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 
-Route::get('/', [HomeController::class, "index"])->name('welcome');
+Route::get('/', [HomeController::class, "index"]);
 
 Route::get(
     '/product',

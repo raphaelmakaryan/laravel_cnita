@@ -9,5 +9,6 @@ class HomeController extends Controller
     public function index()
     {
         echo "coucou";
+        return view("homepage");
     }
 }
