@@ -6,10 +6,10 @@ use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function explore()
     {
         echo "Tout les produits";
-        return view("product-list");
+        return view("explore");
     }
 
     public function detail($id)

@@ -8,8 +8,8 @@ use App\Http\Controllers\CartController;
 Route::get('/', [HomeController::class, "index"]);
 
 Route::get(
-    '/product',
-    [ProductController::class, "index"]
+    '/explore',
+    [ProductController::class, "explore"]
 );
 
 Route::get(

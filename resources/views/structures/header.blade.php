@@ -8,7 +8,7 @@
         rel="stylesheet">
 </head>
 
-<nav class="navbar navbar-expand-lg header_footer">
+<nav class="navbar navbar-expand-lg background_couleur_principale_400">
     <div class="container-fluid">
         <a class="navbar-brand" href="#">
             <img src="{{ asset('assets/logoNoir.png') }}" alt="Bootstrap" width="100"> </a>

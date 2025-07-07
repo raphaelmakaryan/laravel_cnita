@@ -16,11 +16,11 @@
     --couleur_grise_900: #343A40;
 }
 
-.header_footer {
+.background_couleur_principale_400 {
     background-color: var(--couleur_principale_400);
 }
 
-.bouton_noir {
+.bouton_style {
     display: flex;
     height: 35px;
     padding: 4px 20px;
@@ -29,14 +29,26 @@
     align-items: center;
     gap: 10px;
     flex-shrink: 0;
-    color: #E9ECEF;
     font-family: Asap;
     font-size: 15px;
     font-style: normal;
     font-weight: 400;
     line-height: 146.687%;
     border-radius: 10px;
+}
+
+.bouton_noir {
     background: var(--couleur_grise_900);
+    color: var(--couleur_grise_100);
+}
+
+.bouton_blanc {
+    background: var(--couleur_grise_100);
+    color: var(--couleur_grise_900);
+}
+
+a{
+    text-decoration: none;
 }
 
 .couleur_grise_700 {
@@ -64,11 +76,6 @@
     width: 100%;
     height: 50px;
     padding: 0px;
-}
-
-.produitsTendances {
-    background-color: var(--couleur_principale_400);
-    border-radius: 5px;
 }
 
 
