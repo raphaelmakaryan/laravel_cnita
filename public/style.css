@@ -16,6 +16,23 @@
     --couleur_grise_900: #343A40;
 }
 
+body {
+    font-family: Asap;
+    background-color: var(--couleur_background) !important;
+}
+
+a {
+    text-decoration: none;
+}
+
+.w-0 {
+    width: 0 !important;
+}
+
+.mt-7{
+    margin-top: 5rem !important;
+}
+
 .background_couleur_principale_400 {
     background-color: var(--couleur_principale_400);
 }
@@ -42,13 +59,28 @@
     color: var(--couleur_grise_100);
 }
 
+.bouton_noir:hover {
+    background: var(--couleur_grise_100) ;
+    color: var(--couleur_grise_900);
+}
+
+.bouton_noir.orange:hover {
+    background: var(--couleur_principale_500);
+    color: var(--couleur_grise_100);
+}
+
 .bouton_blanc {
     background: var(--couleur_grise_100);
     color: var(--couleur_grise_900);
 }
 
-a{
-    text-decoration: none;
+.bouton_blanc:hover {
+    background: var(--couleur_grise_900); 
+    color: var(--couleur_grise_100);
+}
+
+.couleur_grise_100 {
+    color: var(--couleur_grise_100);
 }
 
 .couleur_grise_700 {
@@ -57,10 +89,6 @@ a{
 
 .couleur_grise_900 {
     color: var(--couleur_grise_900);
-}
-
-.w-0 {
-    width: 0 !important;
 }
 
 /*#endregion BODY*/
@@ -78,5 +106,8 @@ a{
     padding: 0px;
 }
 
+#itemsMore {
+    background-color: var(--couleur_grise_100);
+}
 
 /*#endregion ACCUEIL*/
