@@ -8,7 +8,6 @@ class ProductController extends Controller
 {
     public function explore()
     {
-        echo "Tout les produits";
         return view("explore");
     }
 

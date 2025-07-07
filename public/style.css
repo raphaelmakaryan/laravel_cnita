@@ -29,10 +29,6 @@ a {
     width: 0 !important;
 }
 
-.mt-7{
-    margin-top: 5rem !important;
-}
-
 .background_couleur_principale_400 {
     background-color: var(--couleur_principale_400);
 }
@@ -60,7 +56,7 @@ a {
 }
 
 .bouton_noir:hover {
-    background: var(--couleur_grise_100) ;
+    background: var(--couleur_grise_100);
     color: var(--couleur_grise_900);
 }
 
@@ -75,7 +71,7 @@ a {
 }
 
 .bouton_blanc:hover {
-    background: var(--couleur_grise_900); 
+    background: var(--couleur_grise_900);
     color: var(--couleur_grise_100);
 }
 
@@ -94,12 +90,6 @@ a {
 /*#endregion BODY*/
 
 /*#region ACCUEIL*/
-#heroImg {
-    /*background-image: url("./assets/hero.png");*/
-    background-repeat: no-repeat;
-    background-size: cover;
-}
-
 .separations {
     width: 100%;
     height: 50px;
@@ -111,3 +101,82 @@ a {
 }
 
 /*#endregion ACCUEIL*/
+
+/*#region MEDIAQUERYS*/
+/*! PC*/
+@media (min-width: 1281px) {
+    #heroImg {
+        width: 2200px !important;
+        height: 500px !important;
+    }
+
+    .logoFooter {
+        width: 100px !important;
+    }
+
+    #heroItems {
+        margin-top: 14rem !important;
+    }
+
+    #heroItems>p {
+        font-size: x-large;
+    }
+
+    #buttonFilterExplore {
+        width: 15% !important;
+        font-size: large;
+    }
+}
+
+/*! PETIT ECRAN PC*/
+@media (min-width: 1025px) and (max-width: 1280px) {
+    #heroImg {
+        width: 2200px !important;
+        height: 500px !important;
+    }
+
+    .logoFooter {
+        width: 100px !important;
+    }
+
+    #heroItems {
+        margin-top: 10rem !important;
+    }
+
+    #heroItems>p {
+        font-size: large;
+    }
+
+    #buttonFilterExplore {
+        width: 15% !important;
+        font-size: large;
+    }
+}
+
+/*! TABLETTE*/
+@media (min-width: 768px) and (max-width: 1024px) {}
+
+/*! GRAND TEL*/
+@media (min-width: 481px) and (max-width: 767px) {
+    #heroItems {
+        margin-top: 10rem !important;
+    }
+
+    #heroItems>p {
+        font-size: large;
+    }
+
+}
+
+/*! TEL*/
+@media (min-width: 320px) and (max-width: 480px) {
+    #heroItems {
+        margin-top: 6rem !important;
+    }
+
+    #heroItems>p {
+        font-size: large;
+    }
+}
+
+/*#endregion MEDIAQUERYS*/
