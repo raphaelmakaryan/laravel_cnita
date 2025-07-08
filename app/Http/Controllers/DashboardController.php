@@ -12,12 +12,12 @@ class DashboardController extends Controller
     public function indexPage()
     {
         $allProduct = Product::all();
-        return view("dashboard.dashboard", data: ['produits' => $allProduct]);
+        return view("backoffice.products", data: ['produits' => $allProduct]);
     }
 
     public function createPage()
     {
-        return view("dashboard.create.createProduct");
+        return view("backoffice.create.createProduct");
     }
 
     public function addingProduct(Request $request)
@@ -35,54 +35,53 @@ class DashboardController extends Controller
                 "prix" => $newProduct[2],
             ]);
 
-            return view("dashboard.create.successCreate");
+            return view("backoffice.create.successCreate");
         } catch (Exception $e) {
-            return view("dashboard.create.errorCreate");
+            return view("backoffice.create.errorCreate");
         }
     }
 
     public function errorCreatePage()
     {
-        return view("dashboard.create.errorCreate");
+        return view("backoffice.create.errorCreate");
     }
 
     public function successCreatePage()
     {
-        return view("dashboard.create.successCreate");
+        return view("backoffice.create.successCreate");
     }
 
     public function deletePage($id)
     {
         $productDelete = Product::where("ID", "=", $id)->get();
 
-        return view("dashboard.delete.deleteProduct", ["product" => $productDelete]);
+        return view("backoffice.delete.deleteProduct", ["product" => $productDelete]);
     }
 
     public function deleteProduct($id)
     {
         try {
-            $productDelete = Product::find($id);
-            $productDelete->delete();
-            return view("dashboard.delete.successDelete");
+            Product::where("ID", $id)->delete();
+            return view("backoffice.delete.successDelete");
         } catch (Exception $e) {
-            return view("dashboard.delete.errorDelete");
+            return view("backoffice.delete.errorDelete");
         }
     }
 
     public function errorDeletePage()
     {
-        return view("dashboard.delete.errorDelete");
+        return view("backoffice.delete.errorDelete");
     }
 
     public function successDeletePage()
     {
-        return view("dashboard.delete.successDelete");
+        return view("backoffice.delete.successDelete");
     }
 
     public function modifyPage($id)
     {
         $productModify = Product::where("ID", "=", $id)->get();
 
-        return view("dashboard.modifyProduct", ["product" => $productModify]);
+        return view("backoffice.modifyProduct", ["product" => $productModify]);
     }
 }

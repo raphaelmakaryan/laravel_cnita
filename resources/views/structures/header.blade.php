@@ -34,7 +34,7 @@
                     <a class="nav-link couleur_grise_900" href="/contact">Contact</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link couleur_grise_900" href="/dashboard">Dashboard</a>
+                    <a class="nav-link couleur_grise_900" href="/backoffice/products">Dashboard</a>
                 </li>
             </ul>
         </div>

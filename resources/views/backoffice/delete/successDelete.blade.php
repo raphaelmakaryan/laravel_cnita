@@ -8,7 +8,7 @@
             </div>
             <div class="col-12">
                 <p class="fs-5 couleur_succes text-center">
-                    L'ajout du produit a marcher !
+                    Suppresion du produit a marcher !
                 </p>
             </div>
         </div>

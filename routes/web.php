@@ -50,48 +50,48 @@ Route::get(
 
 #region DASHBOARD
 Route::get(
-    '/dashboard',
+    '/backoffice/products',
     [DashboardController::class, "indexPage"]
 );
 #endregion DASHBOARD
 
 #region MODIFY
 Route::get(
-    '/modify/{id}',
+    '/backoffice/modify/{id}',
     [DashboardController::class, "modifyPage"]
 );
 #endregion MODIFY
 
 #region CREATE
 Route::get(
-    '/create',
+    '/backoffice/create',
     [DashboardController::class, "createPage"]
 );
 
 Route::post(
-    '/createproduct',
+    '/backoffice/createproduct',
     [DashboardController::class, "addingProduct"]
 );
 
 Route::get(
-    '/errorcreate',
+    '/backoffice/errorcreate',
     [DashboardController::class, "errorCreatePage"]
 );
 
 Route::get(
-    '/successcreate',
+    '/backoffice/successcreate',
     [DashboardController::class, "successCreatePage"]
 );
 #endregion CREATE
 
 #region DELETE
 Route::get(
-    '/delete/{id}',
+    '/backoffice/delete/{id}',
     [DashboardController::class, "deletePage"]
 );
 
 Route::post(
-    '/deleteproduct/{id}',
+    '/backoffice/deleteproduct/{id}',
     [DashboardController::class, "deleteProduct"]
 );
 #endregion DELETE
