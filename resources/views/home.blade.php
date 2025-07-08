@@ -11,9 +11,7 @@
                     <p class="couleur_grise_100 text-center">MIRO MIRO propose un large
                         choix de lunettes photochromiques, du design à la vente, incluant des
                         modèles personnalisés.</p>
-                    <a>
-                        <button type="button" class="btn bouton_style bouton_noir">EXPLORER</button>
-                    </a>
+                    <a href="/explore" class="btn bouton_style bouton_noir">EXPLORER</a>
                 </div>
                 <img src="{{ asset('assets/home/hero.png') }}" alt="" id="heroImg" class="img-fluid w-100">
             </div>
@@ -44,11 +42,9 @@
                             <p class="fs-6">Nom de la lunette</p>
                             <p class="fs-6">20€</p>
                         </div>
-                        <div class="col-5 col-sm-5 col-md-12 col-lg-12 p-0">
-                            <a
-                                class="d-flex align-items-center flex-row flex-md-column flex-lg-column justify-content-end pe-2 pe-lg-0 mb-lg-2 mb-md-2">
-                                <button type="button" class="btn bouton_style bouton_noir">VOIR</button>
-                            </a>
+                        <div
+                            class="col-5 col-sm-5 col-md-12 col-lg-12 p-0 d-flex align-items-center flex-row flex-md-column flex-lg-column justify-content-end pe-2 pe-lg-0 mb-lg-2 mb-md-2">
+                            <a href="/product/1" class="btn bouton_style bouton_noir">VOIR</a>
                         </div>
                     </div>
                 </div>
@@ -67,11 +63,9 @@
                             <p class="fs-6">Nom de la lunette</p>
                             <p class="fs-6">20€</p>
                         </div>
-                        <div class="col-5 col-sm-5 col-md-12 col-lg-12 p-0">
-                            <a
-                                class="d-flex align-items-center flex-row flex-md-column flex-lg-column justify-content-end pe-2 pe-lg-0 mb-lg-2 mb-md-2">
-                                <button type="button" class="btn bouton_style bouton_noir">VOIR</button>
-                            </a>
+                        <div
+                            class="col-5 col-sm-5 col-md-12 col-lg-12 p-0 d-flex align-items-center flex-row flex-md-column flex-lg-column justify-content-end pe-2 pe-lg-0 mb-lg-2 mb-md-2">
+                            <a href="/product/1" class="btn bouton_style bouton_noir">VOIR</a>
                         </div>
                     </div>
                 </div>
@@ -90,11 +84,9 @@
                             <p class="fs-6">Nom de la lunette</p>
                             <p class="fs-6">20€</p>
                         </div>
-                        <div class="col-5 col-sm-5 col-md-12 col-lg-12 p-0">
-                            <a
-                                class="d-flex align-items-center flex-row flex-md-column flex-lg-column justify-content-end pe-2 pe-lg-0 mb-lg-2 mb-md-2">
-                                <button type="button" class="btn bouton_style bouton_noir">VOIR</button>
-                            </a>
+                        <div
+                            class="col-5 col-sm-5 col-md-12 col-lg-12 p-0 d-flex align-items-center flex-row flex-md-column flex-lg-column justify-content-end pe-2 pe-lg-0 mb-lg-2 mb-md-2">
+                            <a href="/product/1" class="btn bouton_style bouton_noir">VOIR</a>
                         </div>
                     </div>
                 </div>
@@ -113,11 +105,9 @@
                             <p class="fs-6">Nom de la lunette</p>
                             <p class="fs-6">20€</p>
                         </div>
-                        <div class="col-5 col-sm-5 col-md-12 col-lg-12 p-0">
-                            <a
-                                class="d-flex align-items-center flex-row flex-md-column flex-lg-column justify-content-end pe-2 pe-lg-0 mb-lg-2 mb-md-2">
-                                <button type="button" class="btn bouton_style bouton_noir">VOIR</button>
-                            </a>
+                        <div
+                            class="col-5 col-sm-5 col-md-12 col-lg-12 p-0 d-flex align-items-center flex-row flex-md-column flex-lg-column justify-content-end pe-2 pe-lg-0 mb-lg-2 mb-md-2">
+                            <a href="/product/1" class="btn bouton_style bouton_noir">VOIR</a>
                         </div>
                     </div>
                 </div>
@@ -136,11 +126,9 @@
                             <p class="fs-6">Nom de la lunette</p>
                             <p class="fs-6">20€</p>
                         </div>
-                        <div class="col-5 col-sm-5 col-md-12 col-lg-12 p-0">
-                            <a
-                                class="d-flex align-items-center flex-row flex-md-column flex-lg-column justify-content-end pe-2 pe-lg-0 mb-lg-2 mb-md-2">
-                                <button type="button" class="btn bouton_style bouton_noir">VOIR</button>
-                            </a>
+                        <div
+                            class="col-5 col-sm-5 col-md-12 col-lg-12 p-0 d-flex align-items-center flex-row flex-md-column flex-lg-column justify-content-end pe-2 pe-lg-0 mb-lg-2 mb-md-2">
+                            <a href="/product/1" class="btn bouton_style bouton_noir">VOIR</a>
                         </div>
                     </div>
                 </div>
@@ -159,11 +147,9 @@
                             <p class="fs-6">Nom de la lunette</p>
                             <p class="fs-6">20€</p>
                         </div>
-                        <div class="col-5 col-sm-5 col-md-12 col-lg-12 p-0">
-                            <a
-                                class="d-flex align-items-center flex-row flex-md-column flex-lg-column justify-content-end pe-2 pe-lg-0 mb-lg-2 mb-md-2">
-                                <button type="button" class="btn bouton_style bouton_noir">VOIR</button>
-                            </a>
+                        <div
+                            class="col-5 col-sm-5 col-md-12 col-lg-12 p-0 d-flex align-items-center flex-row flex-md-column flex-lg-column justify-content-end pe-2 pe-lg-0 mb-lg-2 mb-md-2">
+                            <a href="/product/1" class="btn bouton_style bouton_noir">VOIR</a>
                         </div>
                     </div>
                 </div>

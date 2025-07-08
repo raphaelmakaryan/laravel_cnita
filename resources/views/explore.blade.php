@@ -21,7 +21,7 @@
                         <h6 class="card-subtitle mb-2 text-body-secondary">10€</h6>
                         <p class="card-text">Ces lunettes sont magnifique genre wahhhh suis jaloux de fou</p>
                         <div class="d-flex flex-row justify-content-end">
-                            <a href="#" class="btn bouton_style bouton_noir orange w-25">VOIR</a>
+                            <a href="/product/1" class="btn bouton_style bouton_noir orange w-25">VOIR</a>
                         </div>
                     </div>
                 </div>
@@ -34,7 +34,7 @@
                         <h6 class="card-subtitle mb-2 text-body-secondary">10€</h6>
                         <p class="card-text">Ces lunettes sont magnifique genre wahhhh suis jaloux de fou</p>
                         <div class="d-flex flex-row justify-content-end">
-                            <a href="#" class="btn bouton_style bouton_noir orange w-25">VOIR</a>
+                            <a href="/product/1" class="btn bouton_style bouton_noir orange w-25">VOIR</a>
                         </div>
                     </div>
                 </div>
@@ -47,7 +47,7 @@
                         <h6 class="card-subtitle mb-2 text-body-secondary">10€</h6>
                         <p class="card-text">Ces lunettes sont magnifique genre wahhhh suis jaloux de fou</p>
                         <div class="d-flex flex-row justify-content-end">
-                            <a href="#" class="btn bouton_style bouton_noir orange w-25">VOIR</a>
+                            <a href="/product/1" class="btn bouton_style bouton_noir orange w-25">VOIR</a>
                         </div>
                     </div>
                 </div>
@@ -60,7 +60,7 @@
                         <h6 class="card-subtitle mb-2 text-body-secondary">10€</h6>
                         <p class="card-text">Ces lunettes sont magnifique genre wahhhh suis jaloux de fou</p>
                         <div class="d-flex flex-row justify-content-end">
-                            <a href="#" class="btn bouton_style bouton_noir orange w-25">VOIR</a>
+                            <a href="/product/1" class="btn bouton_style bouton_noir orange w-25">VOIR</a>
                         </div>
                     </div>
                 </div>
@@ -73,7 +73,7 @@
                         <h6 class="card-subtitle mb-2 text-body-secondary">10€</h6>
                         <p class="card-text">Ces lunettes sont magnifique genre wahhhh suis jaloux de fou</p>
                         <div class="d-flex flex-row justify-content-end">
-                            <a href="#" class="btn bouton_style bouton_noir orange w-25">VOIR</a>
+                            <a href="/product/1" class="btn bouton_style bouton_noir orange w-25">VOIR</a>
                         </div>
                     </div>
                 </div>
@@ -86,7 +86,7 @@
                         <h6 class="card-subtitle mb-2 text-body-secondary">10€</h6>
                         <p class="card-text">Ces lunettes sont magnifique genre wahhhh suis jaloux de fou</p>
                         <div class="d-flex flex-row justify-content-end">
-                            <a href="#" class="btn bouton_style bouton_noir orange w-25">VOIR</a>
+                            <a href="/product/1" class="btn bouton_style bouton_noir orange w-25">VOIR</a>
                         </div>
                     </div>
                 </div>

@@ -44,7 +44,7 @@
                         <p class="fs-6">50€</p>
                     </div>
                     <div class="col-12">
-                        <a href="#" class="btn bouton_style bouton_noir orange w-100">PANIER</a>
+                        <a href="/cart" class="btn bouton_style bouton_noir orange w-100">PANIER</a>
                     </div>
                     <div class="col-12 mt-4 mb-2">
                         <hr>
