@@ -27,3 +27,10 @@ Route::get(
     '/cart',
     [CartController::class, "index"]
 );
+
+Route::get(
+    '/payment',
+    function () {
+        return view("payment");
+    }
+);

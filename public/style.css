@@ -14,6 +14,8 @@
     --couleur_grise_700: #6C757D;
     --couleur_grise_800: #50585F;
     --couleur_grise_900: #343A40;
+    --couleur_succes: #63DD94;
+    --couleur_error: #EE283B;
 }
 
 body {
@@ -39,6 +41,14 @@ a {
 
 .background_couleur_grise_900 {
     background-color: var(--couleur_grise_900);
+}
+
+.couleur_succes {
+    color: var(--couleur_succes);
+}
+
+.couleur_error {
+    color: var(--couleur_error);
 }
 
 .couleur_grise_100 {
