@@ -90,11 +90,6 @@ a {
     color: var(--couleur_grise_900);
 }
 
-.bouton_noir.orange:hover {
-    background: var(--couleur_principale_500);
-    color: var(--couleur_grise_100);
-}
-
 .bouton_blanc {
     background: var(--couleur_grise_100);
     color: var(--couleur_grise_900);
@@ -103,6 +98,31 @@ a {
 .bouton_blanc:hover {
     background: var(--couleur_grise_900);
     color: var(--couleur_grise_100);
+}
+
+.bouton_orange {
+    background: var(--couleur_principale_500);
+    color: var(--couleur_grise_900);
+}
+
+.bouton_orange:hover {
+    background: var(--couleur_grise_900);
+    color: var(--couleur_grise_100);
+}
+
+.bouton_fond_orange:hover {
+    background: var(--couleur_principale_500);
+    color: var(--couleur_grise_100);
+}
+
+.bouton_fond_noir:hover {
+    background: var(--couleur_grise_900);
+        color: var(--couleur_grise_100);
+}
+
+.bouton_fond_blanc:hover {
+    background: var(--couleur_grise_100);
+    color: var(--couleur_grise_900);
 }
 
 /*#endregion BODY*/

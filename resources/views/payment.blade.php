@@ -37,7 +37,7 @@
                                 </div>
                             </div>
                             <div class="col-12 mt-4 d-flex align-items-center justify-content-center">
-                                <button href="#" class="btn bouton_style bouton_noir orange"
+                                <button href="#" class="btn bouton_style bouton_noir bouton_fond_orange"
                                     type="submit">VALIDER</button>
                             </div>
                         </form>
@@ -121,7 +121,7 @@
                 </div>
             </div>
             <div class="col-12 mt-4 d-flex align-items-center justify-content-center">
-                <a href="#" class="btn bouton_style bouton_noir orange w-25">CONTINUER</a>
+                <a href="#" class="btn bouton_style bouton_noir bouton_fond_orange w-25">CONTINUER</a>
             </div>
         </div>
         <div class="row mt-3" id="responsePayment">
@@ -153,7 +153,7 @@
                 </div>
                 <div class="row mt-2">
                     <div class="col-12  d-flex align-items-center justify-content-center">
-                        <a href="/" class="btn bouton_style bouton_noir orange">RETOUR A L'ACCUEIL</a>
+                        <a href="/" class="btn bouton_style bouton_noir bouton_fond_orange">RETOUR A L'ACCUEIL</a>
                     </div>
                 </div>
             </div>

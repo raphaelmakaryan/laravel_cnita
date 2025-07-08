@@ -4,7 +4,7 @@
     <div class="container-fluid">
         <div class="row d-flex flex-column">
             <div class="col-12 d-flex flex-column align-items-center">
-                <button type="button" class="btn bouton_style bouton_noir orange w-75" id="buttonFilterExplore">FILTRER</button>
+                <button type="button" class="btn bouton_style bouton_noir bouton_fond_orange w-75" id="buttonFilterExplore">FILTRER</button>
             </div>
         </div>
     </div>
@@ -22,7 +22,7 @@
                             <h6 class="card-subtitle mb-2 text-body-secondary">{{ $produit->prix ?? '10€' }}</h6>
                             <p class="card-text">{{ $produit->description ?? 'Ces lunettes sont magnifique genre wahhhh suis jaloux de fou' }}</p>
                             <div class="d-flex flex-row justify-content-end">
-                                <a href="/product/{{ $produit->id ?? 1 }}" class="btn bouton_style bouton_noir orange w-25">VOIR</a>
+                                <a href="/product/{{ $produit->id ?? 1 }}" class="btn bouton_style bouton_noir bouton_fond_orange w-25">VOIR</a>
                             </div>
                         </div>
                     </div>

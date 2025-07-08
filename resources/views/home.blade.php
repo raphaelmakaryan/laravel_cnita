@@ -35,10 +35,11 @@
                             class="row flex-md-column flex-lg-column background_couleur_principale_400 d-flex align-items-center rounded">
                             <div class="col-1 p-0 w-0"></div>
                             <div class="col-3 col-sm-3 col-md-12 col-lg-12 p-0">
-                                <img src="{{ asset($produit->image ?? 'assets/exemples/exempleProduitsTendance.png') }}" alt=""
-                                    class="img-fluid w-100 rounded">
+                                <img src="{{ asset($produit->image ?? 'assets/exemples/exempleProduitsTendance.png') }}"
+                                    alt="" class="img-fluid w-100 rounded">
                             </div>
-                            <div class="col-4 col-sm-4 col-md-12 col-lg-12 ps-3 ps-lg-2 d-flex align-items-start flex-column mt-lg-1">
+                            <div
+                                class="col-4 col-sm-4 col-md-12 col-lg-12 ps-3 ps-lg-2 d-flex align-items-start flex-column mt-lg-1">
                                 <p class="fs-6">{{ $produit->nom ?? 'Nom des lunettes ici la' }}</p>
                                 <p class="fs-6">{{ $produit->prix ?? 'X'}} €</p>
                             </div>
@@ -48,9 +49,7 @@
                             </div>
                         </div>
                     </div>
-                    </div>
-
-
+                </div>
             @endforeach
         </div>
     </div>
@@ -92,7 +91,7 @@
                         offrir un confort visuel optimal.</p>
                 </div>
                 <div>
-                    <button type="button" class="btn bouton_style bouton_noir orange">EXPLORER</button>
+                    <button type="button" class="btn bouton_style bouton_noir bouton_fond_orange">EXPLORER</button>
                 </div>
             </div>
             <div class="col-12 col-lg-4 d-flex flex-column align-items-center mt-4 mb-4 p-lg-1">
@@ -108,7 +107,7 @@
                         personnalisable.</p>
                 </div>
                 <div>
-                    <button type="button" class="btn bouton_style bouton_noir orange">EN SAVOIR PLUS</button>
+                    <button type="button" class="btn bouton_style bouton_noir bouton_fond_orange">EN SAVOIR PLUS</button>
                 </div>
             </div>
             <div class="col-12 col-lg-4 d-flex flex-column align-items-center mt-4 mb-5 p-lg-1">
@@ -123,7 +122,7 @@
                         rapide dans toute la France.</p>
                 </div>
                 <div>
-                    <button type="button" class="btn bouton_style bouton_noir orange">SUIVRE MA COMMANDE</button>
+                    <button type="button" class="btn bouton_style bouton_noir bouton_fond_orange">SUIVRE MA COMMANDE</button>
                 </div>
             </div>
         </div>

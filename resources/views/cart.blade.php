@@ -88,7 +88,7 @@
             <div class="col-lg-3">
             </div>
             <div class="col-12 mt-4 d-flex flex-row justify-content-end justify-content-lg-center">
-                <a href="/payment" class="btn bouton_style bouton_noir orange">VALIDER</a>
+                <a href="/payment" class="btn bouton_style bouton_noir bouton_fond_orange">VALIDER</a>
             </div>
         </div>
     </div>

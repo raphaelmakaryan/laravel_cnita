@@ -48,7 +48,7 @@
                                 </button>
                             </div>
                             <div class="mt-4 mb-3">
-                                <a href="#" class="btn bouton_style bouton_noir orange w-100">VALIDER</a>
+                                <a href="#" class="btn bouton_style bouton_noir bouton_fond_orange w-100">VALIDER</a>
                             </div>
                         </div>
                     </div>
@@ -88,7 +88,7 @@
                                     </button>
                                 </div>
                                 <div class="mt-4 mb-3">
-                                    <a href="#" class="btn bouton_style bouton_noir orange w-100">VALIDER</a>
+                                    <a href="#" class="btn bouton_style bouton_noir bouton_fond_orange w-100">VALIDER</a>
                                 </div>
                             </div>
                         </div>
@@ -129,7 +129,7 @@
                                     </button>
                                 </div>
                                 <div class="mt-4 mb-3">
-                                    <a href="#" class="btn bouton_style bouton_noir orange w-100">VALIDER</a>
+                                    <a href="#" class="btn bouton_style bouton_noir bouton_fond_orange w-100">VALIDER</a>
                                 </div>
                             </div>
                         </div>
@@ -170,7 +170,7 @@
                                     </button>
                                 </div>
                                 <div class="mt-4 mb-3">
-                                    <a href="#" class="btn bouton_style bouton_noir orange w-100">VALIDER</a>
+                                    <a href="#" class="btn bouton_style bouton_noir bouton_fond_orange w-100">VALIDER</a>
                                 </div>
                             </div>
                         </div>
@@ -211,7 +211,7 @@
                                     </button>
                                 </div>
                                 <div class="mt-4 mb-3">
-                                    <a href="#" class="btn bouton_style bouton_noir orange w-100">VALIDER</a>
+                                    <a href="#" class="btn bouton_style bouton_noir bouton_fond_orange w-100">VALIDER</a>
                                 </div>
                             </div>
                         </div>
@@ -252,7 +252,7 @@
                                     </button>
                                 </div>
                                 <div class="mt-4 mb-3">
-                                    <a href="#" class="btn bouton_style bouton_noir orange w-100">VALIDER</a>
+                                    <a href="#" class="btn bouton_style bouton_noir bouton_fond_orange w-100">VALIDER</a>
                                 </div>
                             </div>
                         </div>
@@ -263,7 +263,7 @@
         </div>
         <div class="row mt-3 mb-3">
             <div class="col-12 mt-4 d-flex flex-row justify-content-end justify-content-lg-center">
-                <a href="#" class="btn bouton_style bouton_noir orange">PANIER</a>
+                <a href="#" class="btn bouton_style bouton_noir bouton_fond_orange">PANIER</a>
             </div>
         </div>
     </div>

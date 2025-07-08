@@ -4,8 +4,6 @@
     <div class="container">
         @if ($product)
             @foreach ($product as $produit)
-
-
                 <div class="row">
                     <div class="col-12 col-lg-6">
                         <div class="container">
@@ -48,7 +46,7 @@
                                 <p class="fs-6">{{ $produit->prix ?? 'X'}} €</p>
                             </div>
                             <div class="col-12">
-                                <a href="/cart" class="btn bouton_style bouton_noir orange w-100">PANIER</a>
+                                <a href="/cart" class="btn bouton_style bouton_noir bouton_fond_orange w-100">PANIER</a>
                             </div>
                             <div class="col-12 mt-4 mb-2">
                                 <hr>
