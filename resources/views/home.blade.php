@@ -28,132 +28,30 @@
             <p class="fs-2 text-center couleur_grise_700">Nos produits tendances</p>
         </div>
         <div class="row mt-4">
-            <div class="col-12 col-md-4 col-lg-4 p-0 p-lg-1 mb-2 mt-2">
-                <div class="container-fluid">
-                    <div
-                        class="row flex-md-column flex-lg-column background_couleur_principale_400 d-flex align-items-center rounded">
-                        <div class="col-1 p-0 w-0"></div>
-                        <div class="col-3 col-sm-3 col-md-12 col-lg-12 p-0">
-                            <img src="{{ asset('assets/exemples/exempleProduitsTendance.png') }}" alt=""
-                                class="img-fluid w-100 rounded">
-                        </div>
+            @foreach ($produits as $produit)
+                <div class="col-12 col-md-4 col-lg-4 p-0 p-lg-1 mb-2 mt-2">
+                    <div class="container-fluid">
                         <div
-                            class="col-4 col-sm-4 col-md-12 col-lg-12 ps-3 ps-lg-2 d-flex align-items-start flex-column mt-lg-1">
-                            <p class="fs-6">Nom de la lunette</p>
-                            <p class="fs-6">20€</p>
-                        </div>
-                        <div
-                            class="col-5 col-sm-5 col-md-12 col-lg-12 p-0 d-flex align-items-center flex-row flex-md-column flex-lg-column justify-content-end pe-2 pe-lg-0 mb-lg-2 mb-md-2">
-                            <a href="/product/1" class="btn bouton_style bouton_noir">VOIR</a>
+                            class="row flex-md-column flex-lg-column background_couleur_principale_400 d-flex align-items-center rounded">
+                            <div class="col-1 p-0 w-0"></div>
+                            <div class="col-3 col-sm-3 col-md-12 col-lg-12 p-0">
+                                <img src="{{ asset($produit->image ?? 'assets/exemples/exempleProduitsTendance.png') }}" alt=""
+                                    class="img-fluid w-100 rounded">
+                            </div>
+                            <div class="col-4 col-sm-4 col-md-12 col-lg-12 ps-3 ps-lg-2 d-flex align-items-start flex-column mt-lg-1">
+                                <p class="fs-6">{{ $produit->nom ?? 'Nom des lunettes ici la' }}</p>
+                                <p class="fs-6">{{ $produit->prix ?? 'X'}} €</p>
+                            </div>
+                            <div
+                                class="col-5 col-sm-5 col-md-12 col-lg-12 p-0 d-flex align-items-center flex-row flex-md-column flex-lg-column justify-content-end pe-2 pe-lg-0 mb-lg-2 mb-md-2">
+                                <a href="/product/{{ $produit->id ?? 1 }}" class="btn bouton_style bouton_noir">VOIR</a>
+                            </div>
                         </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-4 col-lg-4 p-0 p-lg-1 mb-2 mt-2">
-                <div class="container-fluid">
-                    <div
-                        class="row flex-md-column flex-lg-column background_couleur_principale_400 d-flex align-items-center rounded">
-                        <div class="col-1 p-0 w-0"></div>
-                        <div class="col-3 col-sm-3 col-md-12 col-lg-12 p-0">
-                            <img src="{{ asset('assets/exemples/exempleProduitsTendance.png') }}" alt=""
-                                class="img-fluid w-100 rounded">
-                        </div>
-                        <div
-                            class="col-4 col-sm-4 col-md-12 col-lg-12 ps-3 ps-lg-2 d-flex align-items-start flex-column mt-lg-1">
-                            <p class="fs-6">Nom de la lunette</p>
-                            <p class="fs-6">20€</p>
-                        </div>
-                        <div
-                            class="col-5 col-sm-5 col-md-12 col-lg-12 p-0 d-flex align-items-center flex-row flex-md-column flex-lg-column justify-content-end pe-2 pe-lg-0 mb-lg-2 mb-md-2">
-                            <a href="/product/1" class="btn bouton_style bouton_noir">VOIR</a>
-                        </div>
                     </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-4 col-lg-4 p-0 p-lg-1 mb-2 mt-2">
-                <div class="container-fluid">
-                    <div
-                        class="row flex-md-column flex-lg-column background_couleur_principale_400 d-flex align-items-center rounded">
-                        <div class="col-1 p-0 w-0"></div>
-                        <div class="col-3 col-sm-3 col-md-12 col-lg-12 p-0">
-                            <img src="{{ asset('assets/exemples/exempleProduitsTendance.png') }}" alt=""
-                                class="img-fluid w-100 rounded">
-                        </div>
-                        <div
-                            class="col-4 col-sm-4 col-md-12 col-lg-12 ps-3 ps-lg-2 d-flex align-items-start flex-column mt-lg-1">
-                            <p class="fs-6">Nom de la lunette</p>
-                            <p class="fs-6">20€</p>
-                        </div>
-                        <div
-                            class="col-5 col-sm-5 col-md-12 col-lg-12 p-0 d-flex align-items-center flex-row flex-md-column flex-lg-column justify-content-end pe-2 pe-lg-0 mb-lg-2 mb-md-2">
-                            <a href="/product/1" class="btn bouton_style bouton_noir">VOIR</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-4 col-lg-4 p-0 p-lg-1 mb-2 mt-2">
-                <div class="container-fluid">
-                    <div
-                        class="row flex-md-column flex-lg-column background_couleur_principale_400 d-flex align-items-center rounded">
-                        <div class="col-1 p-0 w-0"></div>
-                        <div class="col-3 col-sm-3 col-md-12 col-lg-12 p-0">
-                            <img src="{{ asset('assets/exemples/exempleProduitsTendance.png') }}" alt=""
-                                class="img-fluid w-100 rounded">
-                        </div>
-                        <div
-                            class="col-4 col-sm-4 col-md-12 col-lg-12 ps-3 ps-lg-2 d-flex align-items-start flex-column mt-lg-1">
-                            <p class="fs-6">Nom de la lunette</p>
-                            <p class="fs-6">20€</p>
-                        </div>
-                        <div
-                            class="col-5 col-sm-5 col-md-12 col-lg-12 p-0 d-flex align-items-center flex-row flex-md-column flex-lg-column justify-content-end pe-2 pe-lg-0 mb-lg-2 mb-md-2">
-                            <a href="/product/1" class="btn bouton_style bouton_noir">VOIR</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-4 col-lg-4 p-0 p-lg-1 mb-2 mt-2">
-                <div class="container-fluid">
-                    <div
-                        class="row flex-md-column flex-lg-column background_couleur_principale_400 d-flex align-items-center rounded">
-                        <div class="col-1 p-0 w-0"></div>
-                        <div class="col-3 col-sm-3 col-md-12 col-lg-12 p-0">
-                            <img src="{{ asset('assets/exemples/exempleProduitsTendance.png') }}" alt=""
-                                class="img-fluid w-100 rounded">
-                        </div>
-                        <div
-                            class="col-4 col-sm-4 col-md-12 col-lg-12 ps-3 ps-lg-2 d-flex align-items-start flex-column mt-lg-1">
-                            <p class="fs-6">Nom de la lunette</p>
-                            <p class="fs-6">20€</p>
-                        </div>
-                        <div
-                            class="col-5 col-sm-5 col-md-12 col-lg-12 p-0 d-flex align-items-center flex-row flex-md-column flex-lg-column justify-content-end pe-2 pe-lg-0 mb-lg-2 mb-md-2">
-                            <a href="/product/1" class="btn bouton_style bouton_noir">VOIR</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-12 col-md-4 col-lg-4 p-0 p-lg-1 mb-2 mt-2">
-                <div class="container-fluid">
-                    <div
-                        class="row flex-md-column flex-lg-column background_couleur_principale_400 d-flex align-items-center rounded">
-                        <div class="col-1 p-0 w-0"></div>
-                        <div class="col-3 col-sm-3 col-md-12 col-lg-12 p-0">
-                            <img src="{{ asset('assets/exemples/exempleProduitsTendance.png') }}" alt=""
-                                class="img-fluid w-100 rounded">
-                        </div>
-                        <div
-                            class="col-4 col-sm-4 col-md-12 col-lg-12 ps-3 ps-lg-2 d-flex align-items-start flex-column mt-lg-1">
-                            <p class="fs-6">Nom de la lunette</p>
-                            <p class="fs-6">20€</p>
-                        </div>
-                        <div
-                            class="col-5 col-sm-5 col-md-12 col-lg-12 p-0 d-flex align-items-center flex-row flex-md-column flex-lg-column justify-content-end pe-2 pe-lg-0 mb-lg-2 mb-md-2">
-                            <a href="/product/1" class="btn bouton_style bouton_noir">VOIR</a>
-                        </div>
-                    </div>
-                </div>
-            </div>
+
+
+            @endforeach
         </div>
     </div>
 </section>
