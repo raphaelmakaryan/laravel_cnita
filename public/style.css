@@ -118,6 +118,10 @@ a {
     background-color: var(--couleur_grise_100);
 }
 
+#heroImg {
+    object-fit: cover;
+}
+
 /*#endregion ACCUEIL*/
 
 /*#region MEDIAQUERYS*/
