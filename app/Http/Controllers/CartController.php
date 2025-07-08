@@ -8,7 +8,6 @@ class CartController extends Controller
 {
     public function index()
     {
-        echo "panier";
         return view("cart");
     }
 }

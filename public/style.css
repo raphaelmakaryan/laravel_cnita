@@ -37,6 +37,22 @@ a {
     background-color: var(--couleur_principale_400);
 }
 
+.background_couleur_grise_900 {
+    background-color: var(--couleur_grise_900);
+}
+
+.couleur_grise_100 {
+    color: var(--couleur_grise_100);
+}
+
+.couleur_grise_700 {
+    color: var(--couleur_grise_700);
+}
+
+.couleur_grise_900 {
+    color: var(--couleur_grise_900);
+}
+
 .bouton_style {
     display: flex;
     height: 35px;
@@ -77,18 +93,6 @@ a {
 .bouton_blanc:hover {
     background: var(--couleur_grise_900);
     color: var(--couleur_grise_100);
-}
-
-.couleur_grise_100 {
-    color: var(--couleur_grise_100);
-}
-
-.couleur_grise_700 {
-    color: var(--couleur_grise_700);
-}
-
-.couleur_grise_900 {
-    color: var(--couleur_grise_900);
 }
 
 /*#endregion BODY*/
