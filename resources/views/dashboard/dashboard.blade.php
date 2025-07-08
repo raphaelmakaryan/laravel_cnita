@@ -35,7 +35,7 @@
                                         <img src="{{ asset('assets/dashboard/modify.png') }}" class="img-fluid" alt="..."
                                             width="25">
                                     </a>
-                                    <a href="/deleteproduct/{{ $produit->ID }}" class="btn bouton_style bouton_orange bouton_fond_blanc mt-2 mb-2">
+                                    <a href="/delete/{{ $produit->ID }}" class="btn bouton_style bouton_orange bouton_fond_blanc mt-2 mb-2">
                                         <img src="{{ asset('assets/dashboard/delete.png') }}" class="img-fluid" alt="..."
                                             width="25">
                                     </a>

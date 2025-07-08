@@ -53,6 +53,7 @@ Route::get(
     '/dashboard',
     [DashboardController::class, "indexPage"]
 );
+#endregion DASHBOARD
 
 #region MODIFY
 Route::get(
@@ -84,15 +85,13 @@ Route::get(
 #endregion CREATE
 
 #region DELETE
-Route::post(
-    '/delete',
+Route::get(
+    '/delete/{id}',
     [DashboardController::class, "deletePage"]
 );
 
 Route::post(
     '/deleteproduct/{id}',
-    [DashboardController::class, "deletePage"]
+    [DashboardController::class, "deleteProduct"]
 );
 #endregion DELETE
-
-#endregion DASHBOARD

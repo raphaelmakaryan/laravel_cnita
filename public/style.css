@@ -43,6 +43,22 @@ a {
     background-color: var(--couleur_grise_900);
 }
 
+.background_couleur_succes {
+    background-color: var(--couleur_succes);
+}
+
+.background_couleur_succes:hover {
+    background-color: var(--couleur_succes);
+}
+
+.background_couleur_error {
+    background-color: var(--couleur_error);
+}
+
+.background_couleur_error:hover {
+    background-color: var(--couleur_error);
+}
+
 .couleur_succes {
     color: var(--couleur_succes);
 }

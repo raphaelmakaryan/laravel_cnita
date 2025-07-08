@@ -35,27 +35,48 @@ class DashboardController extends Controller
                 "prix" => $newProduct[2],
             ]);
 
-            return view("dashboard.dashboard");
+            return view("dashboard.create.successCreate");
         } catch (Exception $e) {
-            return view("home");
+            return view("dashboard.create.errorCreate");
         }
     }
 
     public function errorCreatePage()
     {
-        return view("dashboard.create.errorCreateProduct");
+        return view("dashboard.create.errorCreate");
     }
 
     public function successCreatePage()
     {
-        return view("dashboard.create.successCreateProduct");
+        return view("dashboard.create.successCreate");
     }
 
     public function deletePage($id)
     {
         $productDelete = Product::where("ID", "=", $id)->get();
 
-        return view("dashboard.deleteProduct", ["product" => $productDelete]);
+        return view("dashboard.delete.deleteProduct", ["product" => $productDelete]);
+    }
+
+    public function deleteProduct($id)
+    {
+        try {
+            $productDelete = Product::find($id);
+            $productDelete->delete();
+            return view("dashboard.delete.successDelete");
+        } catch (Exception $e) {
+            return view("dashboard.delete.errorDelete");
+        }
+    }
+
+    public function errorDeletePage()
+    {
+        return view("dashboard.delete.errorDelete");
+    }
+
+    public function successDeletePage()
+    {
+        return view("dashboard.delete.successDelete");
     }
 
     public function modifyPage($id)
