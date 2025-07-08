@@ -25,6 +25,10 @@ a {
     text-decoration: none;
 }
 
+.mt-7 {
+    margin-top: 5rem !important;
+}
+
 .w-0 {
     width: 0 !important;
 }

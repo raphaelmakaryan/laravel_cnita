@@ -1,4 +1,4 @@
-<footer class="mt-5">
+<footer class="mt-7">
     <div class="container-fluid">
         <div class="row">
             <img src="{{ asset('assets/separationHAUT.png') }}" alt="" class="img-fluid separations">
