@@ -44,7 +44,7 @@
                             </div>
                             <div
                                 class="col-5 col-sm-5 col-md-12 col-lg-12 p-0 d-flex align-items-center flex-row flex-md-column flex-lg-column justify-content-end pe-2 pe-lg-0 mb-lg-2 mb-md-2">
-                                <a href="/product/{{ $produit->id ?? 1 }}" class="btn bouton_style bouton_noir">VOIR</a>
+                                <a href="/product/{{ $produit->ID }}" class="btn bouton_style bouton_noir">VOIR</a>
                             </div>
                         </div>
                     </div>
