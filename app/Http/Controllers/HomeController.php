@@ -10,7 +10,7 @@ use App\Models\Product;
 
 class HomeController extends Controller
 {
-    public function index()
+    public function indexPage()
     {
         //$allProduct = Product::orderBy("nom")->get();
         //$allProduct = Product::orderByDesc("prix")->get();

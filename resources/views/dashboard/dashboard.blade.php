@@ -9,7 +9,7 @@
         </div>
         <div class="row">
             <div class="col-12 d-flex flex-row justify-content-end justify-content-lg-center">
-                <a href="/createproduct">
+                <a href="/create">
                     <button class="btn bouton_orange bouton_fond_blanc">
                         <img src="{{ asset('assets/dashboard/create.png') }}" class="img-fluid" alt="..." width="25">
                     </button>
@@ -19,7 +19,8 @@
         <div class="row mt-3">
             @if($produits)
                 @foreach ($produits as $produit)
-                    <div class="col-12">
+                    <div class="col-lg-3"></div>
+                    <div class="col-12 col-lg-6">
                         <div class="mt-1 mb-1 container">
                             <div class="row border">
                                 <div class="col-4 d-flex">
@@ -42,6 +43,7 @@
                             </div>
                         </div>
                     </div>
+                    <div class="col-lg-3"></div>
                 @endforeach
             @endif
         </div>

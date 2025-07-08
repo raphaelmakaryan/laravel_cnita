@@ -9,14 +9,14 @@ use App\Models\Product;
 
 class ProductController extends Controller
 {
-    public function explore()
+    public function explorePage()
     {
         $allProduct = Product::all();
 
         return view("explore", data: ['produits' => $allProduct]);
     }
 
-    public function detail($id)
+    public function detailPage($id)
     {
         $productDetail = Product::where("ID", "=", $id)->get();
 

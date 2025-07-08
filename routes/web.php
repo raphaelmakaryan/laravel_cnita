@@ -7,52 +7,92 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\PersonalizeController;
 use App\Http\Controllers\DashboardController;
 
-Route::get('/', [HomeController::class, "index"]);
+#region HOME
+Route::get('/', [HomeController::class, "indexPage"]);
+#endregion HOME
 
+#region EXPLORE
 Route::get(
     '/explore',
-    [ProductController::class, "explore"]
+    [ProductController::class, "explorePage"]
 );
+#endregion EXPLORE
 
+#region PERSO
 Route::get(
     '/personalize',
-    [PersonalizeController::class, "index"]
+    [PersonalizeController::class, "indexPage"]
 );
+#endregion PERSO
 
+#region PRODUCT DETAIL
 Route::get(
     '/product/{id}',
-    [ProductController::class, "detail"]
+    [ProductController::class, "detailPage"]
 );
+#endregion PRODUCT DETAIL
 
+#region CART
 Route::get(
     '/cart',
-    [CartController::class, "index"]
+    [CartController::class, "indexPage"]
 );
+#endregion CART
 
+#region PAYMENT
 Route::get(
     '/payment',
     function () {
         return view("payment");
     }
 );
+#endregion PAYMENT
 
+#region DASHBOARD
 Route::get(
     '/dashboard',
-    [DashboardController::class, "index"]
+    [DashboardController::class, "indexPage"]
 );
 
+#region MODIFY
 Route::get(
-    '/modifyproduct/{id}',
-    [DashboardController::class, "modify"]
+    '/modify/{id}',
+    [DashboardController::class, "modifyPage"]
+);
+#endregion MODIFY
+
+#region CREATE
+Route::get(
+    '/create',
+    [DashboardController::class, "createPage"]
 );
 
-Route::get(
+Route::post(
     '/createproduct',
-    [DashboardController::class, "create"]
+    [DashboardController::class, "addingProduct"]
 );
-
 
 Route::get(
-    '/deleteproduct/{id}',
-    [DashboardController::class, "delete"]
+    '/errorcreate',
+    [DashboardController::class, "errorCreatePage"]
 );
+
+Route::get(
+    '/successcreate',
+    [DashboardController::class, "successCreatePage"]
+);
+#endregion CREATE
+
+#region DELETE
+Route::post(
+    '/delete',
+    [DashboardController::class, "deletePage"]
+);
+
+Route::post(
+    '/deleteproduct/{id}',
+    [DashboardController::class, "deletePage"]
+);
+#endregion DELETE
+
+#endregion DASHBOARD
