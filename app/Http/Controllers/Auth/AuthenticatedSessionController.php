@@ -28,7 +28,13 @@ class AuthenticatedSessionController extends Controller
 
         $request->session()->regenerate();
 
-        return redirect()->intended(route('backoffice.products', absolute: false));
+        $user = Auth::user();
+
+        if ($user->permission === 1) {
+            return redirect()->intended(route('backoffice.products', absolute: false));
+        } else {
+            return redirect()->route('client.dashboard');
+        }
     }
 
     /**

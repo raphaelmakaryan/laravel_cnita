@@ -4,10 +4,13 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\HomeController;
 use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
+use App\Http\Controllers\ClientController;
 use App\Http\Controllers\PersonalizeController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Auth\Middleware\Authenticate;
 use App\Http\Controllers\ProfileController;
+use App\Http\Middleware\AdminMiddleware;
+use App\Http\Middleware\ClientMiddleware;
 
 #region HOME
 Route::get('/', [HomeController::class, "indexPage"]);
@@ -59,54 +62,62 @@ Route::get(
 );
 #endregion AUTHENTICATION
 
-#region DASHBOARD
+#region DASHBOARD ADMIN
 Route::get(
     '/backoffice/products',
     [DashboardController::class, "indexPage"]
-)->middleware(['auth', 'verified'])->name('backoffice.products');
+)->middleware(['auth', 'verified', AdminMiddleware::class])->name('backoffice.products');
 
 Route::get(
     '/backoffice/product/{id}/detail',
     [DashboardController::class, "detailPage"]
-)->middleware(['auth', 'verified']);
-#endregion DASHBOARD
+)->middleware(['auth', 'verified', AdminMiddleware::class]);
+#endregion DASHBOARD ADMIN
 
 #region MODIFY
 Route::get(
     '/backoffice/product/{id}/edit',
     [DashboardController::class, "modifyPage"]
-)->middleware(['auth', 'verified']);
+)->middleware(['auth', 'verified', AdminMiddleware::class]);
 
 Route::post(
     '/backoffice/modifyproduct',
     [DashboardController::class, "modifyProduct"]
-)->middleware(['auth', 'verified']);
+)->middleware(['auth', 'verified', AdminMiddleware::class]);
 #endregion MODIFY
 
 #region CREATE
 Route::get(
     '/backoffice/product/new',
     [DashboardController::class, "createPage"]
-)->middleware(['auth', 'verified']);
+)->middleware(['auth', 'verified', AdminMiddleware::class]);
 
 Route::post(
     '/backoffice/createproduct',
     [DashboardController::class, "addingProduct"]
-)->middleware(['auth', 'verified']);
+)->middleware(['auth', 'verified', AdminMiddleware::class]);
 #endregion CREATE
 
 #region DELETE
 Route::get(
     '/backoffice/delete/{id}',
     [DashboardController::class, "deletePage"]
-)->middleware(['auth', 'verified']);
+)->middleware(['auth', 'verified', AdminMiddleware::class]);
 
 Route::delete(
     '/backoffice/products/{id}/delete',
     [DashboardController::class, "deleteProduct"]
-)->middleware(['auth', 'verified']);
+)->middleware(['auth', 'verified', AdminMiddleware::class]);
 #endregion DELETE
 
+#region CLIENT
+Route::get(
+    '/account',
+    [ClientController::class, "indexPage"]
+)->middleware(['auth', 'verified', ClientMiddleware::class])->name('client.dashboard');
+#endregion CLIENT
+
+#region BACKUP
 /*
 
 Route::get('/dashboard', function () {
@@ -119,5 +130,6 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 */
+#endregion BACKUP
 
 require __DIR__ . '/auth.php';
