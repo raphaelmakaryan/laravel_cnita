@@ -1,5 +1,6 @@
-@include("./structures/header")
+@extends('layouts.miromiro')
 
+@section('content')
 <header class="mt-5 mb-5">
     <div class="container-fluid">
         <div class="row">
@@ -107,7 +108,8 @@
                         personnalisable.</p>
                 </div>
                 <div>
-                    <button type="button" class="btn bouton_style bouton_noir bouton_fond_orange">EN SAVOIR PLUS</button>
+                    <button type="button" class="btn bouton_style bouton_noir bouton_fond_orange">EN SAVOIR
+                        PLUS</button>
                 </div>
             </div>
             <div class="col-12 col-lg-4 d-flex flex-column align-items-center mt-4 mb-5 p-lg-1">
@@ -122,12 +124,11 @@
                         rapide dans toute la France.</p>
                 </div>
                 <div>
-                    <button type="button" class="btn bouton_style bouton_noir bouton_fond_orange">SUIVRE MA COMMANDE</button>
+                    <button type="button" class="btn bouton_style bouton_noir bouton_fond_orange">SUIVRE MA
+                        COMMANDE</button>
                 </div>
             </div>
         </div>
     </div>
 </section>
-
-
-@include("./structures/footer")
+@stop

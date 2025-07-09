@@ -1,4 +1,5 @@
-@include("./structures/header")
+@extends('layouts.miromiro') 
+@section('content')
 
 <section class="mt-5 mb-2" id="boutonFilter">
     <div class="container-fluid">
@@ -22,7 +23,7 @@
                             <h6 class="card-subtitle mb-2 text-body-secondary">{{ $produit->prix ?? '10€' }}</h6>
                             <p class="card-text">{{ $produit->description ?? 'Ces lunettes sont magnifique genre wahhhh suis jaloux de fou' }}</p>
                             <div class="d-flex flex-row justify-content-end">
-                                <a href="/product/{{ $produit->id ?? 1 }}" class="btn bouton_style bouton_noir bouton_fond_orange w-25">VOIR</a>
+                                <a href="/product/{{ $produit->ID}}" class="btn bouton_style bouton_noir bouton_fond_orange w-25">VOIR</a>
                             </div>
                         </div>
                     </div>
@@ -33,4 +34,4 @@
 </section>
 
 
-@include("./structures/footer")
+@stop

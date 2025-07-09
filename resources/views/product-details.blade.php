@@ -1,4 +1,9 @@
-@include("./structures/header")
+@extends('layouts.miromiro')
+@section('content')
+<?php
+use App\Http\Controllers\CartController;
+
+?>
 
 <section class="mt-5 mb-5" id="detailProduct">
     <div class="container">
@@ -12,7 +17,8 @@
                                     <div id="carouselExample" class="carousel slide">
                                         <div class="carousel-inner">
                                             <div class="carousel-item active">
-                                                <img src="{{ asset($produit->image ?? 'assets/exemples/exempleDetail.png') }}"
+                                                <img id="imageProductDetail"
+                                                    src="{{ asset($produit->image ?? 'assets/exemples/exempleDetail.png') }}"
                                                     class="d-block w-100">
                                             </div>
                                             <div class="carousel-item">
@@ -42,11 +48,21 @@
                     <div class="col-12 col-lg-6 mt-2">
                         <div class="row">
                             <div class="col-12 d-flex flex-column align-items-start mt-1 ms-1">
-                                <p class="fs-5">{{ $produit->nom ?? 'Nom des lunettes ici la' }}</p>
-                                <p class="fs-6">{{ $produit->prix ?? 'X'}} €</p>
+                                <p class="fs-5" id="nameProductDetail">{{ $produit->nom }}</p>
+                                <p class="fs-6"><span id="prixProductDetail">{{ $produit->prix}}</span> €</p>
+                                <input type="hidden" id="idProductDetail" value="{{ $produit->ID }}">
                             </div>
                             <div class="col-12">
-                                <a href="/cart" class="btn bouton_style bouton_noir bouton_fond_orange w-100">PANIER</a>
+                                @if (Auth::check())
+                                    <form action="{{ route('cart.add', ['id' => $produit->ID]) }}" method="POST" class="w-100">
+                                        @csrf
+                                        <button type="submit" class="btn bouton_style bouton_noir bouton_fond_orange w-100"
+                                            id="buttonAddCart">PANIER</button>
+                                    </form>
+                                @else
+                                    <button onclick="addOnCart()" class="btn bouton_style bouton_noir bouton_fond_orange w-100"
+                                        id="buttonAddCart">PANIER</button>
+                                @endif
                             </div>
                             <div class="col-12 mt-4 mb-2">
                                 <hr>
@@ -109,5 +125,4 @@
         @endif
     </div>
 </section>
-
-@include("./structures/footer")
+@stop

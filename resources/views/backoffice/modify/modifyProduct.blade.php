@@ -1,4 +1,6 @@
-@include("structures.header")
+@extends('layouts.miromiro')
+
+@section('content')
 
 @if ($product)
     @foreach ($product as $produit)
@@ -37,4 +39,4 @@
         </section>
     @endforeach
 @endif
-@include("structures.footer")
+@stop

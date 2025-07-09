@@ -50,7 +50,7 @@ Route::get(
     function () {
         return view("payment");
     }
-);
+)->middleware(['auth', 'verified', ClientMiddleware::class])->name('payment');
 #endregion PAYMENT
 
 #region AUTHENTICATION
@@ -59,7 +59,7 @@ Route::get(
     function () {
         return view("authentication");
     }
-);
+)->name('authentication');;
 #endregion AUTHENTICATION
 
 #region DASHBOARD ADMIN

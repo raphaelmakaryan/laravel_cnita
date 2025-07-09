@@ -1,4 +1,6 @@
-@include("structures.header")
+@extends('layouts.miromiro')
+
+@section('content')
 
 <section class="mt-5 mb-5">
     <div class="container">
@@ -32,4 +34,4 @@
 
 </section>
 
-@include("structures.footer")
+@stop

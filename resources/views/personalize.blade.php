@@ -1,5 +1,6 @@
-@include("./structures/header")
+@extends('layouts.miromiro')
 
+@section('content')
 <section id="personalizePage" class="mt-7 mb-5">
     <div class="container-fluid">
         <div class="row mt-3">
@@ -88,7 +89,8 @@
                                     </button>
                                 </div>
                                 <div class="mt-4 mb-3">
-                                    <a href="#" class="btn bouton_style bouton_noir bouton_fond_orange w-100">VALIDER</a>
+                                    <a href="#"
+                                        class="btn bouton_style bouton_noir bouton_fond_orange w-100">VALIDER</a>
                                 </div>
                             </div>
                         </div>
@@ -129,7 +131,8 @@
                                     </button>
                                 </div>
                                 <div class="mt-4 mb-3">
-                                    <a href="#" class="btn bouton_style bouton_noir bouton_fond_orange w-100">VALIDER</a>
+                                    <a href="#"
+                                        class="btn bouton_style bouton_noir bouton_fond_orange w-100">VALIDER</a>
                                 </div>
                             </div>
                         </div>
@@ -170,7 +173,8 @@
                                     </button>
                                 </div>
                                 <div class="mt-4 mb-3">
-                                    <a href="#" class="btn bouton_style bouton_noir bouton_fond_orange w-100">VALIDER</a>
+                                    <a href="#"
+                                        class="btn bouton_style bouton_noir bouton_fond_orange w-100">VALIDER</a>
                                 </div>
                             </div>
                         </div>
@@ -211,7 +215,8 @@
                                     </button>
                                 </div>
                                 <div class="mt-4 mb-3">
-                                    <a href="#" class="btn bouton_style bouton_noir bouton_fond_orange w-100">VALIDER</a>
+                                    <a href="#"
+                                        class="btn bouton_style bouton_noir bouton_fond_orange w-100">VALIDER</a>
                                 </div>
                             </div>
                         </div>
@@ -252,7 +257,8 @@
                                     </button>
                                 </div>
                                 <div class="mt-4 mb-3">
-                                    <a href="#" class="btn bouton_style bouton_noir bouton_fond_orange w-100">VALIDER</a>
+                                    <a href="#"
+                                        class="btn bouton_style bouton_noir bouton_fond_orange w-100">VALIDER</a>
                                 </div>
                             </div>
                         </div>
@@ -269,4 +275,4 @@
     </div>
 </section>
 
-@include("./structures/footer")
+@stop

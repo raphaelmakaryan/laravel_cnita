@@ -31,6 +31,14 @@ a {
     margin-top: 5rem !important;
 }
 
+.disabled {
+    color: unset !important;
+    pointer-events: none;
+    background-color: unset !important;
+    border-color: unset !important;
+    opacity: var(--bs-btn-disabled-opacity);
+}
+
 .w-0 {
     width: 0 !important;
 }
@@ -133,7 +141,7 @@ a {
 
 .bouton_fond_noir:hover {
     background: var(--couleur_grise_900);
-        color: var(--couleur_grise_100);
+    color: var(--couleur_grise_100);
 }
 
 .bouton_fond_blanc:hover {
