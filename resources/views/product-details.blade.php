@@ -54,13 +54,10 @@ use App\Http\Controllers\CartController;
                             </div>
                             <div class="col-12">
                                 @if (Auth::check())
-                                    <form action="{{ route('cart.add', ['id' => $produit->ID]) }}" method="POST" class="w-100">
-                                        @csrf
-                                        <button type="submit" class="btn bouton_style bouton_noir bouton_fond_orange w-100"
-                                            id="buttonAddCart">PANIER</button>
-                                    </form>
+                                    <button onclick="addOnCart(true)" class="btn bouton_style bouton_noir bouton_fond_orange w-100"
+                                    id="buttonAddCart">PANIER</button>
                                 @else
-                                    <button onclick="addOnCart()" class="btn bouton_style bouton_noir bouton_fond_orange w-100"
+                                    <button onclick="addOnCart(false)" class="btn bouton_style bouton_noir bouton_fond_orange w-100"
                                         id="buttonAddCart">PANIER</button>
                                 @endif
                             </div>

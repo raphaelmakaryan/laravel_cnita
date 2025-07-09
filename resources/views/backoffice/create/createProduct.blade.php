@@ -10,7 +10,7 @@
             </div>
         </div>
         <div class="row mt-4">
-            <form action="/createproduct" method="post">
+            <form action="/backoffice/product/new" method="post">
                 @csrf <!-- {{ csrf_field() }} -->
                 <div class="col-12 mt-1 mb-1">
                     <label for="nameProduct" class="form-label">Nom du nouveau produit</label>

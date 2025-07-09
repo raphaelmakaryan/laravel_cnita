@@ -11,6 +11,7 @@ use Illuminate\Auth\Middleware\Authenticate;
 use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\ClientMiddleware;
+use Illuminate\Http\Request;
 
 #region HOME
 Route::get('/', [HomeController::class, "indexPage"]);
@@ -116,6 +117,23 @@ Route::get(
     [ClientController::class, "indexPage"]
 )->middleware(['auth', 'verified', ClientMiddleware::class])->name('client.dashboard');
 #endregion CLIENT
+
+#region CART CONNECTED
+Route::post(
+    '/product/addoncart',
+    [CartController::class, "addToCart"]
+);
+
+Route::post(
+    '/product/deleteoncart',
+    [CartController::class, "deleteToCart"]
+);
+
+Route::post(
+    '/product/verificationcart',
+    [CartController::class, "addLocalProducts"]
+);
+#endregion CART CONNECTED
 
 #region BACKUP
 /*

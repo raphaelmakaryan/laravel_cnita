@@ -1,5 +1,8 @@
-@extends('layouts.miromiro') 
+@extends('layouts.miromiro')
 @section('content')
+<?php    
+$index = 0
+?>
 
 <section class="mt-2 mb-5" id="cartDiv">
     <div class="container-fluid">
@@ -11,71 +14,30 @@
         <div class="row">
             <div class="col-lg-3">
             </div>
-            @if (Auth::check())
+            @if (Auth::check() && $products)
                 <div class="col-12 col-lg-3 mt-3 mb-3">
-                    <div class="mt-1 mb-1">
-                        <div class="container">
-                            <div class="row border">
-                                <div class="col-4 d-flex">
-                                    <img src="{{ asset('assets/exemples/exempleCart.png') }}" class="img-fluid w-100"
-                                        alt="...">
-                                </div>
-                                <div class="col-4 d-flex flex-column align-items-start">
-                                    <p class="fs-5 mt-1">NOM DES LUNETTES</p>
-                                    <p class="fs-6">10 €</p>
-                                </div>
-                                <div class="col-4 d-flex flex-column justify-content-center align-items-center">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkDefault">
-                                        <label class="form-check-label" for="checkDefault">
-                                        </label>
+                    @foreach ($products as $produits)
+                        <div class="mt-1 mb-1">
+                            <div class="container">
+                                <div class="row border">
+                                    <div class="col-4 d-flex">
+                                        <img src="{{ $produits->image }}" class="img-fluid w-100" alt="...">
+                                    </div>
+                                    <div class="col-4 d-flex flex-column align-items-start">
+                                        <p class="fs-5 mt-1">{{ $produits->nom }}</p>
+                                        <p class="fs-6"><span class="priceForCalculate">{{ $produits->prix }}</span> €</p>
+                                    </div>
+                                    <div class="col-4 d-flex flex-column justify-content-center align-items-center">
+                                        <button class="btn bouton_style bouton_orange bouton_fond_blanc"
+                                            onclick="removeFromCart('{{ $produits->ID }}', true)">
+                                            <img src="{{ asset('assets/dashboard/delete.png') }}" class="img-fluid" alt="..."
+                                                width="25">
+                                        </button>
                                     </div>
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div class="mt-1 mb-1">
-                        <div class="container">
-                            <div class="row border">
-                                <div class="col-4 d-flex">
-                                    <img src="{{ asset('assets/exemples/exempleCart.png') }}" class="img-fluid w-100"
-                                        alt="...">
-                                </div>
-                                <div class="col-4 d-flex flex-column align-items-start">
-                                    <p class="fs-5 mt-1">NOM DES LUNETTES</p>
-                                    <p class="fs-6">10 €</p>
-                                </div>
-                                <div class="col-4 d-flex flex-column justify-content-center align-items-center">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkDefault">
-                                        <label class="form-check-label" for="checkDefault">
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="mt-1 mb-1">
-                        <div class="container">
-                            <div class="row border">
-                                <div class="col-4 d-flex">
-                                    <img src="{{ asset('assets/exemples/exempleCart.png') }}" class="img-fluid w-100"
-                                        alt="...">
-                                </div>
-                                <div class="col-4 d-flex flex-column align-items-start">
-                                    <p class="fs-5 mt-1">NOM DES LUNETTES</p>
-                                    <p class="fs-6">10 €</p>
-                                </div>
-                                <div class="col-4 d-flex flex-column justify-content-center align-items-center">
-                                    <div class="form-check">
-                                        <input class="form-check-input" type="checkbox" value="" id="checkDefault">
-                                        <label class="form-check-label" for="checkDefault">
-                                        </label>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
+                    @endforeach
                 </div>
             @else
                 <div class="col-12 col-lg-3 mt-3 mb-3" id="cartProduct">
@@ -106,7 +68,6 @@
         </div>
     </div>
 </section>
-
 
 
 <script>
