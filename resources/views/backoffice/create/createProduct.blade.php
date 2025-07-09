@@ -32,5 +32,4 @@
 
 </section>
 
-
 @include("structures.footer")

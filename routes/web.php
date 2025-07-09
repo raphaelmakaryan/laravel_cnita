@@ -6,6 +6,7 @@ use App\Http\Controllers\ProductController;
 use App\Http\Controllers\CartController;
 use App\Http\Controllers\PersonalizeController;
 use App\Http\Controllers\DashboardController;
+use Illuminate\Auth\Middleware\Authenticate;
 
 #region HOME
 Route::get('/', [HomeController::class, "indexPage"]);
@@ -52,46 +53,46 @@ Route::get(
 Route::get(
     '/backoffice/products',
     [DashboardController::class, "indexPage"]
-);
+)->middleware('auth');
+
+Route::get(
+    '/backoffice/product/{id}/detail',
+    [DashboardController::class, "detailPage"]
+)->middleware('auth');;
 #endregion DASHBOARD
 
 #region MODIFY
 Route::get(
-    '/backoffice/modify/{id}',
+    '/backoffice/product/{id}/edit',
     [DashboardController::class, "modifyPage"]
-);
+)->middleware('auth');;
+
+Route::post(
+    '/backoffice/modifyproduct',
+    [DashboardController::class, "modifyProduct"]
+)->middleware('auth');;
 #endregion MODIFY
 
 #region CREATE
 Route::get(
-    '/backoffice/create',
+    '/backoffice/product/new',
     [DashboardController::class, "createPage"]
-);
+)->middleware('auth');;
 
 Route::post(
     '/backoffice/createproduct',
     [DashboardController::class, "addingProduct"]
-);
-
-Route::get(
-    '/backoffice/errorcreate',
-    [DashboardController::class, "errorCreatePage"]
-);
-
-Route::get(
-    '/backoffice/successcreate',
-    [DashboardController::class, "successCreatePage"]
-);
+)->middleware('auth');;
 #endregion CREATE
 
 #region DELETE
 Route::get(
     '/backoffice/delete/{id}',
     [DashboardController::class, "deletePage"]
-);
+)->middleware('auth');;
 
-Route::post(
-    '/backoffice/deleteproduct/{id}',
+Route::delete(
+    '/backoffice/products/{id}/delete',
     [DashboardController::class, "deleteProduct"]
-);
+)->middleware('auth');;
 #endregion DELETE

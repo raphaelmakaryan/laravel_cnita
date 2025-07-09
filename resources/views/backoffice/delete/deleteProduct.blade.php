@@ -34,9 +34,10 @@
                         <a href="/dashboard" class="btn bouton_style background_couleur_error w-75">NON</a>
                     </div>
                     <div class="col-6 col-lg-3">
-                        <form action="/deleteproduct/{{ $produit->ID }}" method="post"
+                        <form action="/backoffice/products/{{ $produit->ID }}/delete" method="POST"
                             class="w-100 p-0 m-0 d-flex flex-column align-items-center justify-content-center">
-                            @csrf <!-- {{ csrf_field() }} -->
+                            @csrf
+                            @method('DELETE')
                             <button type="submit" class="btn bouton_style background_couleur_succes w-75" id="">OUI</button>
                         </form>
                     </div>

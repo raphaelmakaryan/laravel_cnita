@@ -15,6 +15,13 @@ class DashboardController extends Controller
         return view("backoffice.products", data: ['produits' => $allProduct]);
     }
 
+    public function detailPage($id)
+    {
+        $detailProduct = Product::where("ID", "=", $id)->get();
+
+        return view("backoffice.detail", data: ['produits' => $detailProduct]);
+    }
+
     public function createPage()
     {
         return view("backoffice.create.createProduct");
@@ -60,8 +67,8 @@ class DashboardController extends Controller
 
     public function deleteProduct($id)
     {
+        Product::where("ID", $id)->delete();
         try {
-            Product::where("ID", $id)->delete();
             return view("backoffice.delete.successDelete");
         } catch (Exception $e) {
             return view("backoffice.delete.errorDelete");
@@ -82,6 +89,28 @@ class DashboardController extends Controller
     {
         $productModify = Product::where("ID", "=", $id)->get();
 
-        return view("backoffice.modifyProduct", ["product" => $productModify]);
+        return view("backoffice.modify.modifyProduct", ["product" => $productModify]);
+    }
+
+    public function modifyProduct(Request $request)
+    {
+        try {
+            $modifyProduct = [
+                $request->input('idProduct'),
+                $request->input('nameProduct'),
+                $request->input('imageProduct'),
+                $request->input('priceProduct')
+            ];
+
+            Product::where("ID", "=", $modifyProduct[0])->update([
+                "nom" => $modifyProduct[1],
+                "image" => $modifyProduct[2],
+                "prix" => $modifyProduct[3],
+            ]);
+
+            return view("backoffice.modify.successModify");
+        } catch (Exception) {
+            return view("backoffice.modify.errorModify");
+        }
     }
 }
