@@ -7,6 +7,7 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\PersonalizeController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Auth\Middleware\Authenticate;
+use App\Http\Controllers\ProfileController;
 
 #region HOME
 Route::get('/', [HomeController::class, "indexPage"]);
@@ -53,46 +54,61 @@ Route::get(
 Route::get(
     '/backoffice/products',
     [DashboardController::class, "indexPage"]
-)->middleware('auth');
+)->middleware(['auth', 'verified']);
 
 Route::get(
     '/backoffice/product/{id}/detail',
     [DashboardController::class, "detailPage"]
-)->middleware('auth');;
+)->middleware(['auth', 'verified']);
 #endregion DASHBOARD
 
 #region MODIFY
 Route::get(
     '/backoffice/product/{id}/edit',
     [DashboardController::class, "modifyPage"]
-)->middleware('auth');;
+)->middleware(['auth', 'verified']);
 
 Route::post(
     '/backoffice/modifyproduct',
     [DashboardController::class, "modifyProduct"]
-)->middleware('auth');;
+)->middleware(['auth', 'verified']);
 #endregion MODIFY
 
 #region CREATE
 Route::get(
     '/backoffice/product/new',
     [DashboardController::class, "createPage"]
-)->middleware('auth');;
+)->middleware(['auth', 'verified']);
 
 Route::post(
     '/backoffice/createproduct',
     [DashboardController::class, "addingProduct"]
-)->middleware('auth');;
+)->middleware(['auth', 'verified']);
 #endregion CREATE
 
 #region DELETE
 Route::get(
     '/backoffice/delete/{id}',
     [DashboardController::class, "deletePage"]
-)->middleware('auth');;
+)->middleware(['auth', 'verified']);
 
 Route::delete(
     '/backoffice/products/{id}/delete',
     [DashboardController::class, "deleteProduct"]
-)->middleware('auth');;
+)->middleware(['auth', 'verified']);
 #endregion DELETE
+
+/*
+
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+});
+*/
+
+require __DIR__ . '/auth.php';
