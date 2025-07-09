@@ -34,16 +34,16 @@ use Illuminate\Support\Facades\Auth;
                     <a class="nav-link couleur_grise_900" href="/personalize">Personnaliser</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link couleur_grise_900" href="/account">Compte</a>
-                </li>
-                <li class="nav-item">
                     <a class="nav-link couleur_grise_900" href="/contact">Contact</a>
                 </li>
-                @if (Auth::check()) {
+                @if (Auth::check())
                     <li class="nav-item">
-                        <a class="nav-link couleur_grise_900" href="/backoffice/products">Dashboard</a>
+                        <a class="nav-link couleur_grise_900" href="/backoffice/products">Compte</a>
                     </li>
-                    }
+                @else
+                    <li class="nav-item">
+                        <a class="nav-link couleur_grise_900" href="/authentication">Page de connexion</a>
+                    </li>
                 @endif
             </ul>
         </div>

@@ -27,21 +27,25 @@
                                     <img src="{{ asset($produit->image) }}" class="img-fluid w-100" alt="...">
                                 </div>
                                 <div class="col-4 d-flex flex-column align-items-start">
-                                    <p class="fs-5 mt-1">{{ $produit->nom }}</p>
+                                    <p class="fs-5 mt-1 text-wrap text-break lh-lg">{{ $produit->nom }}</p>
                                     <p class="fs-6">ID : {{ $produit->ID }}</p>
                                     <p class="fs-6">{{ $produit->prix }} €</p>
                                 </div>
                                 <div class="col-4 d-flex flex-column justify-content-center align-items-center">
-                                    <a href="/backoffice/product/{{ $produit->ID }}/edit" class="btn bouton_style bouton_orange bouton_fond_blanc mt-2 mb-2">
+                                    <a href="/backoffice/product/{{ $produit->ID }}/edit"
+                                        class="btn bouton_style bouton_orange bouton_fond_blanc mt-2 mb-2">
                                         <img src="{{ asset('assets/dashboard/modify.png') }}" class="img-fluid" alt="..."
                                             width="25">
                                     </a>
-                                    <a href="/backoffice/delete/{{ $produit->ID }}" class="btn bouton_style bouton_orange bouton_fond_blanc mt-2 mb-2">
+                                    <a href="/backoffice/delete/{{ $produit->ID }}"
+                                        class="btn bouton_style bouton_orange bouton_fond_blanc mt-2 mb-2">
                                         <img src="{{ asset('assets/dashboard/delete.png') }}" class="img-fluid" alt="..."
                                             width="25">
                                     </a>
-                                    <a href="/backoffice/product/{{ $produit->ID }}/detail" class="btn bouton_style bouton_orange bouton_fond_blanc mt-2 mb-2">
-                                        <img src="{{ asset('assets/dashboard/look.png') }}" class="img-fluid" alt="..." width="25">
+                                    <a href="/backoffice/product/{{ $produit->ID }}/detail"
+                                        class="btn bouton_style bouton_orange bouton_fond_blanc mt-2 mb-2">
+                                        <img src="{{ asset('assets/dashboard/look.png') }}" class="img-fluid" alt="..."
+                                            width="25">
                                     </a>
                                 </div>
                             </div>
@@ -50,6 +54,17 @@
                     <div class="col-lg-3"></div>
                 @endforeach
             @endif
+        </div>
+        <div class="row mt-5">
+            <div class="col-12 d-flex align-items-center justify-content-center">
+                <form method="POST" action="{{ route('logout') }}">
+                    @csrf
+                    <button class="btn bouton_style background_couleur_error w-100" :href="route('logout')" onclick="event.preventDefault();
+                                                this.closest('form').submit();">
+                        {{ __('Se deconnecter') }}
+                    </button>
+                </form>
+            </div>
         </div>
     </div>
 </section>

@@ -50,11 +50,20 @@ Route::get(
 );
 #endregion PAYMENT
 
+#region AUTHENTICATION
+Route::get(
+    '/authentication',
+    function () {
+        return view("authentication");
+    }
+);
+#endregion AUTHENTICATION
+
 #region DASHBOARD
 Route::get(
     '/backoffice/products',
     [DashboardController::class, "indexPage"]
-)->middleware(['auth', 'verified']);
+)->middleware(['auth', 'verified'])->name('backoffice.products');
 
 Route::get(
     '/backoffice/product/{id}/detail',
