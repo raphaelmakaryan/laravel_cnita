@@ -7,14 +7,16 @@ use App\Http\Controllers\CartController;
 use App\Http\Controllers\ClientController;
 use App\Http\Controllers\PersonalizeController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\PaymentController;
 use Illuminate\Auth\Middleware\Authenticate;
 use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\ClientMiddleware;
+use App\Http\Middleware\PaymentMiddleware;
 use Illuminate\Http\Request;
 
 #region HOME
-Route::get('/', [HomeController::class, "indexPage"]);
+Route::get('/', [HomeController::class, "indexPage"])->name('home');
 #endregion HOME
 
 #region EXPLORE
@@ -48,10 +50,22 @@ Route::get(
 #region PAYMENT
 Route::get(
     '/payment',
-    function () {
-        return view("payment");
-    }
-)->middleware(['auth', 'verified', ClientMiddleware::class])->name('payment');
+    [PaymentController::class, "indexPage"]
+)->middleware(['auth', 'verified', PaymentMiddleware::class])->name('payment');
+
+/*
+Route::get(
+    '/payment/check',
+    [PaymentController::class, "indexPage"]
+)->middleware(['auth', 'verified', PaymentMiddleware::class])->name('payment');
+*/
+
+Route::post(
+    '/payment/add',
+    [PaymentController::class, "addInformation"]
+)->middleware(['auth', 'verified', PaymentMiddleware::class]);
+
+
 #endregion PAYMENT
 
 #region AUTHENTICATION
@@ -60,7 +74,7 @@ Route::get(
     function () {
         return view("authentication");
     }
-)->name('authentication');;
+)->name('authentication');
 #endregion AUTHENTICATION
 
 #region DASHBOARD ADMIN

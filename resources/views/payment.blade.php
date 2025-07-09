@@ -12,8 +12,11 @@
             </div>
             <div class="col-12 col-lg-6">
                 <div class="container">
-                    <div class="row">
-                        <form>
+                    <form action="/payment/add" method="post">
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <p class="fs-5 text-start">Informations bancaire</p>
+                            </div>
                             <div class="col-12 mt-2 mb-2">
                                 <label for="numberCard" class="form-label ms-1">Numéro de carte bancaire :</label>
                                 <input id="numberCard" type="tel" inputmode="numeric" pattern="[0-9\s]{13,19}"
@@ -37,17 +40,52 @@
                                         placeholder="CVC">
                                 </div>
                             </div>
+                        </div>
+                        <div class="row mt-5">
+                            <div class="col-12">
+                                <p class="fs-5 text-start">Informations pour la livraison</p>
+                            </div>
+                            <div class="col-12 mt-2 mb-2">
+                                <label for="firstSecondName" class="form-label">NOM Prénom :</label>
+                                <input type="text" class="form-control" id="firstSecondName" placeholder="NOM prenom"
+                                    min="10" max="100" required name="firstSecondName">
+                            </div>
+                            <div class="col-12 mt-2 mb-2">
+                                <label for="adressLivraison" class="form-label">Adresse :</label>
+                                <input type="search" class="form-control" id="adressLivraison" placeholder="Nombre Rue"
+                                    min="10" max="500" required name="adressLivraison">
+                            </div>
+                            <div class="d-flex flex-row">
+                                <div class="col-4 mt-2 mb-2 me-1">
+                                    <label for="cityLivraison" class="form-label">Ville :</label>
+                                    <input id="cityLivraison" class="form-control" type="text" minlength="2" required
+                                        placeholder="Annecy">
+                                </div>
+                                <div class="col-4 mt-2 mb-2 ms-1">
+                                    <label for="CPLivraison" class="form-label">Code postal :</label>
+                                    <input id="CPLivraison" class="form-control" type="text" minlength="5" maxlength="5"
+                                        required placeholder="74000">
+                                </div>
+                                <div class="col-4 mt-2 mb-2 ms-1">
+                                    <label for="countryLivraison" class="form-label">Pays :</label>
+                                    <input id="countryLivraison" class="form-control" type="text" minlength="5" required
+                                        placeholder="France">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row">
                             <div class="col-12 mt-4 d-flex align-items-center justify-content-center">
                                 <button href="#" class="btn bouton_style bouton_noir bouton_fond_orange"
                                     type="submit">VALIDER</button>
                             </div>
-                        </form>
-                    </div>
+                        </div>
+                    </form>
                 </div>
             </div>
             <div class="col-lg-3">
             </div>
         </div>
+        <!--
         <div class="row mt-3" id="deliveryDivPayment">
             <div class="col-lg-3">
             </div>
@@ -159,6 +197,7 @@
                 </div>
             </div>
         </div>
+    -->
     </div>
 </section>
 
