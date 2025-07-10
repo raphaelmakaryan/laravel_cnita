@@ -44,7 +44,7 @@ Route::get(
 Route::get(
     '/cart',
     [CartController::class, "indexPage"]
-);
+)->name('cart');
 #endregion CART
 
 #region PAYMENT
@@ -53,12 +53,12 @@ Route::get(
     [PaymentController::class, "indexPage"]
 )->middleware(['auth', 'verified', PaymentMiddleware::class])->name('payment');
 
-/*
-Route::get(
+
+Route::post(
     '/payment/check',
-    [PaymentController::class, "indexPage"]
-)->middleware(['auth', 'verified', PaymentMiddleware::class])->name('payment');
-*/
+    [PaymentController::class, "check"]
+)->middleware(['auth', 'verified', PaymentMiddleware::class]);
+
 
 Route::post(
     '/payment/add',

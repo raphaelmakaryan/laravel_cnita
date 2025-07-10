@@ -28,8 +28,10 @@ class CartController extends Controller
     public function addToCart(Request $request)
     {
         $debug = true;
+        // Meme nom que la variable qui contient les infos des produits
         $cartItems = $request->input('cartItems');
         $idUser = Auth::id();
+
 
         if (!is_array($cartItems) || empty($cartItems)) {
             return response()->json([

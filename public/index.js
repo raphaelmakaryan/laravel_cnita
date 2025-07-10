@@ -1,7 +1,6 @@
 //#region LOCAL STORAGE PANIER
 function addOnCart(connect) {
     const debug = true;
-    const button = document.getElementById("buttonAddCart");
     const id = document.getElementById("idProductDetail").value;
     const nom = document.getElementById("nameProductDetail").innerText;
     const image = document.getElementById("imageProductDetail").src;
@@ -22,25 +21,36 @@ function addOnCart(connect) {
                     if (debug) {
                         console.log('Réponse du serveur :', data);
                     }
-                    localStorage.removeItem("cart");
+                    if (data.status === "success") {
+                        disabledButtonAddCart();
+                        localStorage.removeItem("cart");
+                    } else {
+                        console.error('Erreur lors de l\'ajout au panier :', data.message);
+                        alert("Erreur lors de l'ajout au panier. Veuillez réessayer.");
+                    }
                 })
                 .catch(error => console.error('Erreur :', error));
         } else {
-            let items = [{ id, nom, image, prix }]
+            let cartItems = [{ id, nom, image, prix }]
             fetch('/product/addoncart', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
                     'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
                 },
-                body: JSON.stringify({ items })
+                body: JSON.stringify({ cartItems })
             })
                 .then(response => response.json())
                 .then(data => {
                     if (debug) {
                         console.log('Réponse du serveur :', data);
                     }
-                    localStorage.removeItem("cart");
+                    if (data.status === "success") {
+                        disabledButtonAddCart();
+                        localStorage.removeItem("cart");
+                    } else {
+                        alert("Erreur lors de l'ajout au panier. Veuillez réessayer.");
+                    }
                 })
                 .catch(error => console.error('Erreur :', error));
         }
@@ -48,11 +58,7 @@ function addOnCart(connect) {
         const newItem = { id, nom, image, prix };
         cartItems.push(newItem);
         localStorage.setItem("cart", JSON.stringify(cartItems));
-    }
-    if (button) {
-        button.classList.add("disabled");
-        button.disabled = true;
-        button.innerText = "Ajouté au panier";
+        disabledButtonAddCart();
     }
 }
 
@@ -84,7 +90,15 @@ function removeFromCart(index, connect) {
     window.location.reload();
 }
 
+function disabledButtonAddCart() {
+    const button = document.getElementById("buttonAddCart");
+    if (button) {
+        button.classList.add("disabled");
+        button.disabled = true;
+        button.innerText = "Ajouté au panier";
+    }
 
+}
 // Si dans page panier et qu'il est pas connecté
 if (document.getElementById("cartProduct")) {
     const rowItems = document.getElementById("cartProduct");
@@ -139,3 +153,141 @@ if (!document.getElementById("cartProduct")) {
     }
 }
 //#endregion LOCAL STORAGE PANIER
+
+//#region PAYMENT
+function addInformationLivraison() {
+    const debug = true;
+
+    const divInfoUser = document.getElementById("informationsUser");
+    const divDelivery = document.getElementById("deliveryDivPayment");
+
+    const firstSecondNameElem = document.getElementById("firstSecondName");
+    const adressLivraisonElem = document.getElementById("adressLivraison");
+    const cityLivraisonElem = document.getElementById("cityLivraison");
+    const CPLivraisonElem = document.getElementById("CPLivraison");
+    const countryLivraisonElem = document.getElementById("countryLivraison");
+
+    const firstSecondName = firstSecondNameElem ? firstSecondNameElem.value : null;
+    const adressLivraison = adressLivraisonElem ? adressLivraisonElem.value : null;
+    const cityLivraison = cityLivraisonElem ? cityLivraisonElem.value : null;
+    const CPLivraison = CPLivraisonElem ? CPLivraisonElem.value : null;
+    const countryLivraison = countryLivraisonElem ? countryLivraisonElem.value : null;
+
+    if (firstSecondName != null && adressLivraison != null && cityLivraison != null && CPLivraison != null && countryLivraison != null) {
+        let informationsUser = [{ firstSecondName, adressLivraison, cityLivraison, CPLivraison, countryLivraison }]
+        fetch('/payment/add', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            },
+            body: JSON.stringify({ informationsUser })
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (debug) {
+                    console.log('Réponse du serveur :', data);
+                }
+                if (data.status === "success") {
+                    userAddingInformationLivraison(firstSecondName, `${adressLivraison}, ${cityLivraison}, ${CPLivraison}, ${countryLivraison}`, data.dateBuy);
+                } else {
+                    alert("Erreur lors de l'ajout de vos informations de livraison. Veuillez réessayer.");
+                }
+            })
+            .catch(error => console.error('Erreur :', error));
+    } else {
+        divInfoUser.style.display = "none";
+        divDelivery.style.display = "flex";
+    }
+}
+
+function userAddingInformationLivraison(FLName, ACPCUser, dateBuy) {
+    const FLNameElem = document.getElementById("FLName");
+    const ACPCUserElem = document.getElementById("ACPCUser");
+    const dateBuyElem = document.getElementById("dateBuy");
+    if (FLNameElem && ACPCUserElem && dateBuyElem) {
+        FLNameElem.innerText = FLName;
+        ACPCUserElem.innerText = ACPCUser;
+        dateBuyElem.innerText = dateBuy;
+    }
+}
+
+function choiceLivraison() {
+    const divDelivery = document.getElementById("deliveryDivPayment");
+    const divFacture = document.getElementById("factureDivPayment");
+    const choiseUserLivraison = document.getElementById("choiseUserLivraison");
+
+    const choiceRadio = document.querySelector('input[name="deliveryType"]:checked');
+    const verificationRadio = choiceRadio ? choiceRadio.value : null;
+
+    if (verificationRadio !== null) {
+        choiseUserLivraison.innerText = verificationRadio;
+        divDelivery.style.display = "none";
+        divFacture.style.display = "flex";
+    }
+}
+
+function finalPayment() {
+    const debug = true;
+
+    const IDForFinalElements = document.getElementsByClassName("IDForFinal");
+    const idForFinalArray = Array.from(IDForFinalElements).map(el => el.innerText);
+
+    if (idForFinalArray.length > 0) {
+        const payload = [{
+            idForFinalArray
+        }];
+
+        fetch('/payment/check', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            },
+            body: JSON.stringify({ payload })
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (debug) {
+                    console.log('Réponse du serveur :', data);
+                }
+                paymentResult(data);
+            })
+            .catch(error => console.error('Erreur :', error));
+    } else {
+        alert("Informations manquantes pour finaliser le paiement.");
+    }
+}
+
+
+function paymentResult(resultat) {
+    const factureDivPayment = document.getElementById("factureDivPayment");
+    const responsePayment = document.getElementById("responsePayment");
+
+    const acceptPayment = document.getElementById("acceptPayment");
+    const refusePayment = document.getElementById("refusePayment");
+
+    let displayMessage = false;
+    if (resultat.status === "success") {
+        factureDivPayment.style.display = "none";
+        responsePayment.style.display = "flex";
+        acceptPayment.style.display = "flex";
+        setInterval(() => {
+            if (displayMessage === false) {
+                document.getElementById("responseSuccess").innerText = resultat.message;
+                displayMessage = true
+            }
+        }, 1000);
+    } else {
+        factureDivPayment.style.display = "none";
+        responsePayment.style.display = "flex";
+        refusePayment.style.display = "flex";
+        setInterval(() => {
+            if (displayMessage === false) {
+                document.getElementById("responseError").innerText = resultat.message;
+                displayMessage = true
+            }
+        }, 2000);
+    }
+}
+//#endregion PAYMENT
