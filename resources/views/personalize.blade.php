@@ -1,5 +1,5 @@
 @extends('layouts.miromiro')
-
+@section('title', "Personnaliser")@endsection
 @section('content')
 <section id="personalizePage" class="mt-7 mb-5">
     <div class="container-fluid">

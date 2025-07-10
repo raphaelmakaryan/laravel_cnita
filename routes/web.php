@@ -149,6 +149,32 @@ Route::post(
 );
 #endregion CART CONNECTED
 
+
+#region CONTACT
+Route::get('/contact', function () {
+    return view("contact");
+});
+
+#endregion CONTACT
+
+#region CREDITS
+Route::get('/compliance', function () {
+    return view("credits.compliance");
+});
+
+Route::get('/generalconditions', function () {
+    return view("credits.generalconditions");
+});
+
+Route::get('/legalmentions', function () {
+    return view("credits.legalmentions");
+});
+
+Route::get('/privacypolicy', function () {
+    return view("credits.privacypolicy");
+});
+#endregion CREDITS
+
 #region BACKUP
 /*
 

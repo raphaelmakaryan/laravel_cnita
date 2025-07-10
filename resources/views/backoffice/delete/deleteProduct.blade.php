@@ -1,5 +1,5 @@
 @extends('layouts.miromiro')
-
+@section('title', "Suppresion d'un produit")
 @section('content')
 
 @if ($product)

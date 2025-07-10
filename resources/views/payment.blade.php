@@ -1,4 +1,5 @@
 @extends('layouts.miromiro')
+@section('title', "Paiement")@endsection
 @section('content')
 
 <?php

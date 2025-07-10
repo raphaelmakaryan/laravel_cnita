@@ -2,6 +2,7 @@
 use Illuminate\Support\Facades\Auth;
 ?>
 <html>
+
 <head>
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.7/dist/css/bootstrap.min.css" rel="stylesheet"
@@ -12,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
     <link href="https://fonts.googleapis.com/css2?family=Asap:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
 </head>
+
 <body>
     <nav class="navbar navbar-expand-lg background_couleur_principale_400">
         <div class="container-fluid">
@@ -72,15 +74,15 @@ use Illuminate\Support\Facades\Auth;
                 </div>
                 <div
                     class="d-flex flex-column flex-lg-row align-items-center mt-5 mt-lg-2 mb-2 justify-content-lg-evenly">
-                    <a href="/legal-notices"
+                    <a href="/legalmentions"
                         class="couleur_grise_900 fs-6 p-1 p-lg-0 ms-lg-1 me-lg-1 order-lg-2">Mentions
                         légales</a>
-                    <a href="/general-conditions-of-sale"
+                    <a href="/generalconditions"
                         class="couleur_grise_900 fs-6 p-1 p-lg-0 ms-lg-1 me-lg-1 order-lg-3">Conditions générales de
                         vente</a>
                     <a href="/compliance"
                         class="couleur_grise_900 fs-6 p-1 p-lg-0 ms-lg-1 me-lg-1 order-lg-4">Conformité</a>
-                    <a href="/privacy-policy"
+                    <a href="/privacypolicy"
                         class="couleur_grise_900 fs-6 p-1 p-lg-0 ms-lg-1 me-lg-1 order-lg-5">Politique
                         de confidentialité</a>
                     <p class="couleur_grise_900 fs-6 p-1 p-lg-0 ms-lg-1 me-lg-1 m-0 order-lg-1">© 2025 Miro-Miro. Tous

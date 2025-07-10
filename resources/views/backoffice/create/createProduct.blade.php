@@ -1,4 +1,5 @@
 @extends('layouts.miromiro')
+@section('title', 'Crée un produit')
 
 @section('content')
 

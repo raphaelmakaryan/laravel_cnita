@@ -1,5 +1,5 @@
 @extends('layouts.miromiro')
-
+@section('title', "Réussite de la création d'un produit")
 @section('content')
 
 <section class="mt-5 mb-5">

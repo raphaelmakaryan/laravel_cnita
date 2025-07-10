@@ -1,4 +1,5 @@
 @extends('layouts.miromiro')
+@section('title', "Page de connexion")@endsection
 
 @section('content')
 <section class="mt-5 mb-5">

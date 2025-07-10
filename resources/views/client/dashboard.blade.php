@@ -1,4 +1,5 @@
 @extends('layouts.miromiro') 
+@section('title', "Compte")@endsection
 @section('content')
 
 @auth

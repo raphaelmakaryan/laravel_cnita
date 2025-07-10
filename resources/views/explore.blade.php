@@ -1,4 +1,5 @@
 @extends('layouts.miromiro') 
+@section('title', "Explorer")@endsection
 @section('content')
 
 <section class="mt-5 mb-2" id="boutonFilter">
