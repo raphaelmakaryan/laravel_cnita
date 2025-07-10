@@ -71,8 +71,8 @@ class PaymentController extends Controller
 
         if (!is_array($payload) || empty($payload)) {
             return response()->json([
-            'status' => 'error',
-            'message' => 'Aucun produit sélectionné.'
+                'status' => 'error',
+                'message' => 'Aucun produit sélectionné.'
             ], 400);
         }
 
@@ -82,25 +82,32 @@ class PaymentController extends Controller
 
         if ($cartItems->isEmpty()) {
             return response()->json([
-            'status' => 'error',
-            'message' => 'Aucun produit du panier ne correspond à la sélection.'
+                'status' => 'error',
+                'message' => 'Aucun produit du panier ne correspond à la sélection.'
             ], 400);
         }
 
-        foreach ($cartItems as $cartItem) {
-            $productId = $cartItem->idProduct;
-            Cart::where("idProduct", $productId)->where("idUser", $idUser)->delete();
+        try {
+            foreach ($cartItems as $cartItem) {
+                $productId = $cartItem->idProduct;
+                Cart::where("idProduct", $productId)->where("idUser", $idUser)->delete();
 
-            OrderTracking::insert([
-            'idUser' => $idUser,
-            'idProduct' => $productId,
-            'status' => 0
+                OrderTracking::insert([
+                    'idUser' => $idUser,
+                    'idProduct' => $productId,
+                    'status' => 0
+                ]);
+            }
+
+            return response()->json([
+                'status' => 'success',
+                'message' => 'Commande validée et panier vidé pour les produits sélectionnés.'
             ]);
+        } catch (\Throwable $th) {
+            return response()->json([
+                'status' => 'error',
+                'message' => 'Commande non validée et panier non vidé pour les produits sélectionnés.'
+            ], 400);
         }
-
-        return response()->json([
-            'status' => 'success',
-            'message' => 'Commande validée et panier vidé pour les produits sélectionnés.'
-        ]);
     }
 }
