@@ -6,6 +6,7 @@ use Illuminate\Http\Request;
 use App\Models\Product;
 use App\Models\UsersMiroMiro;
 use App\Models\Permissions;
+use App\Models\Status;
 use App\Exceptions\InvalidOrderException;
 use App\Models\OrderTracking;
 use Illuminate\Support\Facades\Auth;
@@ -188,5 +189,52 @@ class DashboardController extends Controller
             "graphDataCommandes" => array_column($jours, 'commandes'),
             "graphDataPrix" => array_column($jours, 'prix')
         ]);
+    }
+
+
+    public function commandsPage()
+    {
+        $commandes = DB::table('order_tracking')
+            ->join('users', 'order_tracking.idUser', '=', 'users.id')
+            ->join('products', 'order_tracking.idProduct', '=', 'products.ID')
+            ->select(
+                'order_tracking.id as idCommande',
+                'order_tracking.date',
+                'order_tracking.status',
+                'order_tracking.prix',
+                'users.name as nomUtilisateur',
+                'users.id as idUser',
+                'products.image',
+                'products.nom as nomProduit'
+            )
+            ->orderBy('order_tracking.date', 'desc')
+            ->get();
+
+        $allStatus = Status::all();
+
+        return view('backoffice.commands', [
+            'commandes' => $commandes,
+            "allStatus" => $allStatus
+        ]);
+    }
+
+    public function commandsUpdate(Request $request)
+    {
+        $modifyStatus = [
+            $request->input("selectStatus"),
+            $request->input("userId"),
+        ];
+
+        $verification = OrderTracking::where("status", '!=', $modifyStatus[0])
+            ->where("idUser", "=", $modifyStatus[1])
+            ->exists();
+
+        if ($verification === true) {
+            OrderTracking::where("idUser", $modifyStatus[1])
+                ->update([
+                    "status" => $modifyStatus[0],
+                ]);
+        }
+        return redirect()->route('backoffice.commands');
     }
 }
