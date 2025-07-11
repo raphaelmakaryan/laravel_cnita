@@ -145,6 +145,11 @@ Route::get(
     '/account',
     [ClientController::class, "indexPage"]
 )->middleware(['auth', 'verified', ClientMiddleware::class])->name('client.dashboard');
+
+Route::get(
+    '/historic',
+    [ClientController::class, "historicPage"]
+)->middleware(['auth', 'verified', ClientMiddleware::class])->name('client.historic');
 #endregion CLIENT
 
 #region CART CONNECTED

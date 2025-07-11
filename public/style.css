@@ -14,8 +14,10 @@
     --couleur_grise_700: #6C757D;
     --couleur_grise_800: #50585F;
     --couleur_grise_900: #343A40;
-    --couleur_succes: #63DD94;
-    --couleur_error: #EE283B;
+    --couleur_succes_100 : #BAF0CF;
+    --couleur_succes_200: #63DD94;
+    --couleur_error_300: #EE283B;
+    --couleur_error_500: #6F0913;
 }
 
 body {
@@ -52,27 +54,27 @@ a {
 }
 
 .background_couleur_succes {
-    background-color: var(--couleur_succes);
+    background-color: var(--couleur_succes_200);
 }
 
 .background_couleur_succes:hover {
-    background-color: var(--couleur_succes);
+    background-color: var(--couleur_succes_200);
 }
 
 .background_couleur_error {
-    background-color: var(--couleur_error);
+    background-color: var(--couleur_error_300);
 }
 
 .background_couleur_error:hover {
-    background-color: var(--couleur_error);
+    background-color: var(--couleur_error_300);
 }
 
-.couleur_succes {
-    color: var(--couleur_succes);
+.couleur_succes_200 {
+    color: var(--couleur_succes_200);
 }
 
-.couleur_error {
-    color: var(--couleur_error);
+.couleur_error_300 {
+    color: var(--couleur_error_300);
 }
 
 .couleur_grise_100 {
@@ -147,6 +149,31 @@ a {
 .bouton_fond_blanc:hover {
     background: var(--couleur_grise_100);
     color: var(--couleur_grise_900);
+}
+
+.status_attente{
+    background-color: var(--couleur_error_300) !important;
+    color: var(--couleur_grise_100);
+}
+
+.status_preparation{
+    background-color: var(--couleur_principale_400) !important;
+    color: var(--couleur_grise_900);
+}
+
+.status_livraison {
+    background-color: var(--couleur_succes_100) !important;
+    color: var(--couleur_grise_100);
+}
+
+.status_retard {
+    background-color: var(--couleur_error_500) !important;
+    color: var(--couleur_grise_100);
+}
+
+.status_livre {
+    background-color: var(--couleur_succes_200) !important;
+    color: var(--couleur_grise_100);
 }
 
 /*#endregion BODY*/
