@@ -21,17 +21,26 @@
             </div>
         </div>
         <div class="row mt-3 mb-3">
-            <div class="col-lg-3"></div>
-            <div class="col-12 col-lg-2">
+            <div class="col-lg-2"></div>
+            <div class="col-12 col-lg-3">
                 <a href="/backoffice/products/list" class="btn bouton_style bouton_noir bouton_fond_orange">Produits</a>
             </div>
-            <div class="col-12 col-lg-2">
+            <div class="col-lg-2"></div>
+            <div class="col-12 col-lg-3">
                 <a href="/backoffice/users" class="btn bouton_style bouton_noir bouton_fond_orange">Utilisateurs</a>
             </div>
-            <div class="col-12 col-lg-2">
+            <div class="col-lg-2"></div>
+        </div>
+        <div class="row mt-3 mb-3">
+            <div class="col-lg-2"></div>
+            <div class="col-12 col-lg-3">
                 <a href="/backoffice/graphs" class="btn bouton_style bouton_noir bouton_fond_orange">Graphiques</a>
             </div>
-            <div class="col-lg-3"></div>
+            <div class="col-lg-2"></div>
+            <div class="col-12 col-lg-3">
+                <a href="/backoffice/commands" class="btn bouton_style bouton_noir bouton_fond_orange">Commandes</a>
+            </div>
+            <div class="col-lg-2"></div>
         </div>
         <div class="row mt-5">
             <div class="col-12 d-flex align-items-center justify-content-center">

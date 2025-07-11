@@ -97,6 +97,11 @@ Route::prefix('backoffice')->name('backoffice.')->middleware(['auth', 'verified'
         [DashboardController::class, "graphPage"]
     )->name('graphs');
 
+    Route::get(
+        '/commands',
+        [DashboardController::class, "commandsPage"]
+    )->name('commands');
+
 
     Route::get(
         '/products/list',
@@ -136,6 +141,11 @@ Route::prefix('backoffice')->name('backoffice.')->middleware(['auth', 'verified'
     Route::delete(
         '/products/{id}/delete',
         [DashboardController::class, "deleteProduct"]
+    );
+
+    Route::post(
+        '/updatecommand',
+        [DashboardController::class, "commandsUpdate"]
     );
 });
 #endregion DASHBOARD ADMIN
