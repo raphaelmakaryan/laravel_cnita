@@ -9,7 +9,7 @@ use App\Http\Controllers\CartController;
     <div class="container">
         @if ($product)
             @foreach ($product as $produit)
-                @section('title', "Détail de {{ $produit->nom }}")@endsection
+                @section('title', "Détail de {{ $produit->nom }}")
                     <div class="row">
                         <div class="col-12 col-lg-6">
                             <div class="container">

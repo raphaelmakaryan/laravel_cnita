@@ -48,24 +48,24 @@ Route::get(
 #endregion CART
 
 #region PAYMENT
-Route::get(
-    '/payment',
-    [PaymentController::class, "indexPage"]
-)->middleware(['auth', 'verified', PaymentMiddleware::class])->name('payment');
+Route::prefix('payment')->name('payment.')->middleware(['auth', 'verified', PaymentMiddleware::class])->group(function () {
+    Route::get(
+        '/payment',
+        [PaymentController::class, "indexPage"]
+    )->name('payment');
 
 
-Route::post(
-    '/payment/check',
-    [PaymentController::class, "check"]
-)->middleware(['auth', 'verified', PaymentMiddleware::class]);
+    Route::post(
+        '/check',
+        [PaymentController::class, "check"]
+    );
 
 
-Route::post(
-    '/payment/add',
-    [PaymentController::class, "addInformation"]
-)->middleware(['auth', 'verified', PaymentMiddleware::class]);
-
-
+    Route::post(
+        '/add',
+        [PaymentController::class, "addInformation"]
+    );
+});
 #endregion PAYMENT
 
 #region AUTHENTICATION
@@ -78,52 +78,48 @@ Route::get(
 #endregion AUTHENTICATION
 
 #region DASHBOARD ADMIN
-Route::get(
-    '/backoffice/products',
-    [DashboardController::class, "indexPage"]
-)->middleware(['auth', 'verified', AdminMiddleware::class])->name('backoffice.products');
+Route::prefix('backoffice')->name('backoffice.')->middleware(['auth', 'verified', AdminMiddleware::class])->group(function () {
+    Route::get(
+        '/products',
+        [DashboardController::class, "indexPage"]
+    )->name('products');
 
-Route::get(
-    '/backoffice/product/{id}/detail',
-    [DashboardController::class, "detailPage"]
-)->middleware(['auth', 'verified', AdminMiddleware::class]);
+    Route::get(
+        '/product/{id}/detail',
+        [DashboardController::class, "detailPage"]
+    );
+
+    Route::get(
+        '/product/{id}/edit',
+        [DashboardController::class, "modifyPage"]
+    );
+
+    Route::post(
+        '/modifyproduct',
+        [DashboardController::class, "modifyProduct"]
+    );
+
+    Route::get(
+        '/product/new',
+        [DashboardController::class, "createPage"]
+    );
+
+    Route::post(
+        '/createproduct',
+        [DashboardController::class, "addingProduct"]
+    );
+
+    Route::get(
+        '/delete/{id}',
+        [DashboardController::class, "deletePage"]
+    );
+
+    Route::delete(
+        '/products/{id}/delete',
+        [DashboardController::class, "deleteProduct"]
+    );
+});
 #endregion DASHBOARD ADMIN
-
-#region MODIFY
-Route::get(
-    '/backoffice/product/{id}/edit',
-    [DashboardController::class, "modifyPage"]
-)->middleware(['auth', 'verified', AdminMiddleware::class]);
-
-Route::post(
-    '/backoffice/modifyproduct',
-    [DashboardController::class, "modifyProduct"]
-)->middleware(['auth', 'verified', AdminMiddleware::class]);
-#endregion MODIFY
-
-#region CREATE
-Route::get(
-    '/backoffice/product/new',
-    [DashboardController::class, "createPage"]
-)->middleware(['auth', 'verified', AdminMiddleware::class]);
-
-Route::post(
-    '/backoffice/createproduct',
-    [DashboardController::class, "addingProduct"]
-)->middleware(['auth', 'verified', AdminMiddleware::class]);
-#endregion CREATE
-
-#region DELETE
-Route::get(
-    '/backoffice/delete/{id}',
-    [DashboardController::class, "deletePage"]
-)->middleware(['auth', 'verified', AdminMiddleware::class]);
-
-Route::delete(
-    '/backoffice/products/{id}/delete',
-    [DashboardController::class, "deleteProduct"]
-)->middleware(['auth', 'verified', AdminMiddleware::class]);
-#endregion DELETE
 
 #region CLIENT
 Route::get(
@@ -148,7 +144,6 @@ Route::post(
     [CartController::class, "addLocalProducts"]
 );
 #endregion CART CONNECTED
-
 
 #region CONTACT
 Route::get('/contact', function () {

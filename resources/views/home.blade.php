@@ -1,5 +1,5 @@
 @extends('layouts.miromiro')
-@section('title', "Accueil")@endsection
+@section('title', "Accueil")
 @section('content')
 <header class="mt-5 mb-5">
     <div class="container-fluid">
@@ -92,7 +92,9 @@
                         offrir un confort visuel optimal.</p>
                 </div>
                 <div>
-                    <button type="button" class="btn bouton_style bouton_noir bouton_fond_orange">EXPLORER</button>
+                    <a href="/explore">
+                        <button type="button" class="btn bouton_style bouton_noir bouton_fond_orange">EXPLORER</button>
+                    </a>
                 </div>
             </div>
             <div class="col-12 col-lg-4 d-flex flex-column align-items-center mt-4 mb-4 p-lg-1">
@@ -108,8 +110,10 @@
                         personnalisable.</p>
                 </div>
                 <div>
-                    <button type="button" class="btn bouton_style bouton_noir bouton_fond_orange">EN SAVOIR
-                        PLUS</button>
+                    <a href="/personalize">
+                        <button type="button" class="btn bouton_style bouton_noir bouton_fond_orange">EN SAVOIR
+                            PLUS</button>
+                    </a>
                 </div>
             </div>
             <div class="col-12 col-lg-4 d-flex flex-column align-items-center mt-4 mb-5 p-lg-1">
@@ -124,8 +128,14 @@
                         rapide dans toute la France.</p>
                 </div>
                 <div>
+                    @if (Auth::check() && Auth::user()->permission === 0)
+                        <a href="/account">
+                    @else
+                        <a href="/authentication">
+                    @endif
                     <button type="button" class="btn bouton_style bouton_noir bouton_fond_orange">SUIVRE MA
                         COMMANDE</button>
+                    </a>
                 </div>
             </div>
         </div>

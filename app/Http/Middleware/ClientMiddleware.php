@@ -22,7 +22,7 @@ class ClientMiddleware
             return $next($request);
         } else if (Auth::check() && Auth::user()->permission === 1) {
             return redirect()->route('backoffice.products'); // ou abort(403);
-        } else if (!Auth::check()) {
+        } else {
             return redirect()->route('authentication'); // ou abort(403);
         }
     }

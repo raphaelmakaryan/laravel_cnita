@@ -1,5 +1,5 @@
 @extends('layouts.miromiro')
-@section('title', "Contact")@endsection
+@section('title', "Contact")
 @section('content')
 
 

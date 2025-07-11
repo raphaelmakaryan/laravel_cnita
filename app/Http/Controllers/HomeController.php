@@ -14,7 +14,7 @@ class HomeController extends Controller
     {
         //$allProduct = Product::orderBy("nom")->get();
         //$allProduct = Product::orderByDesc("prix")->get();
-        $allProduct = Product::all();
+        $allProduct = Product::limit(3)->get();
 
         return view("home", data: ['produits' => $allProduct]);
     }
