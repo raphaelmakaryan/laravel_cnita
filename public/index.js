@@ -231,11 +231,15 @@ function finalPayment() {
     const debug = true;
 
     const IDForFinalElements = document.getElementsByClassName("IDForFinal");
+    const price = document.getElementById("totalPrice").innerText;
     const idForFinalArray = Array.from(IDForFinalElements).map(el => el.innerText);
+    const date = new Date().toISOString().slice(0, 10);
 
     if (idForFinalArray.length > 0) {
         const payload = [{
-            idForFinalArray
+            idForFinalArray,
+            price,
+            date
         }];
 
         fetch('/payment/check', {

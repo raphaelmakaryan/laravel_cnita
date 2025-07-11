@@ -1,0 +1,11 @@
+Admin : 
+labiscotte@lol.com
+LolTestLa02
+
+Client : 
+leclient@ol.com
+LeClientLa0
+
+Test : 
+betatest@test.com
+LeBetaTest8

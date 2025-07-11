@@ -16,7 +16,7 @@ class AuthenticatedSessionController extends Controller
      */
     public function create(): View
     {
-        return view('backoffice.products');
+        return view('backoffice.account');
     }
 
     /**
@@ -31,7 +31,7 @@ class AuthenticatedSessionController extends Controller
         $user = Auth::user();
 
         if ($user->permission === 1) {
-            return redirect()->intended(route('backoffice.products', absolute: false));
+            return redirect()->intended(route('backoffice.account', absolute: false));
         } else {
             return redirect()->route('client.dashboard');
         }

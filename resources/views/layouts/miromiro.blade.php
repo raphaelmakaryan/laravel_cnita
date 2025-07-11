@@ -42,7 +42,7 @@ use Illuminate\Support\Facades\Auth;
                     </li>
                     @if (Auth::check())
                         <li class="nav-item">
-                            <a class="nav-link couleur_grise_900" href="/backoffice/products">Compte</a>
+                            <a class="nav-link couleur_grise_900" href="/account">Compte</a>
                         </li>
                     @else
                         <li class="nav-item">

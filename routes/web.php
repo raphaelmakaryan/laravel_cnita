@@ -48,24 +48,22 @@ Route::get(
 #endregion CART
 
 #region PAYMENT
-Route::prefix('payment')->name('payment.')->middleware(['auth', 'verified', PaymentMiddleware::class])->group(function () {
-    Route::get(
-        '/payment',
-        [PaymentController::class, "indexPage"]
-    )->name('payment');
+Route::get(
+    '/payment',
+    [PaymentController::class, "indexPage"]
+)->middleware(['auth', 'verified', PaymentMiddleware::class])->name('payment');
 
 
-    Route::post(
-        '/check',
-        [PaymentController::class, "check"]
-    );
+Route::post(
+    '/payment/check',
+    [PaymentController::class, "check"]
+)->middleware(['auth', 'verified', PaymentMiddleware::class]);
 
 
-    Route::post(
-        '/add',
-        [PaymentController::class, "addInformation"]
-    );
-});
+Route::post(
+    '/payment/add',
+    [PaymentController::class, "addInformation"]
+)->middleware(['auth', 'verified', PaymentMiddleware::class]);
 #endregion PAYMENT
 
 #region AUTHENTICATION
@@ -80,8 +78,29 @@ Route::get(
 #region DASHBOARD ADMIN
 Route::prefix('backoffice')->name('backoffice.')->middleware(['auth', 'verified', AdminMiddleware::class])->group(function () {
     Route::get(
-        '/products',
+        '/account',
         [DashboardController::class, "indexPage"]
+    )->name('account');
+
+    Route::get(
+        '/users',
+        [DashboardController::class, "usersPage"]
+    )->name('users');
+
+    Route::post(
+        '/users/update',
+        [DashboardController::class, "usersUpdate"]
+    );
+
+    Route::get(
+        '/graphs',
+        [DashboardController::class, "graphPage"]
+    )->name('graphs');
+
+
+    Route::get(
+        '/products/list',
+        [DashboardController::class, "productsPage"]
     )->name('products');
 
     Route::get(
