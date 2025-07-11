@@ -15,7 +15,7 @@
                 @csrf <!-- {{ csrf_field() }} -->
                 <div class="col-12 mt-1 mb-1">
                     <label for="nameProduct" class="form-label">Nom du nouveau produit</label>
-                    <input type="text" class="form-control" id="nameProduct" max="20" placeholder="Nom du produit"
+                    <input type="text" class="form-control" id="nameProduct" minlength="5" maxlength="20" placeholder="Nom du produit"
                         required name="nameProduct">
                 </div>
                 <div class="col-12 mt-1 mb-1">
@@ -24,7 +24,7 @@
                 </div>
                 <div class="col-12 mt-1 mb-2">
                     <label for="priceProduct" class="form-label">Prix du nouveau produit</label>
-                    <input name="priceProduct" type="number" class="form-control" id="priceProduct" required placeholder="0" min="1">
+                    <input name="priceProduct" type="number" class="form-control" id="priceProduct" required placeholder="0" minlength="1">
                 </div>
                 <div class="col-12 mt-4 d-flex flex-column align-items-center justify-content-center">
                     <button type="submit" class="btn bouton_style bouton_noir bouton_fond_orange">Créer</button>
