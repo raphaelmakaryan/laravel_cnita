@@ -8,6 +8,7 @@ use App\Http\Controllers\ClientController;
 use App\Http\Controllers\PersonalizeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PaymentController;
+use App\Http\Controllers\APIController;
 use Illuminate\Auth\Middleware\Authenticate;
 use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\AdminMiddleware;
@@ -203,6 +204,37 @@ Route::get('/privacypolicy', function () {
     return view("credits.privacypolicy");
 });
 #endregion CREDITS
+
+#region API
+Route::prefix('api')->group(function () {
+    Route::get('/', [APIController::class, "indexPage"]);
+
+    Route::get(
+        '/product/all',
+        [APIController::class, "allProduct"]
+    );
+
+    Route::get(
+        '/product/{id}',
+        [APIController::class, "oneProduct"]
+    );
+
+    Route::get(
+        '/product/new/{nom}/{image}/{prix}',
+        [APIController::class, "addProduct"]
+    );
+
+    Route::get(
+        '/product/delete/{id}',
+        [APIController::class, "deleteProduct"]
+    );
+
+    Route::get(
+        '/product/edit/{id}/{nom}/{image}/{prix}',
+        [APIController::class, "updateProduct"]
+    );
+});
+#endregion API
 
 #region BACKUP
 /*
