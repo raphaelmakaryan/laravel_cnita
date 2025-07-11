@@ -8,8 +8,8 @@ use App\Http\Controllers\CartController;
 <section class="mt-5 mb-5" id="detailProduct">
     <div class="container">
         @if ($product)
-            @foreach ($product as $produit)
-                @section('title', "Détail de {{ $produit->nom }}")
+            @foreach ($product as $aProduct)
+                @section('title', "Détail de {{ $aProduct->nom }}")
                     <div class="row">
                         <div class="col-12 col-lg-6">
                             <div class="container">
@@ -19,7 +19,7 @@ use App\Http\Controllers\CartController;
                                             <div class="carousel-inner">
                                                 <div class="carousel-item active">
                                                     <img id="imageProductDetail"
-                                                        src="{{ asset($produit->image ?? 'assets/exemples/exempleDetail.png') }}"
+                                                        src="{{ asset($aProduct->image ?? 'assets/exemples/exempleDetail.png') }}"
                                                         class="d-block w-100">
                                                 </div>
                                                 <div class="carousel-item">
@@ -49,9 +49,9 @@ use App\Http\Controllers\CartController;
                         <div class="col-12 col-lg-6 mt-2">
                             <div class="row">
                                 <div class="col-12 d-flex flex-column align-items-start mt-1 ms-1">
-                                    <p class="fs-5" id="nameProductDetail">{{ $produit->nom }}</p>
-                                    <p class="fs-6"><span id="prixProductDetail">{{ $produit->prix}}</span> €</p>
-                                    <input type="hidden" id="idProductDetail" value="{{ $produit->ID }}">
+                                    <p class="fs-5" id="nameProductDetail">{{ $aProduct->nom }}</p>
+                                    <p class="fs-6"><span id="prixProductDetail">{{ $aProduct->prix}}</span> €</p>
+                                    <input type="hidden" id="idProductDetail" value="{{ $aProduct->ID }}">
                                 </div>
                                 <div class="col-12">
                                     @if (Auth::check())

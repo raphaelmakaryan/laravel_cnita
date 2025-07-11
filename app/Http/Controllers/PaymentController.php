@@ -76,8 +76,12 @@ class PaymentController extends Controller
             ], 400);
         }
 
+        $productIds = collect($payload)->pluck('idForFinalArray')->flatten()->toArray();
+        $price = $payload[0]['price'];
+        $date = $payload[0]['date'];
+
         $cartItems = Cart::where('idUser', $idUser)
-            ->whereIn('idProduct', $payload)
+            ->whereIn('idProduct', $productIds)
             ->get();
 
         if ($cartItems->isEmpty()) {
@@ -90,12 +94,17 @@ class PaymentController extends Controller
         try {
             foreach ($cartItems as $cartItem) {
                 $productId = $cartItem->idProduct;
-                Cart::where("idProduct", $productId)->where("idUser", $idUser)->delete();
+
+                Cart::where("idProduct", $productId)
+                    ->where("idUser", $idUser)
+                    ->delete();
 
                 OrderTracking::insert([
                     'idUser' => $idUser,
                     'idProduct' => $productId,
-                    'status' => 0
+                    'status' => 0,
+                    "prix" => $price,
+                    "date" => $date
                 ]);
             }
 
