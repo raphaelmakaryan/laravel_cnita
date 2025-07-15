@@ -98,6 +98,9 @@ class PaymentController extends Controller
             ], 400);
         }
 
+        $lastOrderId = OrderTracking::max('idOrder');
+        $newOrderId = $lastOrderId ? $lastOrderId + 1 : 1;
+
         foreach ($cartItems as $cartItem) {
             $productId = $cartItem->idProduct;
 
@@ -106,11 +109,12 @@ class PaymentController extends Controller
                 ->delete();
 
             OrderTracking::insert([
-                'idUser' => $idUser,
+                'idUser'    => $idUser,
+                'idOrder'   => $newOrderId,
                 'idProduct' => $productId,
-                'status' => 0,
-                "prix" => $price,
-                "date" => $date
+                'status'    => 0,
+                'prix'      => $price,
+                'date'      => $date
             ]);
         }
 

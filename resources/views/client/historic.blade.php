@@ -17,21 +17,19 @@
                         <table class="table">
                             <thead>
                                 <tr>
-                                    <th scope="col">Image</th>
-                                    <th scope="col">Nom</th>
+                                    <th scope="col">ID de la commande</th>
                                     <th scope="col">Prix</th>
                                     <th scope="col">Date</th>
                                     <th scope="col">Status</th>
+                                    <th scope="col">Detail</th>
                                 </tr>
                             </thead>
                             <tbody>
                                 @foreach ($historic as $historicUser)
                                     <tr>
-                                        <td class="w-25"><img src="{{ $historicUser->imageProduit }}" class="img-fluid w-100"
-                                                alt=""></td>
-                                        <td>{{ $historicUser->nomProduit }}</td>
-                                        <td>{{ $historicUser->prixCommande }}</td>
-                                        <td>{{ $historicUser->dateCommande }}</td>
+                                        <td>#{{ $historicUser->idOrder}}</td>
+                                        <td>{{ $historicUser->totalPrix }} €</td>
+                                        <td>{{ $historicUser->date }}</td>
                                         <td>
                                             @if ($historicUser->statutCommande === 1)
                                                 <span
@@ -50,6 +48,9 @@
                                                     class="badge rounded-pill status_attente w-100">Attente de traitement</span>
                                             @endif
                                         </td>
+                                        <td><a href="/client/details/{{ $historicUser->idOrder}}" class="btn bouton_style bouton_orange bouton_fond_noir">
+                                            Voir
+                                        </a></td>
                                     </tr>
                                 @endforeach
                             </tbody>

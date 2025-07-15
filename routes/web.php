@@ -152,6 +152,11 @@ Route::prefix('client')->middleware(['auth', 'verified', ClientMiddleware::class
         '/historic',
         [ClientController::class, "historicPage"]
     )->middleware(['auth', 'verified', ClientMiddleware::class])->name('client.historic');
+
+    Route::get(
+        '/details/{id}',
+        [ClientController::class, "detailsPage"]
+    )->middleware(['auth', 'verified', ClientMiddleware::class])->name('client.details');
 });
 
 #endregion CLIENT

@@ -1,10 +1,13 @@
 <?php
 
 namespace App\Http\Controllers;
+
 use App\Models\Product;
 use App\Models\OrderTracking;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\DB;
+
 class ClientController extends Controller
 {
     public function indexPage()
@@ -17,8 +20,34 @@ class ClientController extends Controller
         $userId = Auth::id();
 
         $historic = OrderTracking::where('idUser', $userId)
+            ->select(
+                'idOrder',
+                'date',
+                DB::raw('SUM(prix) as totalPrix')
+            )
+            ->groupBy('idOrder', 'date')
+            ->orderBy('date', 'asc')
+            ->get();
+
+        return view("client.historic", ['historic' => $historic]);
+    }
+
+    public function detailsPage($id)
+    {
+        $userId = Auth::id();
+
+        $commandeExiste = OrderTracking::where('idOrder', $id)
+            ->where('idUser', $userId)
+            ->exists();
+
+        if (!$commandeExiste) {
+            return redirect()->route('client.dashboard');
+        }
+
+        $details = OrderTracking::where('order_tracking.idOrder', $id)
             ->join('products', 'order_tracking.idProduct', '=', 'products.ID')
             ->select(
+                'order_tracking.idOrder',
                 'products.nom as nomProduit',
                 'products.image as imageProduit',
                 'order_tracking.prix as prixCommande',
@@ -28,6 +57,6 @@ class ClientController extends Controller
             ->orderBy('order_tracking.date', 'desc')
             ->get();
 
-        return view("client.historic", ['historic' => $historic]);
+        return view("client.details", ['details' => $details]);
     }
 }

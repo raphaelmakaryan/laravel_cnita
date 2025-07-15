@@ -173,19 +173,19 @@ use Carbon\Carbon;
                                 <p class="fs-6 m-0">Choix livraison : <span id="choiseUserLivraison"
                                         class="text-capitalize"></span></p>
                             @endforeach
-                            @foreach ($products as $produit)
-                                <p class="fs-6 mt-3">Listes des articles :</p>
-                                <div class="table-responsive w-100">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Nom</th>
-                                                <th scope="col" class="w-50">Image</th>
-                                                <th scope="col">Quantité</th>
-                                                <th scope="col">Prix</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
+                            <p class="fs-6 mt-3">Listes des articles :</p>
+                            <div class="table-responsive w-100">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Nom</th>
+                                            <th scope="col" class="w-50">Image</th>
+                                            <th scope="col">Quantité</th>
+                                            <th scope="col">Prix</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($products as $produit)
                                             <tr>
                                                 <td>{{ $produit->nom }}</td>
                                                 <td><img src="{{ $produit->image }}" alt="" class="img-fluid w-50"></td>
@@ -193,10 +193,10 @@ use Carbon\Carbon;
                                                 <td><span class="priceForCalculate">{{ $produit->prix }}</span> €</td>
                                                 <td style='display: none;' class="IDForFinal">{{ $produit->ID }}</td>
                                             </tr>
-                                        </tbody>
-                                    </table>
-                                </div>
-                            @endforeach
+                                        @endforeach
+                                    </tbody>
+                                </table>
+                            </div>
                         </div>
                         <div class="d-flex flex-row justify-content-end align-items-end">
                             <p class="fs-6 mt-3 fw-bold">Total : <span id="totalPrice"></span> €</p>
