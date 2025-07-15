@@ -71,7 +71,6 @@ return [
         ],
 
         'log' => [
-            'from' => ['address' => 'exemple@exemple.com', 'name' => 'MiroMiro'],
             'transport' => 'log',
             'channel' => env('MAIL_LOG_CHANNEL'),
         ],
