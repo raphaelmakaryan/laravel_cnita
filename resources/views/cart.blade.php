@@ -21,14 +21,24 @@ $index = 0
                         <div class="mt-1 mb-1">
                             <div class="container">
                                 <div class="row border">
-                                    <div class="col-4 d-flex">
+                                    <div class="col-3 d-flex">
                                         <img src="{{ $produits->image }}" class="img-fluid w-100" alt="...">
                                     </div>
-                                    <div class="col-4 d-flex flex-column align-items-start">
+                                    <div class="col-3 d-flex flex-column align-items-start">
                                         <p class="fs-5 mt-1">{{ $produits->nom }}</p>
                                         <p class="fs-6"><span class="priceForCalculate">{{ $produits->prix }}</span> €</p>
                                     </div>
-                                    <div class="col-4 d-flex flex-column justify-content-center align-items-center">
+                                    <div class="col-3 d-flex flex-column align-items-center justify-content-center">
+                                        <form action="">
+                                            @csrf
+                                            <label for="quantityCart" class="form-label">Quantité</label>
+                                            <input type="number" class="form-control" name="quantityCart" min="1" max="10"
+                                                id="quantityCart" value="1">
+                                                <button type="submit" class="btn bouton_style bouton_orange bouton_fond_blanc p-1 mt-1">Mettre a jour
+                                                </button>
+                                        </form>
+                                    </div>
+                                    <div class="col-3 d-flex flex-column justify-content-center align-items-center">
                                         <button class="btn bouton_style bouton_orange bouton_fond_blanc"
                                             onclick="removeFromCart('{{ $produits->ID }}', true)">
                                             <img src="{{ asset('assets/dashboard/delete.png') }}" class="img-fluid" alt="..."
@@ -42,6 +52,9 @@ $index = 0
                 </div>
             @else
                 <div class="col-12 col-lg-3 mt-3 mb-3" id="cartProduct">
+                    <p class="fs-6 text-center">
+                        Aucun produit
+                    </p>
                 </div>
             @endif
             <div class="col-12 col-lg-3 mt-3 mb-3">
