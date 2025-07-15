@@ -12,19 +12,20 @@ use Illuminate\Queue\SerializesModels;
 class PlacingOrder extends Mailable
 {
     use Queueable, SerializesModels;
+    public $price;
 
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($price)
     {
-        //
+       $this->price = $price;
     }
 
     /**
      * Get the message envelope.
      */
-    public function envelope(): Envelope
+    public function envelope()
     {
         return new Envelope(
             subject: 'Confirmation de votre commande chez Miro-Miro',
@@ -34,10 +35,13 @@ class PlacingOrder extends Mailable
     /**
      * Get the message content definition.
      */
-    public function content(): Content
+    public function content()
     {
         return new Content(
             view: 'mails.commande',
+            with: [
+                'price' => $this->price
+            ],
         );
     }
 

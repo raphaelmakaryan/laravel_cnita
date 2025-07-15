@@ -8,6 +8,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\Product;
 use App\Models\Cart;
 use App\Models\OrderTracking;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\PlacingOrder;
 
 class PaymentController extends Controller
 {
@@ -60,6 +62,11 @@ class PaymentController extends Controller
                     "postal_code" => $CPLivraison,
                     "country" => $countryLivraison,
                 ]);
+
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Informations ajouté.'
+                ]);
             }
         }
     }
@@ -91,32 +98,27 @@ class PaymentController extends Controller
             ], 400);
         }
 
-        try {
-            foreach ($cartItems as $cartItem) {
-                $productId = $cartItem->idProduct;
+        foreach ($cartItems as $cartItem) {
+            $productId = $cartItem->idProduct;
 
-                Cart::where("idProduct", $productId)
-                    ->where("idUser", $idUser)
-                    ->delete();
+            Cart::where("idProduct", $productId)
+                ->where("idUser", $idUser)
+                ->delete();
 
-                OrderTracking::insert([
-                    'idUser' => $idUser,
-                    'idProduct' => $productId,
-                    'status' => 0,
-                    "prix" => $price,
-                    "date" => $date
-                ]);
-            }
-
-            return response()->json([
-                'status' => 'success',
-                'message' => 'Commande validée et panier vidé pour les produits sélectionnés.'
+            OrderTracking::insert([
+                'idUser' => $idUser,
+                'idProduct' => $productId,
+                'status' => 0,
+                "prix" => $price,
+                "date" => $date
             ]);
-        } catch (\Throwable $th) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Commande non validée et panier non vidé pour les produits sélectionnés.'
-            ], 400);
         }
+
+        Mail::to(Auth::user()->email)->send(new PlacingOrder($price));
+
+        return response()->json([
+            'status' => 'success',
+            'message' => 'Commande validée et panier vidé pour les produits sélectionnés.'
+        ]);
     }
 }

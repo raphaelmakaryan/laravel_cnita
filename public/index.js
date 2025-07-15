@@ -156,7 +156,7 @@ if (!document.getElementById("cartProduct")) {
 
 //#region PAYMENT
 function addInformationLivraison() {
-    const debug = true;
+    const debug = false;
 
     const divInfoUser = document.getElementById("informationsUser");
     const divDelivery = document.getElementById("deliveryDivPayment");
@@ -189,28 +189,19 @@ function addInformationLivraison() {
                     console.log('Réponse du serveur :', data);
                 }
                 if (data.status === "success") {
-                    userAddingInformationLivraison(firstSecondName, `${adressLivraison}, ${cityLivraison}, ${CPLivraison}, ${countryLivraison}`, data.dateBuy);
+                    window.location.reload();
                 } else {
                     alert("Erreur lors de l'ajout de vos informations de livraison. Veuillez réessayer.");
                 }
             })
             .catch(error => console.error('Erreur :', error));
+    } else {
+        progressBar();
+        divInfoUser.style.display = "none";
+        divDelivery.style.display = "flex";
     }
-    progressBar();
-    divInfoUser.style.display = "none";
-    divDelivery.style.display = "flex";
 }
 
-function userAddingInformationLivraison(FLName, ACPCUser, dateBuy) {
-    const FLNameElem = document.getElementById("FLName");
-    const ACPCUserElem = document.getElementById("ACPCUser");
-    const dateBuyElem = document.getElementById("dateBuy");
-    if (FLNameElem && ACPCUserElem && dateBuyElem) {
-        FLNameElem.innerText = FLName;
-        ACPCUserElem.innerText = ACPCUser;
-        dateBuyElem.innerText = dateBuy;
-    }
-}
 
 function choiceLivraison() {
     const divDelivery = document.getElementById("deliveryDivPayment");
@@ -221,10 +212,10 @@ function choiceLivraison() {
     const verificationRadio = choiceRadio ? choiceRadio.value : null;
 
     if (verificationRadio !== null) {
-        choiseUserLivraison.innerText = verificationRadio;
         progressBar();
         divDelivery.style.display = "none";
         divFacture.style.display = "flex";
+        choiseUserLivraison.innerText = verificationRadio;
     }
 }
 
@@ -266,13 +257,13 @@ function finalPayment() {
 }
 
 function paymentResult(resultat) {
+    let displayMessage = false;
     const factureDivPayment = document.getElementById("factureDivPayment");
     const responsePayment = document.getElementById("responsePayment");
 
     const acceptPayment = document.getElementById("acceptPayment");
     const refusePayment = document.getElementById("refusePayment");
 
-    let displayMessage = false;
     if (resultat.status === "success") {
         factureDivPayment.style.display = "none";
         responsePayment.style.display = "flex";
