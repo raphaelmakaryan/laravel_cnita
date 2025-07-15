@@ -93,6 +93,11 @@ Route::prefix('backoffice')->name('backoffice.')->middleware(['auth', 'verified'
         [DashboardController::class, "commandsPage"]
     )->name('commands');
 
+    Route::get(
+        '/commands/details/{id}',
+        [DashboardController::class, "detailsCommandsPage"]
+    )->name('commands.details');
+
 
     Route::get(
         '/products/list',

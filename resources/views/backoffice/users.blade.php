@@ -11,7 +11,7 @@
             @if ($allUsers)
                 @foreach ($allUsers as $user)
                     <div
-                        class="col-12 col-lg-4 flex-column rounded background_couleur_principale_400 d-flex align-items-center justify-content-center p-3 m-1">
+                        class="col-12 col-lg-3 flex-column rounded background_couleur_principale_400 d-flex align-items-center justify-content-center m-2">
                         <form action="/backoffice/users/update" method="post">
                             @csrf
                             <p class="fs-5 fw-bold text-center">{{$user->name}}</p>

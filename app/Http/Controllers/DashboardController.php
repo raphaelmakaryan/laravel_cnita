@@ -161,7 +161,10 @@ class DashboardController extends Controller
         $endDate = Carbon::today()->addDays(6);
 
         // Nombre de commandes par jour
-        $commandesParJour = OrderTracking::select(DB::raw('DATE(`date`) as jour'), DB::raw('count(*) as total'))
+        $commandesParJour = OrderTracking::select(
+            DB::raw('DATE(`date`) as jour'),
+            DB::raw('COUNT(DISTINCT idOrder) as total')
+        )
             ->whereBetween('date', [$startDate, $endDate])
             ->groupBy('jour')
             ->pluck('total', 'jour')
@@ -194,8 +197,26 @@ class DashboardController extends Controller
 
     public function commandsPage()
     {
-        $commandes = DB::table('order_tracking')
-            ->join('users', 'order_tracking.idUser', '=', 'users.id')
+        $commandes = OrderTracking::join('users', 'order_tracking.idUser', '=', 'users.id')
+            ->select(
+                'order_tracking.idOrder',
+                'order_tracking.date',
+                DB::raw('SUM(order_tracking.prix) as prix'),
+                'users.name as nomUtilisateur',
+                'users.id as idUser'
+            )
+            ->groupBy('order_tracking.idOrder', 'order_tracking.date', 'users.name', 'users.id')
+            ->orderBy('order_tracking.date', 'desc')
+            ->get();
+
+        return view('backoffice.commands.commands', [
+            'commandes' => $commandes,
+        ]);
+    }
+
+    public function detailsCommandsPage($id)
+    {
+        $commandes = OrderTracking::join('users', 'order_tracking.idUser', '=', 'users.id')
             ->join('products', 'order_tracking.idProduct', '=', 'products.ID')
             ->select(
                 'order_tracking.id as idCommande',
@@ -212,7 +233,7 @@ class DashboardController extends Controller
 
         $allStatus = Status::all();
 
-        return view('backoffice.commands', [
+        return view('backoffice.commands.details', [
             'commandes' => $commandes,
             "allStatus" => $allStatus
         ]);
