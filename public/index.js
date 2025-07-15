@@ -305,3 +305,62 @@ function progressBar() {
 }
 //#endregion PAYMENT
 
+//#region EXPLORE
+function triNameExplore() {
+    const allProductExplore = document.getElementById("allProductExplore");
+    if (!allProductExplore) return;
+    const products = Array.from(allProductExplore.getElementsByClassName("card"));
+    products.sort((a, b) => {
+        const nameA = a.querySelector(".card-title")?.innerText.toLowerCase() || "";
+        const nameB = b.querySelector(".card-title")?.innerText.toLowerCase() || "";
+        return nameA.localeCompare(nameB);
+    });
+    allProductExplore.innerHTML = "";
+    products.forEach(card => {
+        const container = card.closest(".col-12") ?? card.parentElement;
+        if (container) {
+            container.className = "col-12 col-lg-3 d-flex flex-column align-items-center mb-2 mt-1 mt-lg-2";
+            allProductExplore.appendChild(container);
+        }
+    });
+}
+
+function triPrixCroissantExplore() {
+    const allProductExplore = document.getElementById("allProductExplore");
+    if (!allProductExplore) return;
+    const productContainers = Array.from(allProductExplore.children);
+    productContainers.sort((a, b) => {
+        const prixA = parseFloat(
+            a.querySelector(".card-subtitle")?.innerText.replace("€", "").trim() || 0
+        );
+        const prixB = parseFloat(
+            b.querySelector(".card-subtitle")?.innerText.replace("€", "").trim() || 0
+        );
+        return prixA - prixB;
+    });
+
+    allProductExplore.innerHTML = "";
+    productContainers.forEach(container => {
+        container.className = "col-12 col-lg-3 d-flex flex-column align-items-center mb-2 mt-1 mt-lg-2";
+        allProductExplore.appendChild(container);
+    });
+}
+
+let initialOrderExplore = [];
+
+window.addEventListener("DOMContentLoaded", () => {
+    const allProductExplore = document.getElementById("allProductExplore");
+    if (!allProductExplore) return;
+    initialOrderExplore = Array.from(allProductExplore.children);
+});
+
+function resetExploreOrder() {
+    const allProductExplore = document.getElementById("allProductExplore");
+    if (!allProductExplore || initialOrderExplore.length === 0) return;
+
+    allProductExplore.innerHTML = "";
+    initialOrderExplore.forEach(product => {
+        allProductExplore.appendChild(product);
+    });
+}
+//#endregion EXPLORE

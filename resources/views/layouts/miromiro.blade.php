@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\Auth;
 </head>
 
 <body>
-    <nav class="navbar navbar-expand-lg background_couleur_principale_400">
+    <nav class="navbar navbar-expand-lg background_couleur_principale_400" id="headerMiroMiro">
         <div class="container-fluid">
             <a class="navbar-brand" href="/">
                 <img src="{{ asset('assets/logos/logoNoir.png') }}" alt="Bootstrap" width="100"> </a>
@@ -56,7 +56,7 @@ use Illuminate\Support\Facades\Auth;
 
     @yield('content')
 
-    <footer class="mt-7">
+    <footer class="mt-7" id="footerMiroMiro">
         <div class="container-fluid">
             <div class="row">
                 <img src="{{ asset('assets/separationHAUT.png') }}" alt="" class="img-fluid separations">
