@@ -8,7 +8,7 @@ function addOnCart(connect) {
     const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
     if (connect) {
         if (Object.keys(cartItems).length > 0) {
-            fetch('/product/addoncart', {
+            fetch('/api/product/addoncart', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -32,7 +32,7 @@ function addOnCart(connect) {
                 .catch(error => console.error('Erreur :', error));
         } else {
             let cartItems = [{ id, nom, image, prix }]
-            fetch('/product/addoncart', {
+            fetch('/api/product/addoncart', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -65,7 +65,7 @@ function addOnCart(connect) {
 function removeFromCart(index, connect) {
     let debug = true
     if (connect && index) {
-        fetch('/product/deleteoncart', {
+        fetch('/api/product/deleteoncart', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -134,7 +134,7 @@ if (!document.getElementById("cartProduct")) {
     let debug = true
     const cartItems = JSON.parse(localStorage.getItem("cart")) || {};
     if (Object.keys(cartItems).length > 0) {
-        fetch('/product/verificationcart', {
+        fetch('/api/product/verificationcart', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -175,7 +175,7 @@ function addInformationLivraison() {
 
     if (firstSecondName != null && adressLivraison != null && cityLivraison != null && CPLivraison != null && countryLivraison != null) {
         let informationsUser = [{ firstSecondName, adressLivraison, cityLivraison, CPLivraison, countryLivraison }]
-        fetch('/payment/add', {
+        fetch('/api/payment/add', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
@@ -242,7 +242,7 @@ function finalPayment() {
             date
         }];
 
-        fetch('/payment/check', {
+        fetch('/api/payment/check', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
