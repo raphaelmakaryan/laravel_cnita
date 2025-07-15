@@ -53,18 +53,6 @@ Route::get(
     '/payment',
     [PaymentController::class, "indexPage"]
 )->middleware(['auth', 'verified', PaymentMiddleware::class])->name('payment');
-
-
-Route::post(
-    '/payment/check',
-    [PaymentController::class, "check"]
-)->middleware(['auth', 'verified', PaymentMiddleware::class]);
-
-
-Route::post(
-    '/payment/add',
-    [PaymentController::class, "addInformation"]
-)->middleware(['auth', 'verified', PaymentMiddleware::class]);
 #endregion PAYMENT
 
 #region AUTHENTICATION
@@ -152,33 +140,19 @@ Route::prefix('backoffice')->name('backoffice.')->middleware(['auth', 'verified'
 #endregion DASHBOARD ADMIN
 
 #region CLIENT
-Route::get(
-    '/account',
-    [ClientController::class, "indexPage"]
-)->middleware(['auth', 'verified', ClientMiddleware::class])->name('client.dashboard');
+Route::prefix('client')->name('client.')->middleware(['auth', 'verified', ClientMiddleware::class])->group(function () {
+    Route::get(
+        '/account',
+        [ClientController::class, "indexPage"]
+    )->middleware(['auth', 'verified', ClientMiddleware::class])->name('client.dashboard');
 
-Route::get(
-    '/historic',
-    [ClientController::class, "historicPage"]
-)->middleware(['auth', 'verified', ClientMiddleware::class])->name('client.historic');
+    Route::get(
+        '/historic',
+        [ClientController::class, "historicPage"]
+    )->middleware(['auth', 'verified', ClientMiddleware::class])->name('client.historic');
+});
+
 #endregion CLIENT
-
-#region CART CONNECTED
-Route::post(
-    '/product/addoncart',
-    [CartController::class, "addToCart"]
-);
-
-Route::post(
-    '/product/deleteoncart',
-    [CartController::class, "deleteToCart"]
-);
-
-Route::post(
-    '/product/verificationcart',
-    [CartController::class, "addLocalProducts"]
-);
-#endregion CART CONNECTED
 
 #region CONTACT
 Route::get('/contact', function () {
@@ -232,6 +206,32 @@ Route::prefix('api')->group(function () {
     Route::get(
         '/product/edit/{id}/{nom}/{image}/{prix}',
         [APIController::class, "updateProduct"]
+    );
+
+    Route::post(
+        '/payment/check',
+        [PaymentController::class, "check"]
+    )->middleware(['auth', 'verified', PaymentMiddleware::class]);
+
+
+    Route::post(
+        '/payment/add',
+        [PaymentController::class, "addInformation"]
+    )->middleware(['auth', 'verified', PaymentMiddleware::class]);
+
+    Route::post(
+        '/product/addoncart',
+        [CartController::class, "addToCart"]
+    );
+
+    Route::post(
+        '/product/deleteoncart',
+        [CartController::class, "deleteToCart"]
+    );
+
+    Route::post(
+        '/product/verificationcart',
+        [CartController::class, "addLocalProducts"]
     );
 });
 #endregion API
