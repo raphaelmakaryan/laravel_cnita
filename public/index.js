@@ -1,3 +1,33 @@
+//#region BODY
+function onlyNumberInput() {
+    document.querySelectorAll('input[type="tel"]').forEach(input => {
+        input.addEventListener('input', (event) => {
+            const input = event.target;
+            const value = input.value;
+            const newValue = value.replace(/[^0-9]/g, '');
+            if (newValue !== value) {
+                input.value = newValue;
+            }
+        });
+    });
+}
+onlyNumberInput()
+
+function onlyStringInput() {
+    document.querySelectorAll('input[type="text"]').forEach(input => {
+        input.addEventListener('input', (event) => {
+            const input = event.target;
+            const value = input.value;
+            const newValue = value.replace(/[^a-zA-Z]/g, '');
+            if (newValue !== value) {
+                input.value = newValue;
+            }
+        });
+    });
+}
+onlyStringInput()
+//#endregion BODY
+
 //#region LOCAL STORAGE PANIER
 function addOnCart(connect) {
     const debug = true;
