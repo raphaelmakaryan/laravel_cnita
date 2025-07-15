@@ -195,10 +195,10 @@ function addInformationLivraison() {
                 }
             })
             .catch(error => console.error('Erreur :', error));
-    } else {
-        divInfoUser.style.display = "none";
-        divDelivery.style.display = "flex";
     }
+    progressBar();
+    divInfoUser.style.display = "none";
+    divDelivery.style.display = "flex";
 }
 
 function userAddingInformationLivraison(FLName, ACPCUser, dateBuy) {
@@ -222,6 +222,7 @@ function choiceLivraison() {
 
     if (verificationRadio !== null) {
         choiseUserLivraison.innerText = verificationRadio;
+        progressBar();
         divDelivery.style.display = "none";
         divFacture.style.display = "flex";
     }
@@ -255,6 +256,7 @@ function finalPayment() {
                 if (debug) {
                     console.log('Réponse du serveur :', data);
                 }
+                progressBar()
                 paymentResult(data);
             })
             .catch(error => console.error('Erreur :', error));
@@ -262,7 +264,6 @@ function finalPayment() {
         alert("Informations manquantes pour finaliser le paiement.");
     }
 }
-
 
 function paymentResult(resultat) {
     const factureDivPayment = document.getElementById("factureDivPayment");
@@ -294,4 +295,13 @@ function paymentResult(resultat) {
         }, 2000);
     }
 }
+
+const progress = document.getElementById("progressBar");
+let lastValueProgress = 25;
+
+function progressBar() {
+    lastValueProgress = lastValueProgress + 25;
+    progress.style.width = `${lastValueProgress}%`;
+}
 //#endregion PAYMENT
+

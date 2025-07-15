@@ -10,8 +10,14 @@ use Carbon\Carbon;
 <section class="mt-5 mb-5" id="paymentPage">
     <div class="container">
         <div class="row">
-            <!-- BARRE -->
-            <p class="fs-4 text-center">Finaliser ma commande</p>
+            <div class="col-12">
+                <div class="progress-container">
+                    <div class="progress-bar" id="progressBar" style="width: 25%;"></div>
+                </div>
+            </div>
+            <div class="col-12">
+                <p class="fs-4 text-center">Finaliser ma commande</p>
+            </div>
         </div>
         <div class="row mt-3" id="informationsUser">
             <div class="col-lg-3">
@@ -35,13 +41,13 @@ use Carbon\Carbon;
                         <div class="d-flex flex-row">
                             <div class="col-6 mt-2 mb-2 me-1">
                                 <label for="expiredCard" class="form-label">Date d'expliration :</label>
-                                <input id="expiredCard" class="form-control" type="tel" pattern="\d*" minlength="4" maxlength="4"
-                                    placeholder="MM / YY">
+                                <input id="expiredCard" class="form-control" type="tel" pattern="\d*" minlength="4"
+                                    maxlength="4" placeholder="MM / YY">
                             </div>
                             <div class="col-6 mt-2 mb-2 ms-1">
                                 <label for="securityCard" class="form-label">Code de sécurité :</label>
-                                <input id="securityCard" class="form-control" type="tel" pattern="\d*" minlength="3" maxlength="3"
-                                    placeholder="CVC">
+                                <input id="securityCard" class="form-control" type="tel" pattern="\d*" minlength="3"
+                                    maxlength="3" placeholder="CVC">
                             </div>
                         </div>
                     </div>
@@ -239,7 +245,8 @@ use Carbon\Carbon;
                             @endforeach
             @endif
             <div class="col-12 mt-4 d-flex align-items-center justify-content-center">
-                <button onclick="finalPayment()" class="btn bouton_style bouton_noir bouton_fond_orange w-25">CONTINUER</>
+                <button onclick="finalPayment()" class="btn bouton_style bouton_noir bouton_fond_orange w-25">CONTINUER
+                    </>
             </div>
         </div>
         <div class="row mt-3" id="responsePayment" style="display:none">
@@ -300,7 +307,6 @@ use Carbon\Carbon;
             calculate = false;
         }
     }, 1000);
-
 </script>
 
 @stop
