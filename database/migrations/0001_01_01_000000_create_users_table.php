@@ -19,7 +19,7 @@ return new class extends Migration
             $table->string('password');
             $table->rememberToken();
             $table->timestamps();
-            $table->int(0);
+            $table->integer('permission');
         });
 
         Schema::create('password_reset_tokens', function (Blueprint $table) {

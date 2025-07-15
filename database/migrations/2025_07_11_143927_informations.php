@@ -11,16 +11,16 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('order_tracking', function (Blueprint $table) {
+        Schema::create('informations', function (Blueprint $table) {
             $table->id('ID');
             $table->unsignedBigInteger('idUser');
-            $table->unsignedBigInteger('idProduct');
-            $table->unsignedTinyInteger('status');
-            $table->float('prix');
-            $table->date('date');
+            $table->string('firstname_lastname', 1000);
+            $table->string('address', 1000);
+            $table->integer('postal_code');
+            $table->string('city', 100);
+            $table->string('country', 100);
 
             $table->foreign('idUser')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('idProduct')->references('ID')->on('products')->onDelete('cascade');
         });
     }
 
@@ -29,6 +29,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('order_tracking');
+        Schema::dropIfExists('informations');
     }
 };
