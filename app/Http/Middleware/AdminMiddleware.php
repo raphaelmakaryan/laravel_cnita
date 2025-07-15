@@ -20,8 +20,10 @@ class AdminMiddleware
     {
         if (Auth::check() && Auth::user()->permission === 1) {
             return $next($request);
+        } else if (Auth::check() && Auth::user()->permission === 0) {
+            return redirect()->route('client.dashboard');
+        } else {
+            return redirect()->route('authentication');
         }
-
-        return redirect()->route('client.dashboard'); // ou abort(403);
     }
 }

@@ -3,6 +3,7 @@
 @section('content')
 
 <?php
+
 use Carbon\Carbon;
 
 ?>
@@ -24,33 +25,6 @@ use Carbon\Carbon;
             </div>
             <div class="col-12 col-lg-6">
                 <div class="container">
-                    <div class="row mb-3">
-                        <div class="col-12">
-                            <p class="fs-5 text-start">Informations bancaire</p>
-                        </div>
-                        <div class="col-12 mt-2 mb-2">
-                            <label for="numberCard" class="form-label ms-1">Numéro de carte bancaire :</label>
-                            <input id="numberCard" type="tel" inputmode="numeric" pattern="[0-9\s]{13,19}"
-                                autocomplete="cc-number" maxlength="19" placeholder="xxxx xxxx xxxx xxxx"
-                                class="form-control" required>
-                        </div>
-                        <div class="col-12 mt-2 mb-2">
-                            <label for="nameOnCard" class="form-label ms-1">Nom sur la carte bancaire :</label>
-                            <input id="nameOnCard" type="text" class="form-control" required placeholder="NOM PRENOM">
-                        </div>
-                        <div class="d-flex flex-row">
-                            <div class="col-6 mt-2 mb-2 me-1">
-                                <label for="expiredCard" class="form-label">Date d'expliration :</label>
-                                <input id="expiredCard" class="form-control" type="tel" pattern="\d*" minlength="4"
-                                    maxlength="4" placeholder="MM / YY">
-                            </div>
-                            <div class="col-6 mt-2 mb-2 ms-1">
-                                <label for="securityCard" class="form-label">Code de sécurité :</label>
-                                <input id="securityCard" class="form-control" type="tel" pattern="\d*" minlength="3"
-                                    maxlength="3" placeholder="CVC">
-                            </div>
-                        </div>
-                    </div>
                     @if (count($alreadyLivraison) == 0)
                         <div class="row mt-5">
                             <div class="col-12">
@@ -84,6 +58,35 @@ use Carbon\Carbon;
                                 </div>
                             </div>
                         </div>
+
+                    @else
+                        <div class="row mb-3">
+                            <div class="col-12">
+                                <p class="fs-5 text-start">Informations bancaire</p>
+                            </div>
+                            <div class="col-12 mt-2 mb-2">
+                                <label for="numberCard" class="form-label ms-1">Numéro de carte bancaire :</label>
+                                <input id="numberCard" type="tel" inputmode="numeric" pattern="[0-9\s]{13,19}"
+                                    autocomplete="cc-number" maxlength="19" placeholder="xxxx xxxx xxxx xxxx"
+                                    class="form-control" required>
+                            </div>
+                            <div class="col-12 mt-2 mb-2">
+                                <label for="nameOnCard" class="form-label ms-1">Nom sur la carte bancaire :</label>
+                                <input id="nameOnCard" type="text" class="form-control" required placeholder="NOM PRENOM">
+                            </div>
+                            <div class="d-flex flex-row">
+                                <div class="col-6 mt-2 mb-2 me-1">
+                                    <label for="expiredCard" class="form-label">Date d'expliration :</label>
+                                    <input id="expiredCard" class="form-control" type="tel" pattern="\d*" minlength="4"
+                                        maxlength="4" placeholder="MM / YY">
+                                </div>
+                                <div class="col-6 mt-2 mb-2 ms-1">
+                                    <label for="securityCard" class="form-label">Code de sécurité :</label>
+                                    <input id="securityCard" class="form-control" type="tel" pattern="\d*" minlength="3"
+                                        maxlength="3" placeholder="CVC">
+                                </div>
+                            </div>
+                        </div>
                     @endif
                     <div class="row">
                         <div class="col-12 mt-4 d-flex align-items-center justify-content-center">
@@ -97,8 +100,6 @@ use Carbon\Carbon;
             </div>
         </div>
         <div class="row mt-3" id="deliveryDivPayment" style="display:none">
-            <div class="col-lg-3">
-            </div>
             <div class="col-lg-3">
             </div>
             <div class="col-12 mb-4">
@@ -156,98 +157,57 @@ use Carbon\Carbon;
         <div class="row mt-3" id="factureDivPayment" style="display:none">
             <div class="col-lg-3">
             </div>
-            <div class="col-lg-3">
-            </div>
             <div class="col-12 mb-2">
                 <p class="fs-4 text-center">Facture</p>
             </div>
             @if ($alreadyLivraison && $products)
-                @foreach ($alreadyLivraison as $info)
-                    <div class="col-12 mb-4 d-flex align-items-center flex-column">
-                        <div style="background: #D9D9D9;" class="p-3 rounded" id="factureInfos">
-                            <div class="d-flex flex-column align-items-start">
+                <div class="col-12 mb-4 d-flex align-items-center flex-column">
+                    <div style="background: #D9D9D9;" class="p-3 rounded" id="factureInfos">
+                        <div class="d-flex flex-column align-items-start">
+                            @foreach ($alreadyLivraison as $info)
                                 <p class="fs-6 m-0">{{$info->firstname_lastname}}</p>
                                 <p class="fs-6 m-0">{{$info->address}}, {{$info->city}},
                                     {{$info->postal_code}},{{$info->country}}
                                 </p>
-                                <p class="fs-6 m-0">Date d'achat : {{  $date = Carbon::now() }}</p>
+                                <p class="fs-6 m-0">Date d'achat : {{ $date = Carbon::now() }}</p>
                                 <p class="fs-6 m-0">Choix livraison : <span id="choiseUserLivraison"
                                         class="text-capitalize"></span></p>
-                @endforeach
+                            @endforeach
                             @foreach ($products as $produit)
-                                            <p class="fs-6 mt-3">Listes des articles :</p>
-                                            <div class="table-responsive w-100">
-                                                <table class="table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th scope="col">Nom</th>
-                                                            <th scope="col" class="w-50">Image</th>
-                                                            <th scope="col">Quantité</th>
-                                                            <th scope="col">Prix</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>{{ $produit->nom }}</td>
-                                                            <td><img src="{{ $produit->image }}" alt="" class="img-fluid w-50"></td>
-                                                            <td>1</td>
-                                                            <td><span class="priceForCalculate">{{ $produit->prix }}</span> €</td>
-                                                            <td style='display: none;' class="IDForFinal">{{ $produit->ID }}</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex flex-row justify-content-end align-items-end">
-                                            <p class="fs-6 mt-3 fw-bold">Total : <span id="totalPrice"></span> €</p>
-                                        </div>
-                                    </div>
+                                <p class="fs-6 mt-3">Listes des articles :</p>
+                                <div class="table-responsive w-100">
+                                    <table class="table">
+                                        <thead>
+                                            <tr>
+                                                <th scope="col">Nom</th>
+                                                <th scope="col" class="w-50">Image</th>
+                                                <th scope="col">Quantité</th>
+                                                <th scope="col">Prix</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <tr>
+                                                <td>{{ $produit->nom }}</td>
+                                                <td><img src="{{ $produit->image }}" alt="" class="img-fluid w-50"></td>
+                                                <td>1</td>
+                                                <td><span class="priceForCalculate">{{ $produit->prix }}</span> €</td>
+                                                <td style='display: none;' class="IDForFinal">{{ $produit->ID }}</td>
+                                            </tr>
+                                        </tbody>
+                                    </table>
                                 </div>
                             @endforeach
-            @else
-                <div class="col-12 mb-4 d-flex align-items-center flex-column">
-                    <div style="background: #D9D9D9;" class="p-3 rounded" id="factureInfos">
-                        <div class="d-flex flex-column align-items-start">
-                            <p class="fs-6 m-0" id="FLName"></p>
-                            <p class="fs-6 m-0" id="ACPCUser"> </p>
-                            <p class="fs-6 m-0">Date d'achat : <span id="dateBuy"></span></p>
-                            <p class="fs-6 m-0">Choix livraison : <span id="choiseUserLivraison"
-                                    class="text-capitalize"></span></p>
-                            @foreach ($products as $produit)
-                                            <p class="fs-6 mt-3">Listes des articles :</p>
-                                            <div class="table-responsive w-100">
-                                                <table class="table">
-                                                    <thead>
-                                                        <tr>
-                                                            <th scope="col">Nom</th>
-                                                            <th scope="col" class="w-50">Image</th>
-                                                            <th scope="col">Quantité</th>
-                                                            <th scope="col">Prix</th>
-                                                        </tr>
-                                                    </thead>
-                                                    <tbody>
-                                                        <tr>
-                                                            <td>{{ $produit->nom }}</td>
-                                                            <td><img src="{{ $produit->image }}" alt="" class="img-fluid w-50"></td>
-                                                            <td>1</td>
-                                                            <td><span class="priceForCalculate">{{ $produit->prix }}</span> €</td>
-                                                            <td style='display: none;' class="IDForFinal">{{ $produit->ID }}</td>
-                                                        </tr>
-                                                    </tbody>
-                                                </table>
-                                            </div>
-                                        </div>
-                                        <div class="d-flex flex-row justify-content-end align-items-end">
-                                            <p class="fs-6 mt-3 fw-bold">Total : <span id="totalPrice"></span> €</p>
-                                        </div>
-                                    </div>
-                                </div>
-                            @endforeach
+                        </div>
+                        <div class="d-flex flex-row justify-content-end align-items-end">
+                            <p class="fs-6 mt-3 fw-bold">Total : <span id="totalPrice"></span> €</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-12 mt-4 d-flex align-items-center justify-content-center">
+                    <button onclick="finalPayment()"
+                        class="btn bouton_style bouton_noir bouton_fond_orange w-25">CONTINUER</button>
+                </div>
             @endif
-            <div class="col-12 mt-4 d-flex align-items-center justify-content-center">
-                <button onclick="finalPayment()" class="btn bouton_style bouton_noir bouton_fond_orange w-25">CONTINUER
-                    </>
-            </div>
         </div>
         <div class="row mt-3" id="responsePayment" style="display:none">
             <div class="container">

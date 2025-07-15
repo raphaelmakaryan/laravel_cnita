@@ -7,38 +7,41 @@ use Illuminate\Contracts\Queue\ShouldQueue;
 use Illuminate\Mail\Mailable;
 use Illuminate\Mail\Mailables\Content;
 use Illuminate\Mail\Mailables\Envelope;
-use Illuminate\Mail\Mailables\Address;
 use Illuminate\Queue\SerializesModels;
 
-class Registration extends Mailable
+class PlacingOrder extends Mailable
 {
     use Queueable, SerializesModels;
+    public $price;
 
     /**
      * Create a new message instance.
      */
-    public function __construct()
+    public function __construct($price)
     {
-        //
+       $this->price = $price;
     }
 
     /**
      * Get the message envelope.
      */
-    public function envelope(): Envelope
+    public function envelope()
     {
         return new Envelope(
-            subject: 'Bienvenue sur Miro-Miro !',
+            subject: 'Confirmation de votre commande chez Miro-Miro',
         );
     }
 
     /**
      * Get the message content definition.
      */
-    public function content(): Content
+    public function content()
     {
         return new Content(
-            view: 'mails.inscription',
+            view: 'mails.commande',
+            with: [
+                'price' => $this->price
+            ],
         );
     }
 

@@ -22,7 +22,7 @@ class AuthenticatedSessionController extends Controller
     /**
      * Handle an incoming authentication request.
      */
-    public function store(LoginRequest $request): RedirectResponse
+    public function store(LoginRequest $request)
     {
         $request->authenticate();
 
@@ -32,8 +32,10 @@ class AuthenticatedSessionController extends Controller
 
         if ($user->permission === 1) {
             return redirect()->intended(route('backoffice.account', absolute: false));
-        } else {
+        } else if ($user->permission === 0) {
             return redirect()->route('client.dashboard');
+        } else {
+            return redirect()->route('authentication');
         }
     }
 

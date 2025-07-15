@@ -15,6 +15,8 @@ use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\ClientMiddleware;
 use App\Http\Middleware\PaymentMiddleware;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
+use App\Mail\Contact;
 
 #region HOME
 Route::get('/', [HomeController::class, "indexPage"])->name('home');
@@ -140,7 +142,7 @@ Route::prefix('backoffice')->name('backoffice.')->middleware(['auth', 'verified'
 #endregion DASHBOARD ADMIN
 
 #region CLIENT
-Route::prefix('client')->name('client.')->middleware(['auth', 'verified', ClientMiddleware::class])->group(function () {
+Route::prefix('client')->middleware(['auth', 'verified', ClientMiddleware::class])->group(function () {
     Route::get(
         '/account',
         [ClientController::class, "indexPage"]
@@ -233,15 +235,19 @@ Route::prefix('api')->group(function () {
         '/product/verificationcart',
         [CartController::class, "addLocalProducts"]
     );
+
+    Route::post(
+        '/contact',
+        function (Request $request) {
+            Mail::to($request->input('emailUserContact'))->send(new Contact());
+            return redirect("contact");
+        }
+    );
 });
 #endregion API
 
 #region BACKUP
 /*
-
-Route::get('/dashboard', function () {
-    return view('dashboard');
-})->middleware(['auth', 'verified'])->name('dashboard');
 
 Route::middleware('auth')->group(function () {
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
