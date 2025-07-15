@@ -37,7 +37,7 @@
                             <h5 class="card-title">{{ $produit->nom }}</h5>
                             <h6 class="card-subtitle mb-2 text-body-secondary">{{ $produit->prix }} €</h6>
                             <p class="card-text">
-                                {{ $produit->description ?? 'Ces lunettes sont magnifique genre wahhhh suis jaloux de fou' }}
+                                {{ $produit->description }}
                             </p>
                             <div class="d-flex flex-row justify-content-end">
                                 <a href="/product/{{ $produit->ID}}"
