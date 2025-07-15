@@ -19,15 +19,15 @@ use App\Http\Controllers\CartController;
                                             <div class="carousel-inner">
                                                 <div class="carousel-item active">
                                                     <img id="imageProductDetail"
-                                                        src="{{ asset($aProduct->image ?? 'assets/exemples/exempleDetail.png') }}"
+                                                        src="{{ asset($aProduct->image) }}"
                                                         class="d-block w-100">
                                                 </div>
                                                 <div class="carousel-item">
-                                                    <img src="{{ asset('assets/exemples/exempleDetail.png') }}"
+                                                    <img src="{{ asset($aProduct->image) }}"
                                                         class="d-block w-100">
                                                 </div>
                                                 <div class="carousel-item">
-                                                    <img src="{{ asset('assets/exemples/exempleDetail.png') }}"
+                                                    <img src="{{ asset($aProduct->image) }}"
                                                         class="d-block w-100">
                                                 </div>
                                             </div>
@@ -50,6 +50,7 @@ use App\Http\Controllers\CartController;
                             <div class="row">
                                 <div class="col-12 d-flex flex-column align-items-start mt-1 ms-1">
                                     <p class="fs-5" id="nameProductDetail">{{ $aProduct->nom }}</p>
+                                    <p class="fs-6">{{ $aProduct->description}}</p>
                                     <p class="fs-6"><span id="prixProductDetail">{{ $aProduct->prix}}</span> €</p>
                                     <input type="hidden" id="idProductDetail" value="{{ $aProduct->ID }}">
                                 </div>
@@ -75,7 +76,7 @@ use App\Http\Controllers\CartController;
                                                 <p class="fs-6 fw-bold">Genre</p>
                                             </div>
                                             <div class="col-6" id="genderGlass">
-                                                <p class="fs-6">Homme</p>
+                                                <p class="fs-6">{{ $aProduct->genre }}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -87,19 +88,7 @@ use App\Http\Controllers\CartController;
                                                 <p class="fs-6 fw-bold">Taille</p>
                                             </div>
                                             <div class="col-6" id="tailleGlass">
-                                                <p class="fs-6">XL</p>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                                <div class="col-12">
-                                    <div class="container">
-                                        <div class="row">
-                                            <div class="col-6">
-                                                <p class="fs-6 fw-bold">Type</p>
-                                            </div>
-                                            <div class="col-6" id="typeGlass">
-                                                <p class="fs-6">Cerclées</p>
+                                                <p class="fs-6">{{ $aProduct->taille }}</p>
                                             </div>
                                         </div>
                                     </div>
@@ -111,7 +100,7 @@ use App\Http\Controllers\CartController;
                                                 <p class="fs-6 fw-bold">Forme</p>
                                             </div>
                                             <div class="col-6" id="formeGlass">
-                                                <p class="fs-6">Ovales</p>
+                                                <p class="fs-6">{{ $aProduct->forme }}</p>
                                             </div>
                                         </div>
                                     </div>
