@@ -121,19 +121,18 @@ class DashboardController extends Controller
     public function modifyProduct(Request $request)
     {
         try {
+            $idProduct = $request->input('idProduct');
             $modifyProduct = [
-                $request->input('idProduct'),
-                $request->input('nameProduct'),
-                $request->input('imageProduct'),
-                $request->input('priceProduct')
+                'nom'        => $request->input('nameProduct'),
+                'description' => $request->input('descProduct'),
+                'genre'      => $request->input('genreProduct'),
+                'taille'     => $request->input('sizeProduct'),
+                'forme'      => $request->input('formProduct'),
+                'image'      => $request->input('imageProduct'),
+                'prix'       => $request->input('priceProduct'),
             ];
 
-            Product::where("ID", "=", $modifyProduct[0])->update([
-                "nom" => $modifyProduct[1],
-                "image" => $modifyProduct[2],
-                "prix" => $modifyProduct[3],
-            ]);
-
+            Product::where("ID", "=", $idProduct)->update($modifyProduct);
             return view("backoffice.modify.successModify");
         } catch (Exception) {
             return view("backoffice.modify.errorModify");
