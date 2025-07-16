@@ -12,9 +12,7 @@ class HomeController extends Controller
 {
     public function indexPage()
     {
-        //$allProduct = Product::orderBy("nom")->get();
-        //$allProduct = Product::orderByDesc("prix")->get();
-        $allProduct = Product::limit(3)->get();
+        $allProduct = Product::orderByDesc("ID")->limit(3)->get();
 
         return view("home", data: ['produits' => $allProduct]);
     }
