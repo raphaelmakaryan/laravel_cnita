@@ -39,9 +39,17 @@ class DashboardController extends Controller
         return view("backoffice.create.createProduct");
     }
 
+    /*
     public function addingProduct(Request $request)
     {
         try {
+
+            $validated = $request->validate([
+                'title' => 'required|unique:posts|max:255',
+                'body' => 'required',
+            ]);
+
+
             $newProduct = [
                 'nom'        => $request->input('nameProduct'),
                 'description' => $request->input('descProduct'),
@@ -70,6 +78,52 @@ class DashboardController extends Controller
 
             return view("backoffice.create.successCreate");
         } catch (Exception $e) {
+            return view("backoffice.create.errorCreate");
+        }
+    }
+        */
+
+    public function addingProduct(Request $request)
+    {
+        try {
+
+            $validated = $request->validate([
+                'nameProduct' => 'required|max:20',
+                'imageProduct'      => 'required',
+                'priceProduct'       => 'required|min:1',
+            ]);
+
+            if ($validated) {
+                $newProduct = [
+                    'nom'        => $request->input('nameProduct'),
+                    'description' => $request->input('descProduct'),
+                    'genre'      => $request->input('genreProduct'),
+                    'taille'     => $request->input('sizeProduct'),
+                    'forme'      => $request->input('formProduct'),
+                    'image'      => $request->input('imageProduct'),
+                    'prix'       => $request->input('priceProduct'),
+                ];
+
+                if ($newProduct['genre'] === "Genre") {
+                    unset($newProduct['genre']);
+                }
+                if ($newProduct['taille'] === "Taille") {
+                    unset($newProduct['taille']);
+                }
+                if ($newProduct['forme'] === "Forme") {
+                    unset($newProduct['forme']);
+                }
+
+                if (empty($newProduct['description'])) {
+                    unset($newProduct['description']);
+                }
+
+                Product::insert($newProduct);
+
+                return view("backoffice.create.successCreate");
+            }
+        } catch (Exception $e) {
+            echo $e;
             return view("backoffice.create.errorCreate");
         }
     }

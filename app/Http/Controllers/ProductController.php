@@ -9,6 +9,14 @@ use App\Models\Product;
 
 class ProductController extends Controller
 {
+
+    public function indexPage()
+    {
+        $allProduct = Product::orderByDesc("ID")->limit(3)->get();
+
+        return view("home", data: ['produits' => $allProduct]);
+    }
+
     public function explorePage()
     {
         $allProduct = Product::all();
@@ -20,6 +28,6 @@ class ProductController extends Controller
     {
         $productDetail = Product::where("ID", "=", $id)->get();
 
-        return view("product-details", ["product"=> $productDetail]);
+        return view("product-details", ["product" => $productDetail]);
     }
 }

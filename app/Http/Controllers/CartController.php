@@ -15,7 +15,9 @@ class CartController extends Controller
         $userId = Auth::id();
         if ($userId) {
             $cartItems = Cart::where('idUser', $userId)->get();
+            //$cartItems = $userId->verifUser;
             $products = Product::whereIn('ID', $cartItems->pluck('idProduct'))->get();
+            //$products = $cartItems->pluck('idProduct')->userItems;
 
             return view('cart', [
                 'products' => $products,

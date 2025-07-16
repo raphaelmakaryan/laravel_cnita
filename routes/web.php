@@ -19,7 +19,7 @@ use Illuminate\Support\Facades\Mail;
 use App\Mail\Contact;
 
 #region HOME
-Route::get('/', [HomeController::class, "indexPage"])->name('home');
+Route::get('/', [ProductController::class, "indexPage"])->name('home');
 #endregion HOME
 
 #region EXPLORE
