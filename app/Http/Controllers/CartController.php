@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\Cart;
 use App\Models\User;
 use App\Models\Product;
+use COM;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Storage;
 use Illuminate\Support\Facades\Auth;
@@ -15,12 +16,10 @@ class CartController extends Controller
     {
         $userId = Auth::id();
         if ($userId) {
-            $cartItems = Cart::where('idUser', $userId)->get();
-            $products = Product::whereIn('ID', $cartItems->pluck('idProduct'))->get();
+            $cartUsers = Cart::with(["verifUser", 'product'])->where('idUser', $userId)->get();
 
             return view('cart', [
-                'products' => $products,
-                'cartItems' => $cartItems
+                "cartUsers" => $cartUsers
             ]);
         }
         return view("cart");

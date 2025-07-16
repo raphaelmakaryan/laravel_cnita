@@ -16,5 +16,7 @@ class OrderTracking extends Model
 
     public function product()
     {
-        return $this->belongsTo(Product::class, 'idProduct', 'ID');    }
+        return $this->belongsTo(Product::class, 'idProduct', 'ID');
+    }
+
 }

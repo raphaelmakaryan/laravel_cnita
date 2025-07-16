@@ -15,18 +15,18 @@ $index = 0
         <div class="row">
             <div class="col-lg-3">
             </div>
-            @if (Auth::check() && $products && count($products) > 0)
+            @if (Auth::check() && $cartUsers && count($cartUsers) > 0)
                 <div class="col-12 col-lg-3 mt-3 mb-3">
-                    @foreach ($products as $produits)
+                    @foreach ($cartUsers as $produits)
                         <div class="mt-1 mb-1">
                             <div class="container">
                                 <div class="row border">
                                     <div class="col-3 d-flex">
-                                        <img src="{{ $produits->image }}" class="img-fluid w-100" alt="...">
+                                        <img src="{{ $produits->product->image }}" class="img-fluid w-100" alt="...">
                                     </div>
                                     <div class="col-3 d-flex flex-column align-items-start">
-                                        <p class="fs-5 mt-1">{{ $produits->nom }}</p>
-                                        <p class="fs-6"><span class="priceForCalculate">{{ $produits->prix }}</span> €</p>
+                                        <p class="fs-5 mt-1">{{ $produits->product->nom }}</p>
+                                        <p class="fs-6"><span class="priceForCalculate">{{ $produits->product->prix }}</span> €</p>
                                     </div>
                                     <div class="col-3 d-flex flex-column align-items-center justify-content-center">
                                         <form action="">
@@ -69,11 +69,11 @@ $index = 0
             </div>
             <div class="col-lg-3">
             </div>
-            @if (Auth::check() && $products && count($products) > 0)
+            @if (Auth::check() && $cartUsers && count($cartUsers) > 0)
                 <div class="col-12 mt-4 d-flex flex-row justify-content-end justify-content-lg-center">
                     <a href="/payment" class="btn bouton_style bouton_noir bouton_fond_orange">PAYER</a>
                 </div>
-            @elseif  (Auth::check() && $products && count($products) == 0)
+            @elseif  (Auth::check() && $cartUsers && count($cartUsers) == 0)
                 <div class="col-12 mt-4 d-flex flex-row justify-content-end justify-content-lg-center">
                     <a href="/authentication" class="btn bouton_style bouton_noir bouton_fond_orange disabled">AUCUN
                         PRODUIT</a>
