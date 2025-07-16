@@ -8,4 +8,9 @@ class UsersMiroMiro extends Model
 {
     protected $table = 'users';
     public $timestamps = false;
+
+    public function haveItemsOfUser()
+    {
+        return $this->hasMany(Cart::class, "idUser");
+    }
 }

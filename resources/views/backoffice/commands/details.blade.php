@@ -1,6 +1,7 @@
 @extends('layouts.miromiro')
 @section('title', "Détail de la commande")
 @section('content')
+
 <section class="mt-5 mb-5">
     <div class="container">
         <div class="row">
@@ -19,11 +20,11 @@
                                 <div class="container">
                                     <div class="row mb-2 mt-2">
                                         <div class="col-6 col-lg-3">
-                                            <img src="{{ $commande->image }}" alt="" class="img-fluid">
+                                            <img src="{{ $commande->product->image }}" alt="" class="img-fluid">
                                         </div>
                                         <div class="col-6 col-lg-9">
                                             <p class="fs-6">
-                                                {{ $commande->nomProduit }}
+                                                {{ $commande->product->nom }}
                                             </p>
                                         </div>
                                     </div>

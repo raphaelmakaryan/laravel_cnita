@@ -17,7 +17,7 @@
                         <div class="row background_couleur_principale_400 rounded mb-2 mt-2 p-2">
                             <div class="col-3 d-flex flex-column aligns-items-start">
                                 <p class="fs-6 mb-0 me-1">Utilisateur : <span
-                                        class="fw-bold">{{ $commande->nomUtilisateur }}</span> </p>
+                                        class="fw-bold">{{ $commande->user->name }}</span> </p>
                             </div>
                             <div class="col-3 d-flex aligns-items-center flex-column justify-content-center">
                                 <p class="fs-6 mb-0 me-1">ID commande : <span

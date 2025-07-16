@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\Auth;
 use Exception;
 use Carbon\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\MessageBag;
 
 class DashboardController extends Controller
 {
@@ -38,50 +39,6 @@ class DashboardController extends Controller
     {
         return view("backoffice.create.createProduct");
     }
-
-    /*
-    public function addingProduct(Request $request)
-    {
-        try {
-
-            $validated = $request->validate([
-                'title' => 'required|unique:posts|max:255',
-                'body' => 'required',
-            ]);
-
-
-            $newProduct = [
-                'nom'        => $request->input('nameProduct'),
-                'description' => $request->input('descProduct'),
-                'genre'      => $request->input('genreProduct'),
-                'taille'     => $request->input('sizeProduct'),
-                'forme'      => $request->input('formProduct'),
-                'image'      => $request->input('imageProduct'),
-                'prix'       => $request->input('priceProduct'),
-            ];
-
-            if ($newProduct['genre'] === "Genre") {
-                unset($newProduct['genre']);
-            }
-            if ($newProduct['taille'] === "Taille") {
-                unset($newProduct['taille']);
-            }
-            if ($newProduct['forme'] === "Forme") {
-                unset($newProduct['forme']);
-            }
-
-            if (empty($newProduct['description'])) {
-                unset($newProduct['description']);
-            }
-
-            Product::insert($newProduct);
-
-            return view("backoffice.create.successCreate");
-        } catch (Exception $e) {
-            return view("backoffice.create.errorCreate");
-        }
-    }
-        */
 
     public function addingProduct(Request $request)
     {
@@ -261,19 +218,12 @@ class DashboardController extends Controller
         ]);
     }
 
-
     public function commandsPage()
     {
-        $commandes = OrderTracking::join('users', 'order_tracking.idUser', '=', 'users.id')
-            ->select(
-                'order_tracking.idOrder',
-                'order_tracking.date',
-                OrderTracking::raw('SUM(order_tracking.prix) as prix'),
-                'users.name as nomUtilisateur',
-                'users.id as idUser'
-            )
-            ->groupBy('order_tracking.idOrder', 'order_tracking.date', 'users.name', 'users.id')
-            ->orderBy('order_tracking.date', 'desc')
+        $commandes = OrderTracking::with('user')
+            ->select('idOrder', 'date', DB::raw('SUM(prix) as prix'), 'idUser')
+            ->groupBy('idOrder', 'date', 'idUser')
+            ->orderBy('date', 'desc')
             ->get();
 
         return view('backoffice.commands.commands', [
@@ -281,21 +231,10 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function detailsCommandsPage($id)
+    public function detailsCommandsPage()
     {
-        $commandes = OrderTracking::join('users', 'order_tracking.idUser', '=', 'users.id')
-            ->join('products', 'order_tracking.idProduct', '=', 'products.ID')
-            ->select(
-                'order_tracking.id as idCommande',
-                'order_tracking.date',
-                'order_tracking.status',
-                'order_tracking.prix',
-                'users.name as nomUtilisateur',
-                'users.id as idUser',
-                'products.image',
-                'products.nom as nomProduit'
-            )
-            ->orderBy('order_tracking.date', 'desc')
+        $commandes = OrderTracking::with(['user', 'product'])
+            ->orderBy('date', 'desc')
             ->get();
 
         $allStatus = Status::all();
@@ -305,6 +244,7 @@ class DashboardController extends Controller
             "allStatus" => $allStatus
         ]);
     }
+
 
     public function commandsUpdate(Request $request)
     {
