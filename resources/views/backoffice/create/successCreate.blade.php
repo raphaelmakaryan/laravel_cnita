@@ -10,7 +10,7 @@
             </div>
             <div class="col-12">
                 <p class="fs-5 couleur_succes text-center">
-                    Suppresion du produit a marcher !
+                    Création du produit a fonctionner !
                 </p>
             </div>
         </div>
