@@ -214,7 +214,7 @@ class DashboardController extends Controller
             ->select(
                 'order_tracking.idOrder',
                 'order_tracking.date',
-                DB::raw('SUM(order_tracking.prix) as prix'),
+                OrderTracking::raw('SUM(order_tracking.prix) as prix'),
                 'users.name as nomUtilisateur',
                 'users.id as idUser'
             )

@@ -23,9 +23,10 @@ class ClientController extends Controller
             ->select(
                 'idOrder',
                 'date',
+                'status',
                 DB::raw('SUM(prix) as totalPrix')
             )
-            ->groupBy('idOrder', 'date')
+            ->groupBy('idOrder', 'date', 'status')
             ->orderBy('date', 'asc')
             ->get();
 

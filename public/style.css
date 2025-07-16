@@ -163,7 +163,7 @@ a {
 
 .status_livraison {
     background-color: var(--couleur_succes_100) !important;
-    color: var(--couleur_grise_100);
+    color: var(--couleur_grise_900);
 }
 
 .status_retard {
