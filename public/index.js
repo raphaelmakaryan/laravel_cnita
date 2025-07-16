@@ -18,7 +18,7 @@ function onlyStringInput() {
         input.addEventListener('input', (event) => {
             const input = event.target;
             const value = input.value;
-            const newValue = value.replace(/[^a-zA-Z]/g, '');
+            const newValue = value.replace(/[^a-zA-Z\s]/g, '');
             if (newValue !== value) {
                 input.value = newValue;
             }

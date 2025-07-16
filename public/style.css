@@ -176,6 +176,11 @@ a {
     color: var(--couleur_grise_100);
 }
 
+.required::after {
+    content: " *";
+    color: #CC1C57;
+}
+
 /*#endregion BODY*/
 
 /*#region ACCUEIL*/

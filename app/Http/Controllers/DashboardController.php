@@ -43,16 +43,30 @@ class DashboardController extends Controller
     {
         try {
             $newProduct = [
-                $request->input('nameProduct'),
-                $request->input('imageProduct'),
-                $request->input('priceProduct')
+                'nom'        => $request->input('nameProduct'),
+                'description' => $request->input('descProduct'),
+                'genre'      => $request->input('genreProduct'),
+                'taille'     => $request->input('sizeProduct'),
+                'forme'      => $request->input('formProduct'),
+                'image'      => $request->input('imageProduct'),
+                'prix'       => $request->input('priceProduct'),
             ];
 
-            Product::insert([
-                "nom" => $newProduct[0],
-                "image" => $newProduct[1],
-                "prix" => $newProduct[2],
-            ]);
+            if ($newProduct['genre'] === "Genre") {
+                unset($newProduct['genre']);
+            }
+            if ($newProduct['taille'] === "Taille") {
+                unset($newProduct['taille']);
+            }
+            if ($newProduct['forme'] === "Forme") {
+                unset($newProduct['forme']);
+            }
+
+            if (empty($newProduct['description'])) {
+                unset($newProduct['description']);
+            }
+
+            Product::insert($newProduct);
 
             return view("backoffice.create.successCreate");
         } catch (Exception $e) {
