@@ -42,11 +42,23 @@ class CartController extends Controller
 
         foreach ($cartItems as $item) {
             $productId = $item['id'] ?? null;
+            $verification = Cart::where("idProduct", $productId)->where("idUser", $idUser)->get();
+            if ($productId && $idUser && count($verification) >= 1) {
+                $numberProductRequest = Cart::where("idProduct", $productId)
+                    ->where("idUser", $idUser)
+                    ->select("quantite")
+                    ->first();
 
-            if ($productId && $idUser) {
+                $numberProduct = (int) $numberProductRequest->quantite + 1;
+                if ($numberProduct <= 10) {
+                    Cart::where("idProduct", $productId)->where("idUser", $idUser)->update([
+                        "quantite" => $numberProduct
+                    ]);
+                }
+            } else if ($productId && $idUser && count($verification) === 0) {
                 Cart::insert([
                     "idUser" => $idUser,
-                    "idProduct" => $productId,
+                    "idProduct" => $productId
                 ]);
             }
         }
@@ -128,5 +140,45 @@ class CartController extends Controller
                 ]);
             }
         }
+    }
+
+    public function updateQuantity(Request $request)
+    {
+        $debug = true;
+        $informationsCart = [
+            'id' => $request->input('idProduct'),
+            'quantite'        => $request->input('quantityCart'),
+        ];
+
+        $idUser = Auth::id();
+
+        if ($idUser) {
+            $verification = Cart::where("idProduct", $informationsCart["id"])->where("idUser", $idUser)->get();
+            $countVerif = count($verification) == 1;
+            if ($countVerif) {
+                if ($debug) {
+                    response()->json([
+                        'status' => 'success',
+                        'message' => 'Mise a jour de la quantité',
+                        "data" => [
+                            "userId" => $idUser,
+                            "idProduct" => $informationsCart['id'],
+                            "quantite" => $informationsCart['quantite'],
+                            "count" => $countVerif
+                        ]
+                    ]);
+                }
+
+                Cart::where("idProduct", (int) $informationsCart["id"])->where("idUser", $idUser)->update([
+                    "quantite" => (int) $informationsCart["quantite"]
+                ]);
+            }
+        } else {
+            response()->json([
+                'status' => 'error',
+                'message' => 'Mise a jour pas eu lieu'
+            ]);
+        }
+        return redirect()->route('cart');
     }
 }

@@ -161,52 +161,54 @@ use Carbon\Carbon;
                 <p class="fs-4 text-center">Facture</p>
             </div>
             @if ($alreadyLivraison && $products)
-                <div class="col-12 mb-4 d-flex align-items-center flex-column">
-                    <div style="background: #D9D9D9;" class="p-3 rounded" id="factureInfos">
-                        <div class="d-flex flex-column align-items-start">
-                            @foreach ($alreadyLivraison as $info)
-                                <p class="fs-6 m-0">{{$info->firstname_lastname}}</p>
-                                <p class="fs-6 m-0">{{$info->address}}, {{$info->city}},
-                                    {{$info->postal_code}},{{$info->country}}
-                                </p>
-                                <p class="fs-6 m-0">Date d'achat : {{ $date = Carbon::now() }}</p>
-                                <p class="fs-6 m-0">Choix livraison : <span id="choiseUserLivraison"
-                                        class="text-capitalize"></span></p>
-                            @endforeach
-                            <p class="fs-6 mt-3">Listes des articles :</p>
-                            <div class="table-responsive w-100">
-                                <table class="table">
-                                    <thead>
-                                        <tr>
-                                            <th scope="col">Nom</th>
-                                            <th scope="col" class="w-50">Image</th>
-                                            <th scope="col">Quantité</th>
-                                            <th scope="col">Prix</th>
-                                        </tr>
-                                    </thead>
-                                    <tbody>
-                                        @foreach ($products as $produit)
+                @foreach ($cartItems as $cart)
+                    <div class="col-12 mb-4 d-flex align-items-center flex-column">
+                        <div style="background: #D9D9D9;" class="p-3 rounded" id="factureInfos">
+                            <div class="d-flex flex-column align-items-start">
+                                @foreach ($alreadyLivraison as $info)
+                                    <p class="fs-6 m-0">{{$info->firstname_lastname}}</p>
+                                    <p class="fs-6 m-0">{{$info->address}}, {{$info->city}},
+                                        {{$info->postal_code}},{{$info->country}}
+                                    </p>
+                                    <p class="fs-6 m-0">Date d'achat : {{ $date = Carbon::now() }}</p>
+                                    <p class="fs-6 m-0">Choix livraison : <span id="choiseUserLivraison"
+                                            class="text-capitalize"></span></p>
+                                @endforeach
+                                <p class="fs-6 mt-3">Listes des articles :</p>
+                                <div class="table-responsive w-100">
+                                    <table class="table">
+                                        <thead>
                                             <tr>
-                                                <td>{{ $produit->nom }}</td>
-                                                <td><img src="{{ $produit->image }}" alt="" class="img-fluid w-50"></td>
-                                                <td>1</td>
-                                                <td><span class="priceForCalculate">{{ $produit->prix }}</span> €</td>
-                                                <td style='display: none;' class="IDForFinal">{{ $produit->ID }}</td>
+                                                <th scope="col">Nom</th>
+                                                <th scope="col" class="w-50">Image</th>
+                                                <th scope="col">Quantité</th>
+                                                <th scope="col">Prix</th>
                                             </tr>
-                                        @endforeach
-                                    </tbody>
-                                </table>
+                                        </thead>
+                                        <tbody>
+                                            @foreach ($products as $produit)
+                                                <tr>
+                                                    <td>{{ $produit->nom }}</td>
+                                                    <td><img src="{{ $produit->image }}" alt="" class="img-fluid w-50"></td>
+                                                    <td><span class="quantityForCalculate">{{ $cart->quantite }}</span></td>
+                                                    <td><span class="priceForCalculate">{{ $produit->prix }}</span> €</td>
+                                                    <td style='display: none;' class="IDForFinal">{{ $produit->ID }}</td>
+                                                </tr>
+                                            @endforeach
+                                        </tbody>
+                                    </table>
+                                </div>
+                            </div>
+                            <div class="d-flex flex-row justify-content-end align-items-end">
+                                <p class="fs-6 mt-3 fw-bold">Total : <span id="totalPrice"></span> €</p>
                             </div>
                         </div>
-                        <div class="d-flex flex-row justify-content-end align-items-end">
-                            <p class="fs-6 mt-3 fw-bold">Total : <span id="totalPrice"></span> €</p>
-                        </div>
                     </div>
-                </div>
-                <div class="col-12 mt-4 d-flex align-items-center justify-content-center">
-                    <button onclick="finalPayment()"
-                        class="btn bouton_style bouton_noir bouton_fond_orange w-25">CONTINUER</button>
-                </div>
+                    <div class="col-12 mt-4 d-flex align-items-center justify-content-center">
+                        <button onclick="finalPayment()"
+                            class="btn bouton_style bouton_noir bouton_fond_orange w-25">CONTINUER</button>
+                    </div>
+                @endforeach
             @endif
         </div>
         <div class="row mt-3" id="responsePayment" style="display:none">
@@ -257,16 +259,25 @@ use Carbon\Carbon;
     let calculate = true
     setInterval(() => {
         if (calculate === true) {
+            console.log(document.getElementsByClassName("quantityForCalculate"))
+            /*
             const allPrice = document.getElementsByClassName("priceForCalculate");
+            const allQuantities = document.getElementsByClassName("quantityForCalculate");
             const totalPrice = document.getElementById("totalPrice");
             let sum = 0;
+
             for (let index = 0; index < allPrice.length; index++) {
-                sum = sum + parseInt(allPrice[index].innerText)
+                const price = parseFloat(allPrice[index].innerText);
+                const quantity = parseInt(allQuantities[index].value);
+                sum += price * quantity;
             }
+
             totalPrice.innerText = sum.toFixed(2);
             calculate = false;
+            */
         }
-    }, 1000);
+    }, 5000);
+
 </script>
 
 @stop

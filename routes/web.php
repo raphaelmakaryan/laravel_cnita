@@ -253,6 +253,12 @@ Route::prefix('api')->group(function () {
             return redirect("contact");
         }
     );
+
+
+    Route::post(
+        '/cart/quantity',
+        [CartController::class, "updateQuantity"]
+    );
 });
 #endregion API
 

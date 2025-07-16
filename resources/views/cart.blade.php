@@ -26,16 +26,20 @@ $index = 0
                                     </div>
                                     <div class="col-3 d-flex flex-column align-items-start">
                                         <p class="fs-5 mt-1">{{ $produits->product->nom }}</p>
-                                        <p class="fs-6"><span class="priceForCalculate">{{ $produits->product->prix }}</span> €</p>
+                                        <p class="fs-6"><span class="priceForCalculate">{{ $produits->product->prix }}</span> €
+                                        </p>
                                     </div>
                                     <div class="col-3 d-flex flex-column align-items-center justify-content-center">
-                                        <form action="">
+                                        <form action="/api/cart/quantity" method="post">
                                             @csrf
                                             <label for="quantityCart" class="form-label">Quantité</label>
-                                            <input type="number" class="form-control" name="quantityCart" min="1" max="10"
-                                                id="quantityCart" value="1">
-                                                <button type="submit" class="btn bouton_style bouton_orange bouton_fond_blanc p-1 mt-1">Mettre a jour
-                                                </button>
+                                            <input type="number" class="form-control quantityForCalculate" name="quantityCart" min="1" max="10"
+                                                id="quantityCart" value="{{ $produits->quantite }}">
+                                            <input type="hidden" name="idProduct" id="idProduct"
+                                                value="{{ $produits->product->ID }}">
+                                            <button type="submit"
+                                                class="btn bouton_style bouton_orange bouton_fond_blanc p-1 mt-1">Mettre a jour
+                                            </button>
                                         </form>
                                     </div>
                                     <div class="col-3 d-flex flex-column justify-content-center align-items-center">
@@ -90,20 +94,29 @@ $index = 0
 
 
 <script>
-    let calculate = true
-    setInterval(() => {
-        if (calculate === true) {
-            const allPrice = document.getElementsByClassName("priceForCalculate");
-            const totalPrice = document.getElementById("totalPrice");
-            let sum = 0;
-            for (let index = 0; index < allPrice.length; index++) {
-                sum = sum + parseInt(allPrice[index].innerText)
-            }
-            totalPrice.innerText = sum.toFixed(2);
-            calculate = false;
-        }
-    }, 1000);
+    function updateTotalPrice() {
+        const allPrice = document.getElementsByClassName("priceForCalculate");
+        const allQuantities = document.getElementsByClassName("quantityForCalculate");
+        const totalPrice = document.getElementById("totalPrice");
+        let sum = 0;
 
+        for (let index = 0; index < allPrice.length; index++) {
+            const price = parseFloat(allPrice[index].innerText);
+            const quantity = parseInt(allQuantities[index].value);
+            sum += price * quantity;
+        }
+
+        totalPrice.innerText = sum.toFixed(2);
+    }
+
+    window.addEventListener('DOMContentLoaded', () => {
+        const quantityInputs = document.getElementsByClassName("quantityForCalculate");
+        for (let input of quantityInputs) {
+            input.addEventListener("input", updateTotalPrice);
+        }
+
+        updateTotalPrice();
+    });
 </script>
 
 @stop

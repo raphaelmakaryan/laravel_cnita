@@ -45,7 +45,7 @@ class DashboardController extends Controller
         try {
 
             $validated = $request->validate([
-                'nameProduct' => 'required|max:20',
+                'nameProduct' => 'required|max:20|min:5',
                 'imageProduct'      => 'required',
                 'priceProduct'       => 'required|min:1',
             ]);
@@ -70,7 +70,6 @@ class DashboardController extends Controller
                 if ($newProduct['forme'] === "Forme") {
                     unset($newProduct['forme']);
                 }
-
                 if (empty($newProduct['description'])) {
                     unset($newProduct['description']);
                 }
@@ -80,7 +79,7 @@ class DashboardController extends Controller
                 return view("backoffice.create.successCreate");
             }
         } catch (Exception $e) {
-            echo $e;
+            //echo $e;
             return view("backoffice.create.errorCreate");
         }
     }
