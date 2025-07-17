@@ -386,3 +386,51 @@ function resetExploreOrder() {
     });
 }
 //#endregion EXPLORE
+
+//#region PERSO
+const filter = ["Monture", "CouleurMonture", "Verre", "CouleurVerre", "Boîte", "CouleurBoîte"];
+let choiceUser = []
+
+function configureCarouselListener(filterName) {
+    const currentChoiceId = `currentChoice${filterName}`;
+    const carouselId = `carousel${filterName}`;
+
+    const currentChoice = document.getElementById(currentChoiceId);
+    const carousel = document.getElementById(carouselId);
+    if (currentChoice && carousel) {
+        carousel.addEventListener('slide.bs.carousel', event => {
+            const data = event.relatedTarget.dataset[filterName.toLowerCase()];
+            if (data) {
+                currentChoice.innerText = data;
+            }
+        });
+    }
+}
+
+filter.forEach(filterName => {
+    configureCarouselListener(filterName);
+});
+
+function verificationChoicePerso(filtre, newValue) {
+    filter.forEach(filterName => {
+        if (filterName === filtre) {
+            if (!choiceUser[0]) choiceUser[0] = {};
+            choiceUser[0][filterName] = newValue;
+        }
+    });
+}
+
+function newChoice(filtre, index) {
+    if (index != 6) {
+        verificationChoicePerso(filtre, document.getElementById(`currentChoice${filtre}`).innerText);
+        document.getElementById(`flush-collapse${index}`).classList.remove("show");
+        document.getElementById(`choicePerso${index + 1}`).style.display = "block";
+        document.getElementById(`flush-collapse${index + 1}`).classList.add("show");
+    } else {
+        verificationChoicePerso(filtre, document.getElementById(`currentChoice${filtre}`).innerText);
+        document.getElementById(`flush-collapse${index}`).classList.remove("show");
+        document.getElementById("buttonCart").style.display = "block";
+    }
+}
+//#endregion PERSO
+
