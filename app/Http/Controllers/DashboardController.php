@@ -173,16 +173,27 @@ class DashboardController extends Controller
             ->toArray();
 
         // Total des prix par jour
-        $prixParJour = OrderTracking::select(DB::raw('DATE(`date`) as jour'), DB::raw('SUM(prix) as total'))
-            ->whereBetween('date', [$startDate, $endDate])
-            ->groupBy('jour')
-            ->pluck('total', 'jour')
-            ->toArray();
+        $commandes = OrderTracking::select('idOrder', "prix", DB::raw('DATE(date) as jour'))
+            ->groupBy('idOrder', "prix", 'jour')
+            ->get();
 
-        // Génère les 7 jours avec 0 si aucune donnée
+        $prixParJour = [];
+
+        foreach ($commandes as $commande) {
+            $jour = $commande->jour;
+
+            if (!isset($prixParJour[$jour])) {
+                $prixParJour[$jour] = 0;
+            }
+
+            $prixParJour[$jour] += $commande->prix;
+        }
+
         $jours = [];
+
         for ($i = 0; $i < 7; $i++) {
             $jour = $startDate->copy()->addDays($i)->format('Y-m-d');
+
             $jours[$jour] = [
                 'commandes' => $commandesParJour[$jour] ?? 0,
                 'prix' => $prixParJour[$jour] ?? 0,
@@ -199,7 +210,7 @@ class DashboardController extends Controller
     public function commandsPage()
     {
         $commandes = OrderTracking::with('user')
-            ->select('idOrder', 'date', DB::raw('SUM(prix) as prix'), 'idUser')
+            ->select('idOrder', 'date', 'idUser')
             ->groupBy('idOrder', 'date', 'idUser')
             ->orderBy('date', 'desc')
             ->get();
@@ -209,9 +220,10 @@ class DashboardController extends Controller
         ]);
     }
 
-    public function detailsCommandsPage()
+    public function detailsCommandsPage($id)
     {
         $commandes = OrderTracking::with(['user', 'product'])
+            ->where("idOrder", $id)
             ->orderBy('date', 'desc')
             ->get();
 
