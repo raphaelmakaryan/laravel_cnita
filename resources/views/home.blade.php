@@ -5,7 +5,7 @@
 <header class="mt-5 mb-5">
     <div class="container-fluid">
         <div class="row">
-            <img src="{{ asset('assets/separationHAUT.png') }}" alt="" class="img-fluid separations">
+            <img src="{{ asset('assets/home/separationHAUT.png') }}" alt="" class="img-fluid separations">
         </div>
         <div class="row background_couleur_principale_400">
             <div class="col-12 p-0 d-flex flex-column align-items-center">
@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="row">
-            <img src="{{ asset('assets/separationBAS.png') }}" alt="" class="img-fluid separations">
+            <img src="{{ asset('assets/home/separationBAS.png') }}" alt="" class="img-fluid separations">
         </div>
     </div>
 </header>

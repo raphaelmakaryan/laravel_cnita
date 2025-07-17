@@ -26,7 +26,7 @@ Route::get('/', [ProductController::class, "indexPage"])->name('home');
 Route::get(
     '/explore',
     [ProductController::class, "explorePage"]
-);
+)->name("explore");
 #endregion EXPLORE
 
 #region PERSO
