@@ -24,13 +24,16 @@ class ClientController extends Controller
                 'idOrder',
                 'date',
                 'status',
-                DB::raw('SUM(prix) as totalPrix')
+                "prix"
             )
-            ->groupBy('idOrder', 'date', 'status')
+            ->groupBy('idOrder', 'date', 'status', "prix")
             ->orderBy('date', 'asc')
             ->get();
 
-        return view("client.historic", ['historic' => $historic]);
+        if ($historic) {
+            return view("client.historic", ['historic' => $historic]);
+        }
+        return view("client.historic");
     }
 
     public function detailsPage($id)
@@ -45,17 +48,9 @@ class ClientController extends Controller
             return redirect()->route('client.dashboard');
         }
 
-        $details = OrderTracking::where('order_tracking.idOrder', $id)
-            ->join('products', 'order_tracking.idProduct', '=', 'products.ID')
-            ->select(
-                'order_tracking.idOrder',
-                'products.nom as nomProduit',
-                'products.image as imageProduit',
-                'order_tracking.prix as prixCommande',
-                'order_tracking.date as dateCommande',
-                'order_tracking.status as statutCommande'
-            )
-            ->orderBy('order_tracking.date', 'desc')
+        $details = OrderTracking::with('product')
+            ->where('idOrder', $id)
+            ->orderBy('date', 'desc')
             ->get();
 
         return view("client.details", ['details' => $details]);

@@ -17,12 +17,10 @@ class PaymentController extends Controller
     {
         $userId = Auth::id();
         if ($userId) {
-            $cartItems = Cart::where('idUser', $userId)->get();
-            $products = Product::whereIn('ID', $cartItems->pluck('idProduct'))->get();
+            $cartItems = Cart::with('product')->where('idUser', $userId)->get();
             $alreadyLivraison = Informations::where('idUser', $userId)->get();
-            if ($cartItems && count(($cartItems)) > 0 && $products && count($products) > 0) {
+            if (count($cartItems) >= 1) {
                 return view('payment', [
-                    'products' => $products,
                     'cartItems' => $cartItems,
                     'alreadyLivraison' => $alreadyLivraison
                 ]);
@@ -103,6 +101,7 @@ class PaymentController extends Controller
 
         foreach ($cartItems as $cartItem) {
             $productId = $cartItem->idProduct;
+            $quantite = $cartItem->quantite;
 
             Cart::where("idProduct", $productId)
                 ->where("idUser", $idUser)
@@ -114,6 +113,7 @@ class PaymentController extends Controller
                 'idProduct' => $productId,
                 'status'    => 0,
                 'prix'      => $price,
+                "quantite" => $quantite,
                 'date'      => $date
             ]);
         }

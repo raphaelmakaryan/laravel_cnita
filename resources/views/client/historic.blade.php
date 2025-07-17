@@ -28,7 +28,7 @@
                                 @foreach ($historic as $historicUser)
                                     <tr>
                                         <td>#{{ $historicUser->idOrder}}</td>
-                                        <td>{{ $historicUser->totalPrix }} €</td>
+                                        <td>{{ $historicUser->prix }} €</td>
                                         <td>{{ $historicUser->date }}</td>
                                         <td>
                                             @if ($historicUser->status === 0)

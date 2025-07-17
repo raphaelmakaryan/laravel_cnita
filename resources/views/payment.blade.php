@@ -31,28 +31,28 @@ use Carbon\Carbon;
                                 <p class="fs-5 text-start">Informations pour la livraison</p>
                             </div>
                             <div class="col-12 mt-2 mb-2">
-                                <label for="firstSecondName" class="form-label">NOM Prénom :</label>
+                                <label for="firstSecondName" class="form-label required">NOM Prénom :</label>
                                 <input type="text" class="form-control" id="firstSecondName" placeholder="NOM prenom"
                                     min="10" max="100" required name="firstSecondName">
                             </div>
                             <div class="col-12 mt-2 mb-2">
-                                <label for="adressLivraison" class="form-label">Adresse :</label>
+                                <label for="adressLivraison" class="form-label required">Adresse :</label>
                                 <input type="search" class="form-control" id="adressLivraison" placeholder="Nombre Rue"
                                     min="10" max="500" required name="adressLivraison">
                             </div>
                             <div class="d-flex flex-row">
                                 <div class="col-4 mt-2 mb-2 me-1">
-                                    <label for="cityLivraison" class="form-label">Ville :</label>
+                                    <label for="cityLivraison" class="form-label required">Ville :</label>
                                     <input id="cityLivraison" name="cityLivraison" class="form-control" type="text"
                                         minlength="2" required placeholder="Annecy">
                                 </div>
                                 <div class="col-4 mt-2 mb-2 ms-1">
-                                    <label for="CPLivraison" class="form-label">Code postal :</label>
+                                    <label for="CPLivraison" class="form-label required">Code postal :</label>
                                     <input id="CPLivraison" name="CPLivraison" class="form-control" type="text"
                                         minlength="5" maxlength="5" required placeholder="74000">
                                 </div>
                                 <div class="col-4 mt-2 mb-2 ms-1">
-                                    <label for="countryLivraison" class="form-label">Pays :</label>
+                                    <label for="countryLivraison" class="form-label required">Pays :</label>
                                     <input id="countryLivraison" name="countryLivraison" class="form-control" type="text"
                                         minlength="5" required placeholder="France">
                                 </div>
@@ -65,23 +65,23 @@ use Carbon\Carbon;
                                 <p class="fs-5 text-start">Informations bancaire</p>
                             </div>
                             <div class="col-12 mt-2 mb-2">
-                                <label for="numberCard" class="form-label ms-1">Numéro de carte bancaire :</label>
+                                <label for="numberCard" class="form-label required ms-1">Numéro de carte bancaire :</label>
                                 <input id="numberCard" type="tel" inputmode="numeric" pattern="[0-9\s]{13,19}"
                                     autocomplete="cc-number" maxlength="19" placeholder="xxxx xxxx xxxx xxxx"
                                     class="form-control" required>
                             </div>
                             <div class="col-12 mt-2 mb-2">
-                                <label for="nameOnCard" class="form-label ms-1">Nom sur la carte bancaire :</label>
+                                <label for="nameOnCard" class="form-label required ms-1">Nom sur la carte bancaire :</label>
                                 <input id="nameOnCard" type="text" class="form-control" required placeholder="NOM PRENOM">
                             </div>
                             <div class="d-flex flex-row">
                                 <div class="col-6 mt-2 mb-2 me-1">
-                                    <label for="expiredCard" class="form-label">Date d'expliration :</label>
+                                    <label for="expiredCard" class="form-label required">Date d'expliration :</label>
                                     <input id="expiredCard" class="form-control" type="tel" pattern="\d*" minlength="4"
                                         maxlength="4" placeholder="MM / YY">
                                 </div>
                                 <div class="col-6 mt-2 mb-2 ms-1">
-                                    <label for="securityCard" class="form-label">Code de sécurité :</label>
+                                    <label for="securityCard" class="form-label required">Code de sécurité :</label>
                                     <input id="securityCard" class="form-control" type="tel" pattern="\d*" minlength="3"
                                         maxlength="3" placeholder="CVC">
                                 </div>
@@ -160,55 +160,56 @@ use Carbon\Carbon;
             <div class="col-12 mb-2">
                 <p class="fs-4 text-center">Facture</p>
             </div>
-            @if ($alreadyLivraison && $products)
-                @foreach ($cartItems as $cart)
-                    <div class="col-12 mb-4 d-flex align-items-center flex-column">
-                        <div style="background: #D9D9D9;" class="p-3 rounded" id="factureInfos">
-                            <div class="d-flex flex-column align-items-start">
-                                @foreach ($alreadyLivraison as $info)
-                                    <p class="fs-6 m-0">{{$info->firstname_lastname}}</p>
-                                    <p class="fs-6 m-0">{{$info->address}}, {{$info->city}},
-                                        {{$info->postal_code}},{{$info->country}}
-                                    </p>
-                                    <p class="fs-6 m-0">Date d'achat : {{ $date = Carbon::now() }}</p>
-                                    <p class="fs-6 m-0">Choix livraison : <span id="choiseUserLivraison"
-                                            class="text-capitalize"></span></p>
-                                @endforeach
-                                <p class="fs-6 mt-3">Listes des articles :</p>
-                                <div class="table-responsive w-100">
-                                    <table class="table">
-                                        <thead>
-                                            <tr>
-                                                <th scope="col">Nom</th>
-                                                <th scope="col" class="w-50">Image</th>
-                                                <th scope="col">Quantité</th>
-                                                <th scope="col">Prix</th>
-                                            </tr>
-                                        </thead>
-                                        <tbody>
-                                            @foreach ($products as $produit)
+            @if ($alreadyLivraison && $cartItems)
+                <div class="col-12 mb-4 d-flex align-items-center flex-column">
+                    <div style="background: #D9D9D9;" class="p-3 rounded" id="factureInfos">
+                        <div class="d-flex flex-column align-items-start">
+                            @foreach ($alreadyLivraison as $info)
+                                <p class="fs-6 m-0">{{ $info->firstname_lastname }}</p>
+                                <p class="fs-6 m-0">{{ $info->address }}, {{ $info->city }}, {{ $info->postal_code }},
+                                    {{ $info->country }}
+                                </p>
+                                <p class="fs-6 m-0">Date d'achat : {{ \Carbon\Carbon::now() }}</p>
+                                <p class="fs-6 m-0">Choix livraison : <span id="choiseUserLivraison"
+                                        class="text-capitalize"></span></p>
+                            @endforeach
+
+                            <p class="fs-6 mt-3">Listes des articles :</p>
+                            <div class="table-responsive w-100">
+                                <table class="table">
+                                    <thead>
+                                        <tr>
+                                            <th scope="col">Nom</th>
+                                            <th scope="col" class="w-50">Image</th>
+                                            <th scope="col">Quantité</th>
+                                            <th scope="col">Prix</th>
+                                        </tr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach ($cartItems as $cart)
+                                            @if ($cart->product)
                                                 <tr>
-                                                    <td>{{ $produit->nom }}</td>
-                                                    <td><img src="{{ $produit->image }}" alt="" class="img-fluid w-50"></td>
+                                                    <td>{{ $cart->product->nom }}</td>
+                                                    <td><img src="{{ $cart->product->image }}" alt="" class="img-fluid w-50"></td>
                                                     <td><span class="quantityForCalculate">{{ $cart->quantite }}</span></td>
-                                                    <td><span class="priceForCalculate">{{ $produit->prix }}</span> €</td>
-                                                    <td style='display: none;' class="IDForFinal">{{ $produit->ID }}</td>
+                                                    <td><span class="priceForCalculate">{{ $cart->product->prix }}</span> €</td>
+                                                    <td style='display: none;' class="IDForFinal">{{ $cart->product->ID }}</td>
                                                 </tr>
-                                            @endforeach
-                                        </tbody>
-                                    </table>
-                                </div>
-                            </div>
-                            <div class="d-flex flex-row justify-content-end align-items-end">
-                                <p class="fs-6 mt-3 fw-bold">Total : <span id="totalPrice"></span> €</p>
+                                            @endif
+                                        @endforeach
+                                    </tbody>
+                                </table>
                             </div>
                         </div>
+                        <div class="d-flex flex-row justify-content-end align-items-end">
+                            <p class="fs-6 mt-3 fw-bold">Total : <span id="totalPrice"></span> €</p>
+                        </div>
                     </div>
-                    <div class="col-12 mt-4 d-flex align-items-center justify-content-center">
-                        <button onclick="finalPayment()"
-                            class="btn bouton_style bouton_noir bouton_fond_orange w-25">CONTINUER</button>
-                    </div>
-                @endforeach
+                </div>
+                <div class="col-12 mt-4 d-flex align-items-center justify-content-center">
+                    <button onclick="finalPayment()"
+                        class="btn bouton_style bouton_noir bouton_fond_orange w-25">CONTINUER</button>
+                </div>
             @endif
         </div>
         <div class="row mt-3" id="responsePayment" style="display:none">
@@ -259,22 +260,19 @@ use Carbon\Carbon;
     let calculate = true
     setInterval(() => {
         if (calculate === true) {
-            console.log(document.getElementsByClassName("quantityForCalculate"))
-            /*
-            const allPrice = document.getElementsByClassName("priceForCalculate");
             const allQuantities = document.getElementsByClassName("quantityForCalculate");
+            const allPrice = document.getElementsByClassName("priceForCalculate");
             const totalPrice = document.getElementById("totalPrice");
             let sum = 0;
 
             for (let index = 0; index < allPrice.length; index++) {
                 const price = parseFloat(allPrice[index].innerText);
-                const quantity = parseInt(allQuantities[index].value);
+                const quantity = parseInt(allQuantities[index].innerText);
                 sum += price * quantity;
             }
 
             totalPrice.innerText = sum.toFixed(2);
             calculate = false;
-            */
         }
     }, 5000);
 

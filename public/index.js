@@ -284,6 +284,7 @@ function finalPayment() {
     } else {
         alert("Informations manquantes pour finaliser le paiement.");
     }
+
 }
 
 function paymentResult(resultat) {

@@ -25,10 +25,10 @@
                             <tbody>
                                 @foreach ($details as $detail)
                                     <tr>
-                                        <td class="w-25"><img src="{{ $detail->imageProduit }}" class="img-fluid w-100"
+                                        <td class="w-25"><img src="{{ $detail->product->image }}" class="img-fluid w-100"
                                                 alt=""></td>
-                                        <td>{{ $detail->nomProduit }}</td>
-                                        <td>{{ $detail->prixCommande }}</td>
+                                        <td>{{ $detail->product->nom }}</td>
+                                        <td>{{ $detail->product->prix }}</td>
                                     </tr>
                                 @endforeach
                             </tbody>
