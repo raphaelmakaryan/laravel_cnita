@@ -79,7 +79,7 @@ class CartController extends Controller
 
     public function deleteToCart(Request $request)
     {
-        $debug = false;
+        $debug = true;
         $index = $request->input('index');
         $idUser = Auth::id();
 
@@ -91,7 +91,7 @@ class CartController extends Controller
         }
 
         if ($index && $idUser) {
-            Cart::where("idProduct", $index)
+            Cart::where("ID", $index)
                 ->where("idUser", $idUser)
                 ->delete();
         }

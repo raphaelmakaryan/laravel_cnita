@@ -122,7 +122,7 @@ Route::prefix('backoffice')->name('backoffice.')->middleware(['auth', 'verified'
     Route::get(
         '/product/new',
         [DashboardController::class, "createPage"]
-    );
+    )->name("newproduct");
 
     Route::post(
         '/createproduct',

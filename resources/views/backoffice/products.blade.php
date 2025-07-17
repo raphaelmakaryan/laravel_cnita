@@ -11,7 +11,7 @@
         </div>
         <div class="row">
             <div class="col-12 d-flex flex-row justify-content-end justify-content-lg-center">
-                <a href="/backoffice/product/new">
+                <a href="{{ route('backoffice.newproduct') }}">
                     <button class="btn bouton_orange bouton_fond_blanc">
                         <img src="{{ asset('assets/dashboard/create.png') }}" class="img-fluid" alt="..." width="25">
                     </button>

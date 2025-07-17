@@ -12,7 +12,7 @@
                     <p class="couleur_grise_100 text-center">MIRO MIRO propose un large
                         choix de lunettes photochromiques, du design à la vente, incluant des
                         modèles personnalisés.</p>
-                    <a href="/explore" class="btn bouton_style bouton_noir">EXPLORER</a>
+                    <a href="{{ route('explore') }}" class="btn bouton_style bouton_noir">EXPLORER</a>
                 </div>
                 <img src="{{ asset('assets/home/hero.png') }}" alt="" id="heroImg" class="img-fluid w-100">
             </div>
@@ -92,7 +92,7 @@
                         offrir un confort visuel optimal.</p>
                 </div>
                 <div>
-                    <a href="/explore">
+                    <a href="{{ route('explore') }}">
                         <button type="button" class="btn bouton_style bouton_noir bouton_fond_orange">EXPLORER</button>
                     </a>
                 </div>
@@ -110,7 +110,7 @@
                         personnalisable.</p>
                 </div>
                 <div>
-                    <a href="/personalize">
+                    <a href="{{ route('personalize') }}">
                         <button type="button" class="btn bouton_style bouton_noir bouton_fond_orange">EN SAVOIR
                             PLUS</button>
                     </a>
@@ -129,13 +129,13 @@
                 </div>
                 <div>
                     @if (Auth::check() && Auth::user()->permission === 0)
-                        <a href="/account">
+                        <a href="{{ route('account') }}">
                     @else
-                        <a href="/authentication">
-                    @endif
-                    <button type="button" class="btn bouton_style bouton_noir bouton_fond_orange">SUIVRE MA
-                        COMMANDE</button>
-                    </a>
+                            <a href="{{ route('authentication') }}">
+                        @endif
+                            <button type="button" class="btn bouton_style bouton_noir bouton_fond_orange">SUIVRE MA
+                                COMMANDE</button>
+                        </a>
                 </div>
             </div>
         </div>

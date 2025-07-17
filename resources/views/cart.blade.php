@@ -75,16 +75,16 @@ $index = 0
             </div>
             @if (Auth::check() && $cartUsers && count($cartUsers) > 0)
                 <div class="col-12 mt-4 d-flex flex-row justify-content-end justify-content-lg-center">
-                    <a href="/payment" class="btn bouton_style bouton_noir bouton_fond_orange">PAYER</a>
+                    <a href="{{ route('payment') }}" class="btn bouton_style bouton_noir bouton_fond_orange">PAYER</a>
                 </div>
             @elseif  (Auth::check() && $cartUsers && count($cartUsers) == 0)
                 <div class="col-12 mt-4 d-flex flex-row justify-content-end justify-content-lg-center">
-                    <a href="/authentication" class="btn bouton_style bouton_noir bouton_fond_orange disabled">AUCUN
+                    <a href="{{ route('authentication') }}" class="btn bouton_style bouton_noir bouton_fond_orange">AUCUN
                         PRODUIT</a>
                 </div>
             @else
                 <div class="col-12 mt-4 d-flex flex-row justify-content-end justify-content-lg-center">
-                    <a href="/authentication" class="btn bouton_style bouton_noir bouton_fond_orange">SE CONNECTER POUR
+                    <a href="{{ route('authentication') }}" class="btn bouton_style bouton_noir bouton_fond_orange">SE CONNECTER POUR
                         PAYER</a>
                 </div>
             @endif

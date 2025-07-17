@@ -17,7 +17,7 @@ use Illuminate\Support\Facades\Auth;
 <body>
     <nav class="navbar navbar-expand-lg background_couleur_principale_400" id="headerMiroMiro">
         <div class="container-fluid">
-            <a class="navbar-brand" href="/">
+            <a class="navbar-brand" href="{{ route('home') }}">
                 <img src="{{ asset('assets/logos/logoNoir.png') }}" alt="Bootstrap" width="100"> </a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarTogglerDemo01"
                 aria-controls="navbarTogglerDemo01" aria-expanded="false" aria-label="Toggle navigation">

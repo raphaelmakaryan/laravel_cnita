@@ -23,22 +23,22 @@
         <div class="row mt-3 mb-3">
             <div class="col-lg-2"></div>
             <div class="col-12 col-lg-3">
-                <a href="/backoffice/products/list" class="btn bouton_style bouton_noir bouton_fond_orange">Produits</a>
+                <a href="{{ route('backoffice.products') }}" class="btn bouton_style bouton_noir bouton_fond_orange">Produits</a>
             </div>
             <div class="col-lg-2"></div>
             <div class="col-12 col-lg-3">
-                <a href="/backoffice/users" class="btn bouton_style bouton_noir bouton_fond_orange">Utilisateurs</a>
+                <a href="{{ route('backoffice.users') }}" class="btn bouton_style bouton_noir bouton_fond_orange">Utilisateurs</a>
             </div>
             <div class="col-lg-2"></div>
         </div>
         <div class="row mt-3 mb-3">
             <div class="col-lg-2"></div>
             <div class="col-12 col-lg-3">
-                <a href="/backoffice/graphs" class="btn bouton_style bouton_noir bouton_fond_orange">Graphiques</a>
+                <a href="{{ route('backoffice.graphs') }}" class="btn bouton_style bouton_noir bouton_fond_orange">Graphiques</a>
             </div>
             <div class="col-lg-2"></div>
             <div class="col-12 col-lg-3">
-                <a href="/backoffice/commands" class="btn bouton_style bouton_noir bouton_fond_orange">Commandes</a>
+                <a href="{{ route('backoffice.commands') }}" class="btn bouton_style bouton_noir bouton_fond_orange">Commandes</a>
             </div>
             <div class="col-lg-2"></div>
         </div>

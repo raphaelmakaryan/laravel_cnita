@@ -24,7 +24,7 @@
             <div class="row mt-3 mb-3">
                 <div class="col-lg-4"></div>
                 <div class="col-12 col-lg-4">
-                    <a href="/client/historic" class="btn bouton_style bouton_noir bouton_fond_orange">Historique</a>
+                    <a href="{{ route('client.historic') }}" class="btn bouton_style bouton_noir bouton_fond_orange">Historique</a>
                 </div>
                 <div class="col-lg-4"></div>
             </div>

@@ -90,7 +90,7 @@ use Carbon\Carbon;
                     @endif
                     <div class="row">
                         <div class="col-12 mt-4 d-flex align-items-center justify-content-center">
-                            <button href="#" class="btn bouton_style bouton_noir bouton_fond_orange"
+                            <button class="btn bouton_style bouton_noir bouton_fond_orange"
                                 onclick="addInformationLivraison()">VALIDER</button>
                         </div>
                     </div>
@@ -150,7 +150,7 @@ use Carbon\Carbon;
             <div class="col-lg-3">
             </div>
             <div class="col-12 mt-4 d-flex align-items-center justify-content-center">
-                <button href="#" class="btn bouton_style bouton_noir bouton_fond_orange"
+                <button class="btn bouton_style bouton_noir bouton_fond_orange"
                     onclick="choiceLivraison()">VALIDER</button>
             </div>
         </div>
@@ -241,7 +241,7 @@ use Carbon\Carbon;
                 </div>
                 <div class="row mt-2">
                     <div class="col-12  d-flex align-items-center justify-content-center">
-                        <a href="/" class="btn bouton_style bouton_noir bouton_fond_orange">RETOUR A L'ACCUEIL</a>
+                        <a href="{{ route('home') }}" class="btn bouton_style bouton_noir bouton_fond_orange">RETOUR A L'ACCUEIL</a>
                     </div>
                 </div>
             </div>
