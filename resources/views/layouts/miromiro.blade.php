@@ -12,6 +12,7 @@ use Illuminate\Support\Facades\Auth;
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Asap:ital,wght@0,100..900;1,100..900&display=swap"
         rel="stylesheet">
+        <title>{{ config('app.name', 'Miro-Miro') }}</title>
 </head>
 
 <body>
