@@ -33,7 +33,7 @@
                     <div class="col-lg-3">
                     </div>
                     <div class="col-6 col-lg-3 d-flex flex-column align-items-center justify-content-center">
-                        <a href="/dashboard" class="btn bouton_style background_couleur_error w-75">NON</a>
+                        <a href="/backoffice/account" class="btn bouton_style background_couleur_error w-75">NON</a>
                     </div>
                     <div class="col-6 col-lg-3">
                         <form action="/backoffice/products/{{ $produit->ID }}/delete" method="POST"

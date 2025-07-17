@@ -37,7 +37,7 @@ class DashboardController extends Controller
 
     public function createPage()
     {
-        return view("backoffice.create.createProduct");
+        return view("backoffice.createProduct");
     }
 
     public function addingProduct(Request $request)
@@ -76,56 +76,35 @@ class DashboardController extends Controller
 
                 Product::insert($newProduct);
 
-                return view("backoffice.create.successCreate");
+                return view("responses.success", ["texte" => "Création du produit a fonctionner !"]);
             }
         } catch (Exception $e) {
-            //echo $e;
-            return view("backoffice.create.errorCreate");
+            return view("responses.error", ["texte" => " L'ajout du produit n'a pas pu marcher, une erreur est survenue !"]);
         }
-    }
-
-    public function errorCreatePage()
-    {
-        return view("backoffice.create.errorCreate");
-    }
-
-    public function successCreatePage()
-    {
-        return view("backoffice.create.successCreate");
     }
 
     public function deletePage($id)
     {
         $productDelete = Product::where("ID", "=", $id)->get();
 
-        return view("backoffice.delete.deleteProduct", ["product" => $productDelete]);
+        return view("backoffice.deleteProduct", ["product" => $productDelete]);
     }
 
     public function deleteProduct($id)
     {
         Product::where("ID", $id)->delete();
         try {
-            return view("backoffice.delete.successDelete");
+            return view("responses.success", ["texte" => "Suppresion du produit a marcher !"]);
         } catch (Exception $e) {
-            return view("backoffice.delete.errorDelete");
+            return view("responses.error", ["texte" => "Suppresion du produit n'a pas pu marcher, une erreur est survenue !"]);
         }
-    }
-
-    public function errorDeletePage()
-    {
-        return view("backoffice.delete.errorDelete");
-    }
-
-    public function successDeletePage()
-    {
-        return view("backoffice.delete.successDelete");
     }
 
     public function modifyPage($id)
     {
         $productModify = Product::where("ID", "=", $id)->get();
 
-        return view("backoffice.modify.modifyProduct", ["product" => $productModify]);
+        return view("backoffice.modifyProduct", ["product" => $productModify]);
     }
 
     public function modifyProduct(Request $request)
@@ -143,9 +122,9 @@ class DashboardController extends Controller
             ];
 
             Product::where("ID", "=", $idProduct)->update($modifyProduct);
-            return view("backoffice.modify.successModify");
+            return view("responses.success", ["texte" => "Mise a jour du produit a marcher !"]);
         } catch (Exception) {
-            return view("backoffice.modify.errorModify");
+            return view("responses.error", ["texte" => "Mise a jour du produit n'a pas pu marcher, une erreur est survenue !"]);
         }
     }
 
