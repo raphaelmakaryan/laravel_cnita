@@ -3,7 +3,7 @@
 
 @if ($produits)
 @foreach ($produits as $produit)
-@section('title', "Détail de {{ $produit->nom }}")
+<title>MiroMiro - Détail de {{ $produit->nom }}</title>
 <section class="mt-5 mb-5">
     <div class="container">
         <div class="row">

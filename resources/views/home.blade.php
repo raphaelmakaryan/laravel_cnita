@@ -1,5 +1,6 @@
 @extends('layouts.miromiro')
-@section('title', "Accueil")
+<title>MiroMiro - Accueil</title>
+
 @section('content')
 <header class="mt-5 mb-5">
     <div class="container-fluid">

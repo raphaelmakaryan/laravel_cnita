@@ -1,5 +1,6 @@
 @extends('layouts.miromiro')
-@section('title', "Panier")
+<title>MiroMiro - Panier</title>
+
 @section('content')
 <?php    
 $index = 0

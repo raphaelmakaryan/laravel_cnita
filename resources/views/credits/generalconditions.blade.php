@@ -1,5 +1,5 @@
 @extends('layouts.miromiro')
-@section('title', "Conditions Générales de Vente")
+<title>MiroMiro - Conditions Générales de Vente</title>
 @section('content')
 
 <section class="mt-5 mb-5">

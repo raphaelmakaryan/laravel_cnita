@@ -1,5 +1,5 @@
 @extends('layouts.miromiro')
-@section('title', "Erreur !")
+<title>MiroMiro - Erreur !</title>
 
 @section('content')
 <section class="mt-5 mb-5">

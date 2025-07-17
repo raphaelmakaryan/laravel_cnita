@@ -1,5 +1,5 @@
 @extends('layouts.miromiro')
-@section('title', "Graphique")
+<title>MiroMiro - Graphiques</title>
 @section('content')
 
 

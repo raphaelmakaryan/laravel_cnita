@@ -1,5 +1,5 @@
 @extends('layouts.miromiro')
-@section('title', "Modification d'un produit")
+<title>MiroMiro - Modification d'un produit</title>
 @section('content')
 
 @if ($product)

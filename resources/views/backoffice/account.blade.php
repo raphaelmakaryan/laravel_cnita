@@ -1,5 +1,5 @@
 @extends('layouts.miromiro')
-@section('title', "Compte")
+<title>MiroMiro - Compte ADMIN</title>
 @section('content')
 
 <section class="mt-5 mb-5" id="dashboardMain">
