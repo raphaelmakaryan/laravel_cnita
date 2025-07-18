@@ -11,18 +11,18 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('order_tracking', function (Blueprint $table) {
+        Schema::create('order_tracking_perso', function (Blueprint $table) {
             $table->id('ID');
             $table->integer("idOrder");
             $table->unsignedBigInteger('idUser');
             $table->unsignedBigInteger('idProduct');
-            $table->unsignedTinyInteger('status');
             $table->integer("quantite");
             $table->float('prix');
+            $table->unsignedTinyInteger('status');
             $table->date('date');
 
             $table->foreign('idUser')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('idProduct')->references('ID')->on('products')->onDelete('cascade');
+            $table->foreign('idProduct')->references('ID')->on('personalized_glasses')->onDelete('cascade');
         });
     }
 
@@ -31,6 +31,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('order_tracking');
+        Schema::dropIfExists('order_tracking_perso');
     }
 };
