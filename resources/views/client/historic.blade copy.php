@@ -27,31 +27,28 @@
                             <tbody>
                                 @foreach ($historic as $historicUser)
                                     <tr>
-                                        <td>#{{ $historicUser['idOrder'] }}</td>
-                                        <td>{{ $historicUser['prix'] }} €</td>
-                                        <td>{{ $historicUser['date'] }}</td>
+                                        <td>#{{ $historicUser->idOrder}}</td>
+                                        <td>{{ $historicUser->prix }} €</td>
+                                        <td>{{ $historicUser->date }}</td>
                                         <td>
-                                            @if ($historicUser['status'] === 0)
+                                            @if ($historicUser->status === 0)
                                                 <span class="badge rounded-pill status_attente w-100">Attente de traitement</span>
-                                            @elseif ($historicUser['status'] === 1)
+                                            @elseif ($historicUser->status === 1)
                                                 <span class="badge rounded-pill status_preparation w-100">Préparation</span>
-                                            @elseif ($historicUser['status'] === 2)
-                                                <span class="badge rounded-pill status_livraison w-100">En cours de livraison</span>
-                                            @elseif ($historicUser['status'] === 3)
+                                            @elseif ($historicUser->status === 2)
+                                                <span class="badge rounded-pill status_livraison  w-100">En cours de livraison</span>
+                                            @elseif ($historicUser->status === 3)
                                                 <span class="badge rounded-pill status_retard w-100">En retard</span>
-                                            @elseif ($historicUser['status'] === 4)
+                                            @elseif ($historicUser->status === 4)
                                                 <span class="badge rounded-pill status_livre w-100">Livré</span>
                                             @endif
                                         </td>
-                                        <td>
-                                            <a href="{{ route('client.details', $historicUser['idOrder']) }}"
+                                        <td><a href="/client/details/{{ $historicUser->idOrder}}"
                                                 class="btn bouton_style bouton_orange bouton_fond_noir">
                                                 Voir
-                                            </a>
-                                        </td>
+                                            </a></td>
                                     </tr>
                                 @endforeach
-
                             </tbody>
                         </table>
                     </div>

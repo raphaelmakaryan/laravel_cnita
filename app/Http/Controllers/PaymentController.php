@@ -10,6 +10,8 @@ use App\Models\Cart;
 use App\Models\OrderTracking;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\PlacingOrder;
+use App\Models\CartPerso;
+use App\Models\OrderTrackingPerso;
 
 class PaymentController extends Controller
 {
@@ -18,11 +20,13 @@ class PaymentController extends Controller
         $userId = Auth::id();
         if ($userId) {
             $cartItems = Cart::with('product')->where('idUser', $userId)->get();
+            $cartPerso = CartPerso::with('product')->where('idUser', $userId)->get();
             $alreadyLivraison = Informations::where('idUser', $userId)->get();
-            if (count($cartItems) >= 1) {
+            if (count($cartItems) >= 1 || count($cartPerso) >= 1) {
                 return view('payment', [
                     'cartItems' => $cartItems,
-                    'alreadyLivraison' => $alreadyLivraison
+                    'alreadyLivraison' => $alreadyLivraison,
+                    'cartPerso' => $cartPerso
                 ]);
             } else {
                 return redirect()->route('cart');
@@ -84,38 +88,58 @@ class PaymentController extends Controller
         $productIds = collect($payload)->pluck('idForFinalArray')->flatten()->toArray();
         $price = $payload[0]['price'];
         $date = $payload[0]['date'];
-
-        $cartItems = Cart::where('idUser', $idUser)
-            ->whereIn('idProduct', $productIds)
-            ->get();
-
-        if ($cartItems->isEmpty()) {
-            return response()->json([
-                'status' => 'error',
-                'message' => 'Aucun produit du panier ne correspond à la sélection.'
-            ], 400);
-        }
-
+        $types = $payload[0]['type'] ?? ['normal']; 
         $lastOrderId = OrderTracking::max('idOrder');
         $newOrderId = $lastOrderId ? $lastOrderId + 1 : 1;
 
-        foreach ($cartItems as $cartItem) {
-            $productId = $cartItem->idProduct;
-            $quantite = $cartItem->quantite;
+        if (in_array('normal', $types)) {
+            $cartItems = Cart::where('idUser', $idUser)
+                ->whereIn('idProduct', $productIds)
+                ->get();
 
-            Cart::where("idProduct", $productId)
-                ->where("idUser", $idUser)
-                ->delete();
+            foreach ($cartItems as $cartItem) {
+                $productId = $cartItem->idProduct;
+                $quantite = $cartItem->quantite;
 
-            OrderTracking::insert([
-                'idUser'    => $idUser,
-                'idOrder'   => $newOrderId,
-                'idProduct' => $productId,
-                'status'    => 0,
-                'prix'      => $price,
-                "quantite" => $quantite,
-                'date'      => $date
-            ]);
+                Cart::where("idProduct", $productId)
+                    ->where("idUser", $idUser)
+                    ->delete();
+
+                OrderTracking::insert([
+                    'idUser'    => $idUser,
+                    'idOrder'   => $newOrderId,
+                    'idProduct' => $productId,
+                    'status'    => 0,
+                    'prix'      => $price,
+                    'quantite'  => $quantite,
+                    'date'      => $date
+                ]);
+            }
+        }
+
+        if (in_array('perso', $types)) {
+            $cartItemsPerso = CartPerso::where('idUser', $idUser)
+                ->whereIn('idProduct', $productIds)
+                ->get();
+
+            foreach ($cartItemsPerso as $cartItem) {
+                $productId = $cartItem->idProduct;
+                $quantite = $cartItem->quantite;
+
+                CartPerso::where("idProduct", $productId)
+                    ->where("idUser", $idUser)
+                    ->delete();
+
+                OrderTrackingPerso::insert([
+                    'idUser'    => $idUser,
+                    'idOrder'   => $newOrderId,
+                    'idProduct' => $productId,
+                    'status'    => 0,
+                    'prix'      => $price,
+                    'quantite'  => $quantite,
+                    'date'      => $date
+                ]);
+            }
         }
 
         Mail::to(Auth::user()->email)->send(new PlacingOrder($price));

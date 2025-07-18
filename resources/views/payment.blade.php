@@ -3,11 +3,8 @@
 @section('content')
 
 <?php
-
 use Carbon\Carbon;
-
 ?>
-
 <section class="mt-5 mb-5" id="paymentPage">
     <div class="container">
         <div class="row">
@@ -160,7 +157,7 @@ use Carbon\Carbon;
             <div class="col-12 mb-2">
                 <p class="fs-4 text-center">Facture</p>
             </div>
-            @if ($alreadyLivraison && $cartItems)
+            @if ($alreadyLivraison && $cartItems || $alreadyLivraison && $cartPerso)
                 <div class="col-12 mb-4 d-flex align-items-center flex-column">
                     <div style="background: #D9D9D9;" class="p-3 rounded" id="factureInfos">
                         <div class="d-flex flex-column align-items-start">
@@ -169,7 +166,7 @@ use Carbon\Carbon;
                                 <p class="fs-6 m-0">{{ $info->address }}, {{ $info->city }}, {{ $info->postal_code }},
                                     {{ $info->country }}
                                 </p>
-                                <p class="fs-6 m-0">Date d'achat : {{ \Carbon\Carbon::now() }}</p>
+                                <p class="fs-6 m-0">Date d'achat : {{ Carbon::now() }}</p>
                                 <p class="fs-6 m-0">Choix livraison : <span id="choiseUserLivraison"
                                         class="text-capitalize"></span></p>
                             @endforeach
@@ -194,8 +191,20 @@ use Carbon\Carbon;
                                                     <td><span class="quantityForCalculate">{{ $cart->quantite }}</span></td>
                                                     <td><span class="priceForCalculate">{{ $cart->product->prix }}</span> €</td>
                                                     <td style='display: none;' class="IDForFinal">{{ $cart->product->ID }}</td>
+                                                    <td style='display: none;' class="typeForFinal">normal</td>
                                                 </tr>
                                             @endif
+                                        @endforeach
+                                        @foreach ($cartPerso as $cart)
+                                            <tr>
+                                                <td>Lunette personnaliser</td>
+                                                <td><img src="<?php        echo asset('assets/personalize/frames/' . $cart->product->monture . '.jpg'); ?>"
+                                                        alt="" class="img-fluid w-50"></td>
+                                                <td><span class="quantityForCalculate">{{ $cart->quantite }}</span></td>
+                                                <td><span class="priceForCalculate">{{ $cart->product->prix }}</span> €</td>
+                                                <td style='display: none;' class="IDForFinal">{{ $cart->product->ID }}</td>
+                                                <td style='display: none;' class="typeForFinal">perso</td>
+                                            </tr>
                                         @endforeach
                                     </tbody>
                                 </table>
@@ -241,7 +250,8 @@ use Carbon\Carbon;
                 </div>
                 <div class="row mt-2">
                     <div class="col-12  d-flex align-items-center justify-content-center">
-                        <a href="{{ route('home') }}" class="btn bouton_style bouton_noir bouton_fond_orange">RETOUR A L'ACCUEIL</a>
+                        <a href="{{ route('home') }}" class="btn bouton_style bouton_noir bouton_fond_orange">RETOUR A
+                            L'ACCUEIL</a>
                     </div>
                 </div>
             </div>

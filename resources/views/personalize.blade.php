@@ -24,15 +24,15 @@
                             <div id="carouselMonture" class="carousel slide mt-2">
                                 <div class="carousel-inner">
                                     <div class="currentChoiceMonture carousel-item active" data-Monture="Carbone">
-                                        <img src="{{ asset('assets/personalize/frames/carbon.jpg') }}" class=" d-block
+                                        <img src="{{ asset('assets/personalize/frames/Carbone.jpg') }}" class=" d-block
                                             w-75" alt="...">
                                     </div>
                                     <div class="currentChoiceMonture carousel-item" data-Monture="Titane">
-                                        <img src="{{ asset('assets/personalize/frames/titan.jpg') }}" class=" d-block
+                                        <img src="{{ asset('assets/personalize/frames/Titane.jpg') }}" class=" d-block
                                             w-75" alt="...">
                                     </div>
                                     <div class="currentChoiceMonture carousel-item" data-Monture="Bois">
-                                        <img src="{{ asset('assets/personalize/frames/wood.jpg') }}" class=" d-block
+                                        <img src="{{ asset('assets/personalize/frames/Bois.jpg') }}" class=" d-block
                                             w-75" alt="...">
                                     </div>
                                 </div>
@@ -266,7 +266,8 @@
                             <div class="accordion-body">
                                 <div id="carouselCouleurBoîte" class="carousel slide mt-2">
                                     <div class="carousel-inner">
-                                        <div class="currentChoiceCouleurBoîte carousel-item active" data-CouleurBoîte="Bleu">
+                                        <div class="currentChoiceCouleurBoîte carousel-item active"
+                                            data-CouleurBoîte="Bleu">
                                             <img src="{{ asset('assets/personalize/colors/blue.jpg') }}" class="
                                                 d-block w-75" alt="...">
                                         </div>
@@ -305,11 +306,21 @@
             </div>
             <div class="col-lg-4"></div>
         </div>
-        <div class="row mt-3 mb-3" id="buttonCart" style="display: none;">
-            <div class="col-12 mt-4 d-flex flex-row justify-content-end justify-content-lg-center">
-                <a href="#" class="btn bouton_style bouton_noir bouton_fond_orange">PANIER</a>
+        @if (Auth::check())
+            <div class="row mt-3 mb-3" id="buttonCart" style="display: none;">
+                <div class="col-12 mt-4 d-flex flex-row justify-content-end justify-content-lg-center">
+                    <button class="btn bouton_style bouton_noir bouton_fond_orange" onclick="addPersoToCart(true)">PANIER
+                    </button>
+                </div>
             </div>
-        </div>
+        @else
+            <div class="row mt-3 mb-3" id="buttonCart" style="display: none;">
+                <div class="col-12 mt-4 d-flex flex-row justify-content-end justify-content-lg-center">
+                    <button class="btn bouton_style bouton_noir bouton_fond_orange" onclick="addPersoToCart(false)">PANIER
+                    </button>
+                </div>
+            </div>
+        @endif
     </div>
 </section>
 

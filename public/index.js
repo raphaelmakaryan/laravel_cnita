@@ -92,16 +92,17 @@ function addOnCart(connect) {
     }
 }
 
-function removeFromCart(index, connect) {
+function removeFromCart(index, connect, type) {
     let debug = true
     if (connect && index) {
+        let dataRemove = { index, type }
         fetch('/api/product/deleteoncart', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
             },
-            body: JSON.stringify({ index })
+            body: JSON.stringify({ dataRemove })
         })
             .then(response => response.json())
             .then(data => {
@@ -254,6 +255,7 @@ function finalPayment() {
 
     const IDForFinalElements = document.getElementsByClassName("IDForFinal");
     const price = document.getElementById("totalPrice").innerText;
+    const type = Array.from(document.getElementsByClassName("typeForFinal")).map(el => el.innerText);
     const idForFinalArray = Array.from(IDForFinalElements).map(el => el.innerText);
     const date = new Date().toISOString().slice(0, 10);
 
@@ -261,7 +263,8 @@ function finalPayment() {
         const payload = [{
             idForFinalArray,
             price,
-            date
+            date,
+            type
         }];
 
         fetch('/api/payment/check', {
@@ -432,5 +435,43 @@ function newChoice(filtre, index) {
         document.getElementById("buttonCart").style.display = "block";
     }
 }
-//#endregion PERSO
 
+
+function addPersoToCart(connect) {
+    const debug = true;
+    if (!connect) {
+        alert("Vous devez être connecté pour personnaliser un produit pour l'instant.");
+        /*
+        const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
+        cartItems.push(choiceUser[0]);
+        localStorage.setItem("cart", JSON.stringify(cartItems));
+        disabledButtonAddCart();
+        return;
+        */
+    } else {
+        const dataPerso = choiceUser
+        fetch('/api/personalize/create', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            },
+            body: JSON.stringify({ dataPerso })
+        })
+            .then(response => response.json())
+            .then(data => {
+                if (debug) {
+                    console.log('Réponse du serveur :', data);
+                }
+                switch (data.status) {
+                    case 'success':
+                        window.location.href = data.redirect;
+                        break;
+                    default:
+                        break;
+                }
+            })
+            .catch(error => console.error('Erreur :', error));
+    }
+}
+//#endregion PERSO

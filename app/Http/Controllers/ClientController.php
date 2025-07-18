@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Product;
 use App\Models\OrderTracking;
+use App\Models\OrderTrackingPerso;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\DB;
@@ -19,21 +20,63 @@ class ClientController extends Controller
     {
         $userId = Auth::id();
 
-        $historic = OrderTracking::where('idUser', $userId)
-            ->select(
-                'idOrder',
-                'date',
-                'status',
-                "prix"
-            )
-            ->groupBy('idOrder', 'date', 'status', "prix")
-            ->orderBy('date', 'asc')
-            ->get();
+        $normalOrders = OrderTracking::where('idUser', $userId)->pluck('idOrder')->toArray();
+        $persoOrders = OrderTrackingPerso::where('idUser', $userId)->pluck('idOrder')->toArray();
 
-        if ($historic) {
-            return view("client.historic", ['historic' => $historic]);
+        $mergedOrderIds = collect(array_unique(array_merge($normalOrders, $persoOrders)));
+
+        $alreadyHandled = [];
+
+        $historic = collect();
+
+        foreach ($mergedOrderIds as $idOrder) {
+            if (in_array($idOrder, $alreadyHandled)) {
+                continue;
+            }
+
+            $order = OrderTracking::where('idOrder', $idOrder)
+                ->where('idUser', $userId)
+                ->first();
+
+            if ($order) {
+                $prix = OrderTracking::where('idOrder', $idOrder)
+                    ->where('idUser', $userId)
+                    ->sum('prix');
+
+                $historic->push([
+                    'idOrder' => $idOrder,
+                    'date'    => $order->date,
+                    'status'  => $order->status,
+                    'prix'    => $prix,
+                ]);
+
+                $alreadyHandled[] = $idOrder;
+                continue;
+            }
+
+            $orderPerso = OrderTrackingPerso::where('idOrder', $idOrder)
+                ->where('idUser', $userId)
+                ->first();
+
+            if ($orderPerso) {
+                $prix = OrderTrackingPerso::where('idOrder', $idOrder)
+                    ->where('idUser', $userId)
+                    ->sum('prix');
+
+                $historic->push([
+                    'idOrder' => $idOrder,
+                    'date'    => $orderPerso->date,
+                    'status'  => $orderPerso->status,
+                    'prix'    => $prix,
+                ]);
+
+                $alreadyHandled[] = $idOrder;
+            }
         }
-        return view("client.historic");
+
+        $historic = $historic->sortBy('date')->values();
+
+        return view("client.historic", ["historic" => $historic]);
     }
 
     public function detailsPage($id)
@@ -44,7 +87,12 @@ class ClientController extends Controller
             ->where('idUser', $userId)
             ->exists();
 
-        if (!$commandeExiste) {
+        $commandePersoExiste = OrderTrackingPerso::where('idOrder', $id)
+            ->where('idUser', $userId)
+            ->exists();
+
+
+        if (!$commandeExiste && !$commandePersoExiste) {
             return redirect()->route('client.dashboard');
         }
 
@@ -53,6 +101,14 @@ class ClientController extends Controller
             ->orderBy('date', 'desc')
             ->get();
 
-        return view("client.details", ['details' => $details]);
+        $detailsPerso = OrderTrackingPerso::with('product')
+            ->where('idOrder', $id)
+            ->orderBy('date', 'desc')
+            ->get();
+
+        return view("client.details", [
+            'details' => $details,
+            'detailsPerso' => $detailsPerso
+        ]);
     }
 }

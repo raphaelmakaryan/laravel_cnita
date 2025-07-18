@@ -33,7 +33,7 @@ Route::get(
 Route::get(
     '/personalize',
     [PersonalizeController::class, "indexPage"]
-);
+)->name("personalize");
 #endregion PERSO
 
 #region PRODUCT DETAIL
@@ -258,6 +258,11 @@ Route::prefix('api')->group(function () {
     Route::post(
         '/cart/quantity',
         [CartController::class, "updateQuantity"]
+    );
+
+    Route::post(
+        '/personalize/create',
+        [PersonalizeController::class, "createPersonnalized"]
     );
 });
 #endregion API
