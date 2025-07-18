@@ -85,7 +85,7 @@ function addOnCart(connect) {
                 .catch(error => console.error('Erreur :', error));
         }
     } else if (!connect && id && nom && image && prix) {
-        const newItem = { id, nom, image, prix };
+        const newItem = { id, nom, image, prix, quantity: 1 };
         cartItems.push(newItem);
         localStorage.setItem("cart", JSON.stringify(cartItems));
         disabledButtonAddCart();
@@ -111,11 +111,17 @@ function removeFromCart(index, connect, type) {
                 }
             })
             .catch(error => console.error('Erreur :', error));
-    } else if (index && !connect) {
+    } else if (index && !connect && type == "normal") {
         const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
         if (index >= 0 && index < cartItems.length) {
             cartItems.splice(index, 1);
             localStorage.setItem("cart", JSON.stringify(cartItems));
+        }
+    } else if (index && !connect && type == "perso") {
+        const cartItems = JSON.parse(localStorage.getItem("perso")) || [];
+        if (index >= 0 && index < cartItems.length) {
+            cartItems.splice(index, 1);
+            localStorage.setItem("perso", JSON.stringify(cartItems));
         }
     }
     window.location.reload();
@@ -134,44 +140,93 @@ function disabledButtonAddCart() {
 if (document.getElementById("cartProduct")) {
     const rowItems = document.getElementById("cartProduct");
     const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
-    let index = 0
-    cartItems.forEach(item => {
-        let aDiv = document.createElement("div");
-        aDiv.className = "mt-1 mb-1";
-        aDiv.innerHTML = `
+    const cartPerso = JSON.parse(localStorage.getItem("perso")) || [];
+    if (cartItems.length > 0) {
+        let index = 0;
+        cartItems.forEach(item => {
+            let aDiv = document.createElement("div");
+            aDiv.className = "mt-1 mb-1";
+            aDiv.innerHTML = `
                             <div class="container">
                                 <div class="row border">
-                                    <div class="col-4 d-flex">
+                                    <div class="col-3 d-flex">
                                         <img src="${item.image}" class="img-fluid w-100"
                                             alt="...">
                                     </div>
-                                    <div class="col-4 d-flex flex-column align-items-start">
+                                    <div class="col-3 d-flex flex-column align-items-start">
                                         <p class="fs-5 mt-1">${item.nom}</p>
                                         <p class="fs-6"><span class="priceForCalculate">${item.prix}</span>€</p>
                                     </div>
-                                    <div class="col-4 d-flex flex-column justify-content-center align-items-center">
-                                        <button class="btn bouton_style bouton_orange bouton_fond_blanc" onclick="removeFromCart('${index}', false)"><img src="assets/dashboard/delete.png" class="img-fluid" alt="..." width="25"></button>
+                                    <div class="col-3 d-flex flex-column align-items-center justify-content-center">
+                                            <label for="quantityCart" class="form-label">Quantité</label>
+                                            <input type="number" class="form-control quantityForCalculate" name="quantityCart"
+                                                min="1" max="10" id="quantityCartNormal${index}" value="${item.quantity}">
+                                            <button onclick="updateCartLocal(${index}, 'Normal')"
+                                                class="btn bouton_style bouton_orange bouton_fond_blanc p-1 mt-1">Mettre a
+                                                jour
+                                            </button>
+                                    </div>
+                                    <div class="col-3 d-flex flex-column justify-content-center align-items-center">
+                                        <button class="btn bouton_style bouton_orange bouton_fond_blanc" onclick="removeFromCart('${index}', false, 'normal')"><img src="assets/dashboard/delete.png" class="img-fluid" alt="..." width="25"></button>
                                     </div>
                                 </div>
                             </div>
                         </div>
         `;
-        index++;
-        rowItems.appendChild(aDiv);
-    });
+            index++;
+            rowItems.appendChild(aDiv);
+        });
+    }
+    if (cartPerso.length > 0) {
+        let index = 0;
+        cartPerso.forEach(item => {
+            let aDiv = document.createElement("div");
+            aDiv.className = "mt-1 mb-1";
+            aDiv.innerHTML = `
+                            <div class="container">
+                                <div class="row border">
+                                    <div class="col-3 d-flex">
+                                        <img src="${item.image}" class="img-fluid w-100"
+                                            alt="...">
+                                    </div>
+                                    <div class="col-3 d-flex flex-column align-items-start">
+                                        <p class="fs-5 mt-1">${item.nom}</p>
+                                        <p class="fs-6"><span class="priceForCalculate">${item.prix}</span>€</p>
+                                    </div>
+                                    <div class="col-3 d-flex flex-column align-items-center justify-content-center">
+                                            <label for="quantityCart" class="form-label">Quantité</label>
+                                            <input type="number" class="form-control quantityForCalculate" name="quantityCart"
+                                                min="1" max="10" id="quantityCartPerso${index}" value="${item.quantity}">
+                                            <button onclick="updateCartLocal(${index}, 'Perso')"
+                                                class="btn bouton_style bouton_orange bouton_fond_blanc p-1 mt-1">Mettre a
+                                                jour
+                                            </button>
+                                    </div>
+                                    <div class="col-3 d-flex flex-column justify-content-center align-items-center">
+                                        <button class="btn bouton_style bouton_orange bouton_fond_blanc" onclick="removeFromCart('${index}', false, 'perso')"><img src="assets/dashboard/delete.png" class="img-fluid" alt="..." width="25"></button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+        `;
+            index++;
+            rowItems.appendChild(aDiv);
+        });
+    }
 }
 // Si pas dans page panier (verification si il a des items dans le panier)
 if (!document.getElementById("cartProduct")) {
     let debug = true
-    const cartItems = JSON.parse(localStorage.getItem("cart")) || {};
-    if (Object.keys(cartItems).length > 0) {
+    const cartItemsNormal = JSON.parse(localStorage.getItem("cart")) || {};
+    const cartItemsPerso = JSON.parse(localStorage.getItem("perso")) || {};
+    if (Object.keys(cartItemsNormal).length > 0) {
         fetch('/api/product/verificationcart', {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
                 'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
             },
-            body: JSON.stringify({ cartItems })
+            body: JSON.stringify({ cartItemsNormal })
         })
             .then(response => response.json())
             .then(data => {
@@ -182,6 +237,55 @@ if (!document.getElementById("cartProduct")) {
             })
             .catch(error => console.error('Erreur :', error));
     }
+    if (Object.keys(cartItemsPerso).length > 0) {
+        fetch('/api/product/verificationcart', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRF-TOKEN': document.querySelector('meta[name="csrf-token"]').getAttribute('content')
+            },
+            body: JSON.stringify({ cartItemsPerso })
+        })
+            .then(response => response.json())
+            .then(data => {
+                localStorage.removeItem("perso");
+                if (debug) {
+                    console.log('Réponse du serveur :', data);
+                }
+            })
+            .catch(error => console.error('Erreur :', error));
+    }
+}
+
+function updateCartLocal(index, type) {
+    const quantityInput = document.getElementById(`quantityCart${type}${index}`);
+    const quantity = parseInt(quantityInput.value);
+    switch (type) {
+        case "Perso":
+            const cartItemsPerso = JSON.parse(localStorage.getItem("perso")) || [];
+            if (index >= 0 && index < cartItemsPerso.length) {
+                if (quantity > 0 && quantity <= 10) {
+                    cartItemsPerso[index].quantity = quantity;
+                    localStorage.setItem("perso", JSON.stringify(cartItemsPerso));
+                } else {
+                    alert("Veuillez entrer une quantité valide entre 1 et 10.");
+                }
+            }
+            break;
+
+        case "Normal":
+            const cartItemsNormal = JSON.parse(localStorage.getItem("cart")) || [];
+            if (index >= 0 && index < cartItemsNormal.length) {
+                if (quantity > 0 && quantity <= 10) {
+                    cartItemsNormal[index].quantity = quantity;
+                    localStorage.setItem("cart", JSON.stringify(cartItemsNormal));
+                } else {
+                    alert("Veuillez entrer une quantité valide entre 1 et 10.");
+                }
+            }
+            break;
+    }
+    window.location.reload();
 }
 //#endregion LOCAL STORAGE PANIER
 
@@ -393,6 +497,7 @@ function resetExploreOrder() {
 //#region PERSO
 const filter = ["Monture", "CouleurMonture", "Verre", "CouleurVerre", "Boîte", "CouleurBoîte"];
 let choiceUser = []
+let targetImageMonture = [];
 
 function configureCarouselListener(filterName) {
     const currentChoiceId = `currentChoice${filterName}`;
@@ -401,6 +506,8 @@ function configureCarouselListener(filterName) {
     const currentChoice = document.getElementById(currentChoiceId);
     const carousel = document.getElementById(carouselId);
     if (currentChoice && carousel) {
+        const currentImage = document.getElementsByClassName(`currentChoiceMonture carousel-item active`)[0].children[0].currentSrc;
+        targetImageMonture.push(currentImage);
         carousel.addEventListener('slide.bs.carousel', event => {
             const data = event.relatedTarget.dataset[filterName.toLowerCase()];
             if (data) {
@@ -440,14 +547,11 @@ function newChoice(filtre, index) {
 function addPersoToCart(connect) {
     const debug = true;
     if (!connect) {
-        alert("Vous devez être connecté pour personnaliser un produit pour l'instant.");
-        /*
-        const cartItems = JSON.parse(localStorage.getItem("cart")) || [];
-        cartItems.push(choiceUser[0]);
-        localStorage.setItem("cart", JSON.stringify(cartItems));
-        disabledButtonAddCart();
-        return;
-        */
+        let newItem = { Monture: choiceUser[0]["Monture"], CouleurMonture: choiceUser[0]["CouleurMonture"], Verre: choiceUser[0]["Verre"], CouleurVerre: choiceUser[0]["CouleurVerre"], Boîte: choiceUser[0]["Boîte"], CouleurBoîte: choiceUser[0]["CouleurBoîte"], image: targetImageMonture[0], nom: "Lunette personnalisée", prix: 100, quantity: 1 };
+        const cartPerso = JSON.parse(localStorage.getItem("perso")) || [];
+        cartPerso.push(newItem);
+        localStorage.setItem("perso", JSON.stringify(cartPerso));
+        window.location.href = "/cart";
     } else {
         const dataPerso = choiceUser
         fetch('/api/personalize/create', {
