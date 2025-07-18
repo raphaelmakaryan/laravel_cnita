@@ -61,7 +61,7 @@ use Illuminate\Support\Facades\Auth;
     <footer class="mt-7" id="footerMiroMiro">
         <div class="container-fluid">
             <div class="row">
-                <img src="{{ asset('assets/separationHAUT.png') }}" alt="" class="img-fluid separations">
+                <img src="{{ asset('assets/home/separationHAUT.png') }}" alt="" class="img-fluid separations">
             </div>
             <div class="row background_couleur_principale_400">
                 <div class="d-flex flex-column align-items-center">

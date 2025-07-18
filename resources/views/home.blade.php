@@ -5,7 +5,7 @@
 <header class="mt-5 mb-5">
     <div class="container-fluid">
         <div class="row">
-            <img src="{{ asset('assets/separationHAUT.png') }}" alt="" class="img-fluid separations">
+            <img src="{{ asset('assets/home/separationHAUT.png') }}" alt="" class="img-fluid separations">
         </div>
         <div class="row background_couleur_principale_400">
             <div class="col-12 p-0 d-flex flex-column align-items-center">
@@ -19,7 +19,7 @@
             </div>
         </div>
         <div class="row">
-            <img src="{{ asset('assets/separationBAS.png') }}" alt="" class="img-fluid separations">
+            <img src="{{ asset('assets/home/separationBAS.png') }}" alt="" class="img-fluid separations">
         </div>
     </div>
 </header>
@@ -60,7 +60,7 @@
 <section class="mt-5 mb-5 " id="persoPub">
     <div class="container-fluid">
         <div class="row">
-            <img src="{{ asset('assets/separationHAUT.png') }}" alt="" class="img-fluid separations">
+            <img src="{{ asset('assets/home/separationHAUT.png') }}" alt="" class="img-fluid separations">
         </div>
         <div class="row background_couleur_principale_400 p-3 p-lg-5">
             <p class="fs-6 text-center">Vous souhaitez personnaliser vos lunettes ? Vous pouvez le faire en ligne avec
@@ -71,7 +71,7 @@
                 <button type="button" class="btn bouton_style bouton_blanc">VOIR</button></a>
         </div>
         <div class="row">
-            <img src="{{ asset('assets/separationBAS.png') }}" alt="" class="img-fluid separations">
+            <img src="{{ asset('assets/home/separationBAS.png') }}" alt="" class="img-fluid separations">
         </div>
     </div>
 
@@ -130,7 +130,7 @@
                 </div>
                 <div>
                     @if (Auth::check() && Auth::user()->permission === 0)
-                        <a href="{{ route('account') }}">
+                        <a href="{{ route('client.dashboard') }}">
                     @else
                             <a href="{{ route('authentication') }}">
                         @endif

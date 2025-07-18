@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Cart;
+use App\Models\CartPerso;
+use App\Models\PersonalizedGlasses;
 use App\Models\User;
 use App\Models\Product;
 use COM;
@@ -16,10 +18,12 @@ class CartController extends Controller
     {
         $userId = Auth::id();
         if ($userId) {
-            $cartUsers = Cart::with(["verifUser", 'product'])->where('idUser', $userId)->get();
+            $cartProduct = Cart::with(["verifUser", 'product'])->where('idUser', $userId)->get();
+            $cartPerso = CartPerso::with(["verifUser", 'product'])->where('idUser', $userId)->get();
 
             return view('cart', [
-                "cartUsers" => $cartUsers
+                "cartUsers" => $cartProduct,
+                'cartPerso' => $cartPerso
             ]);
         }
         return view("cart");
@@ -80,20 +84,35 @@ class CartController extends Controller
     public function deleteToCart(Request $request)
     {
         $debug = true;
-        $index = $request->input('index');
+        $dataRemove = $request->input('dataRemove');
         $idUser = Auth::id();
 
-        if (empty($index)) {
+        if (empty($dataRemove)) {
             return response()->json([
                 'status' => 'error',
                 'message' => 'Aucun produit récupérer'
             ], 400);
         }
 
-        if ($index && $idUser) {
-            Cart::where("ID", $index)
-                ->where("idUser", $idUser)
-                ->delete();
+        if ($dataRemove && $idUser) {
+
+            switch ($dataRemove["type"]) {
+                case 'normal':
+                    Cart::where("ID", $dataRemove)
+                        ->where("idUser", $idUser)
+                        ->delete();
+                    break;
+
+                case 'perso':
+                    CartPerso::where("ID", $dataRemove["index"])
+                        ->where("idUser", $idUser)
+                        ->delete();
+
+                    PersonalizedGlasses::where("ID", $dataRemove["index"])
+                        ->where("idUser", $idUser)
+                        ->delete();
+                    break;
+            }
         }
 
         if ($debug) {
@@ -148,30 +167,58 @@ class CartController extends Controller
         $informationsCart = [
             'id' => $request->input('idProduct'),
             'quantite'        => $request->input('quantityCart'),
+            "type" => $request->input('whoCart'),
         ];
 
         $idUser = Auth::id();
 
         if ($idUser) {
-            $verification = Cart::where("idProduct", $informationsCart["id"])->where("idUser", $idUser)->get();
-            $countVerif = count($verification) == 1;
-            if ($countVerif) {
-                if ($debug) {
-                    response()->json([
-                        'status' => 'success',
-                        'message' => 'Mise a jour de la quantité',
-                        "data" => [
-                            "userId" => $idUser,
-                            "idProduct" => $informationsCart['id'],
-                            "quantite" => $informationsCart['quantite'],
-                            "count" => $countVerif
-                        ]
-                    ]);
-                }
+            switch ($informationsCart["type"]) {
+                case 'normal':
+                    $verification = Cart::where("idProduct", $informationsCart["id"])->where("idUser", $idUser)->get();
+                    $countVerif = count($verification) == 1;
+                    if ($countVerif) {
+                        if ($debug) {
+                            response()->json([
+                                'status' => 'success',
+                                'message' => 'Mise a jour de la quantité',
+                                "data" => [
+                                    "userId" => $idUser,
+                                    "idProduct" => $informationsCart['id'],
+                                    "quantite" => $informationsCart['quantite'],
+                                    "count" => $countVerif
+                                ]
+                            ]);
+                        }
 
-                Cart::where("idProduct", (int) $informationsCart["id"])->where("idUser", $idUser)->update([
-                    "quantite" => (int) $informationsCart["quantite"]
-                ]);
+                        Cart::where("idProduct", (int) $informationsCart["id"])->where("idUser", $idUser)->update([
+                            "quantite" => (int) $informationsCart["quantite"]
+                        ]);
+                    }
+                    break;
+
+                case 'perso':
+                    $verification = CartPerso::where("idProduct", $informationsCart["id"])->where("idUser", $idUser)->get();
+                    $countVerif = count($verification) == 1;
+                    if ($countVerif) {
+                        if ($debug) {
+                            response()->json([
+                                'status' => 'success',
+                                'message' => 'Mise a jour de la quantité',
+                                "data" => [
+                                    "userId" => $idUser,
+                                    "idProduct" => $informationsCart['id'],
+                                    "quantite" => $informationsCart['quantite'],
+                                    "count" => $countVerif
+                                ]
+                            ]);
+                        }
+
+                        CartPerso::where("idProduct", (int) $informationsCart["id"])->where("idUser", $idUser)->update([
+                            "quantite" => (int) $informationsCart["quantite"]
+                        ]);
+                    }
+                    break;
             }
         } else {
             response()->json([
