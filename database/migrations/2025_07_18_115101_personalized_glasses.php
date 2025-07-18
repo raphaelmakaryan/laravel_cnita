@@ -11,18 +11,19 @@ return new class extends Migration
      */
     public function up(): void
     {
-        Schema::create('order_tracking', function (Blueprint $table) {
+        Schema::create('personalized_glasses', function (Blueprint $table) {
             $table->id('ID');
-            $table->integer("idOrder");
             $table->unsignedBigInteger('idUser');
-            $table->unsignedBigInteger('idProduct');
-            $table->unsignedTinyInteger('status');
-            $table->integer("quantite");
-            $table->float('prix');
-            $table->date('date');
+            $table->string('monture', 1000);
+            $table->string('couleurmonture', 1000);
+            $table->string('verre', 1000);
+            $table->string('couleurverre', 1000);
+            $table->string('boite', 1000);
+            $table->string('couleurboite', 1000);
+            $table->integer('prix');
+
 
             $table->foreign('idUser')->references('id')->on('users')->onDelete('cascade');
-            $table->foreign('idProduct')->references('ID')->on('products')->onDelete('cascade');
         });
     }
 
@@ -31,6 +32,6 @@ return new class extends Migration
      */
     public function down(): void
     {
-        Schema::dropIfExists('order_tracking');
+        Schema::dropIfExists('personalized_glasses');
     }
 };
