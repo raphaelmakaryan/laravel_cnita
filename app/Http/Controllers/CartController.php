@@ -126,36 +126,69 @@ class CartController extends Controller
     public function addLocalProducts(Request $request)
     {
         $debug = true;
-        $cartItems = $request->input('cartItems');
+        $cartItemsNormal = $request->input('cartItemsNormal');
+        $cartItemsPerso = $request->input('cartItemsPerso');
         $idUser = Auth::id();
-        if ($idUser && $cartItems) {
-            if (!is_array($cartItems) || empty($cartItems)) {
+        if ($idUser && $cartItemsNormal) {
+            if (!is_array($cartItemsNormal) || empty($cartItemsNormal)) {
                 return response()->json([
                     'status' => 'error',
                     'message' => 'Aucun produit reçu.'
                 ], 400);
             }
-            foreach ($cartItems as $item) {
-                $productId = $item['id'] ?? null;
-
-                if ($productId && $idUser) {
-                    Cart::insert([
-                        "idUser" => $idUser,
-                        "idProduct" => $productId,
-                    ]);
-                }
+            foreach ($cartItemsNormal as $item) {
+                Cart::insert([
+                    "idUser" => $idUser,
+                    "idProduct" => $item['id'],
+                    "quantite" => $item['quantity'],
+                ]);
             }
 
             if ($debug) {
                 return response()->json([
                     'status' => 'success',
                     'message' => 'Produits ajoutés au panier avec succès (debug)',
-                    'data' => $cartItems
+                    'data' => $cartItemsNormal
                 ]);
             } else {
                 return response()->json([
                     'status' => 'success',
                     'message' => 'Produits ajoutés au panier avec succès'
+                ]);
+            }
+        }
+        if ($idUser && $cartItemsPerso) {
+            if (!is_array($cartItemsPerso) || empty($cartItemsPerso)) {
+                return response()->json([
+                    'status' => 'error',
+                    'message' => 'Aucun produit reçu.'
+                ], 400);
+            }
+
+            foreach ($cartItemsPerso as $item) {
+                PersonalizedGlasses::insert([
+                    'idUser' => $idUser,
+                    'monture' => $item['Monture'],
+                    'couleurmonture' => $item['CouleurMonture'],
+                    'verre' => $item['Verre'],
+                    'couleurverre' => $item['CouleurVerre'],
+                    'boite' => $item['Boîte'],
+                    'couleurboite' => $item['CouleurBoîte']
+                ]);
+
+                $lastPersonalizedGlass = PersonalizedGlasses::where("idUser", $idUser)->first();
+                CartPerso::insert([
+                    "idUser" => $idUser,
+                    "idProduct" => $lastPersonalizedGlass->ID,
+                    'quantite' => $item['quantity'],
+                ]);
+            }
+
+            if ($debug) {
+                return response()->json([
+                    'status' => 'success',
+                    'message' => 'Produits ajoutés au panier avec succès (debug)',
+                    'data' => $cartItemsPerso
                 ]);
             }
         }

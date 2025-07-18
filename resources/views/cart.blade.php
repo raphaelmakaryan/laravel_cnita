@@ -97,9 +97,6 @@ $index = 0
                 </div>
             @else
                 <div class="col-12 col-lg-3 mt-3 mb-3" id="cartProduct">
-                    <p class="fs-6 text-center">
-                        Aucun produit
-                    </p>
                 </div>
             @endif
             <div class="col-12 col-lg-3 mt-3 mb-3">
