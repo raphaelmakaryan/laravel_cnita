@@ -100,32 +100,48 @@ class APIController extends Controller
     public function deleteProduct($id)
     {
         if (!Auth::check()) {
-            return [
+            return response()->json([
                 "success" => false,
                 "message" => "Vous devez être connecté pour effectuer cette action."
-            ];
+            ], 401);
         }
 
-        if (Auth::user()->permission !== 1) {
-            return [
+        $user = Auth::user();
+
+        if ($user->permission !== 1) {
+            return response()->json([
                 "success" => false,
                 "message" => "Vous n'avez pas les permissions requises pour supprimer un produit."
-            ];
+            ], 403);
         }
 
         try {
+            $product = Product::find($id);
+
+            if (!$product) {
+                return response()->json([
+                    "success" => false,
+                    "message" => "Produit introuvable."
+                ], 404);
+            }
+
+            $imagePath = public_path($product->image);
+            if (file_exists($imagePath)) {
+                unlink($imagePath);
+            }
+
             Product::where("ID", $id)->delete();
 
-            return [
+            return response()->json([
                 "success" => true,
                 "message" => "Votre produit a été supprimé avec succès !"
-            ];
+            ]);
         } catch (Exception $e) {
-            return [
+            return response()->json([
                 "success" => false,
-                "message" => "Une erreur est survenue lors de le la suppresion du produit.",
+                "message" => "Une erreur est survenue lors de la suppression du produit.",
                 "error" => $e->getMessage()
-            ];
+            ], 500);
         }
     }
     public function updateProduct(Request $request, $id)
