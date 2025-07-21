@@ -196,7 +196,7 @@ Route::get('/privacypolicy', function () {
 #region API
 Route::prefix('api')->group(function () {
     Route::get('/', [APIController::class, "indexPage"]);
-    Route::post('register', [APIAuthController::class, 'register']);
+    //Route::post('register', [APIAuthController::class, 'register']);
     Route::post('login', [APIAuthController::class, 'login']);
     Route::get('product/all', [APIController::class, "allProduct"]);
     Route::get('product/detail/{id}', [APIController::class, "oneProduct"]);

@@ -17,12 +17,17 @@ class APIAuthController extends Controller
             return response()->json(['error' => 'Identifiants invalides'], 401);
         }
 
-        return response()->json([
-            'token' => $token,
-            'user' => Auth::user(),
-        ]);
+        if (Auth::user()->permission === 1) {
+            return response()->json([
+                'token' => $token,
+                'user' => Auth::user(),
+            ]);
+        } else{
+            return response()->json(['error' => "Vous n'etes pas authorisé a vous connectez."], 401);
+        }
     }
 
+    /*
     public function register(Request $request)
     {
         $validated = $request->validate([
@@ -41,4 +46,5 @@ class APIAuthController extends Controller
 
         return response()->json(compact('user', 'token'));
     }
+        */
 }
