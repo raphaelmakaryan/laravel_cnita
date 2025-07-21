@@ -9,6 +9,7 @@ use App\Http\Controllers\PersonalizeController;
 use App\Http\Controllers\DashboardController;
 use App\Http\Controllers\PaymentController;
 use App\Http\Controllers\APIController;
+use App\Http\Controllers\APIAuthController;
 use Illuminate\Auth\Middleware\Authenticate;
 use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\AdminMiddleware;
@@ -195,58 +196,30 @@ Route::get('/privacypolicy', function () {
 #region API
 Route::prefix('api')->group(function () {
     Route::get('/', [APIController::class, "indexPage"]);
-
-    Route::get(
-        '/product/all',
-        [APIController::class, "allProduct"]
-    );
-
-    Route::get(
-        '/product/detail/{id}',
-        [APIController::class, "oneProduct"]
-    );
-
-    Route::post(
-        '/product/new',
-        [APIController::class, "addProduct"]
-    );
-
-    Route::get(
-        '/product/delete/{id}',
-        [APIController::class, "deleteProduct"]
-    );
-
-    Route::get(
-        '/product/edit/{id}/{nom}/{image}/{prix}',
-        [APIController::class, "updateProduct"]
-    );
-
+    Route::post('register', [APIAuthController::class, 'register']);
+    Route::post('login', [APIAuthController::class, 'login']);
+    Route::get('product/all', [APIController::class, "allProduct"]);
+    Route::get('product/detail/{id}', [APIController::class, "oneProduct"]);
     Route::post(
         '/payment/check',
         [PaymentController::class, "check"]
     )->middleware(['auth', 'verified', PaymentMiddleware::class]);
-
-
     Route::post(
         '/payment/add',
         [PaymentController::class, "addInformation"]
     )->middleware(['auth', 'verified', PaymentMiddleware::class]);
-
     Route::post(
         '/product/addoncart',
         [CartController::class, "addToCart"]
     );
-
     Route::post(
         '/product/deleteoncart',
         [CartController::class, "deleteToCart"]
     );
-
     Route::post(
         '/product/verificationcart',
         [CartController::class, "addLocalProducts"]
     );
-
     Route::post(
         '/contact',
         function (Request $request) {
@@ -254,17 +227,22 @@ Route::prefix('api')->group(function () {
             return redirect("contact");
         }
     );
-
-
     Route::post(
         '/cart/quantity',
         [CartController::class, "updateQuantity"]
     );
-
     Route::post(
         '/personalize/create',
         [PersonalizeController::class, "createPersonnalized"]
     );
+
+
+    // GROUPE PRIVÉ DANS /api, protégé par JWT
+    Route::middleware('auth:api')->group(function () {
+        Route::post('product/new', [APIController::class, 'addProduct']);
+        Route::put('product/edit/{id}', [APIController::class, 'updateProduct']);
+        Route::delete('product/delete/{id}', [APIController::class, 'deleteProduct']);
+    });
 });
 #endregion API
 

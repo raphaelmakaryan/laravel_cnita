@@ -47,16 +47,6 @@ class APIController extends Controller
         }
     }
 
-    /*
-    protected function storeImage($image)
-    {
-        $imageName = time() . '.' . $image->getClientOriginalExtension();
-        $image->storeAs('public/assets/products', $imageName);
-        return $imageName;
-    }
-        */
-
-
     public function storeImage($image)
     {
         $filename = uniqid() . '.' . $image->getClientOriginalExtension();
@@ -66,17 +56,20 @@ class APIController extends Controller
             File::makeDirectory($destinationPath, 0755, true);
         }
 
-        // Copier le fichier temporaire vers le dossier destination
         copy($image->getPathname(), $destinationPath . DIRECTORY_SEPARATOR . $filename);
-
-        // Retourner le chemin accessible publiquement
         return 'assets/products/' . $filename;
     }
-
-
-
     public function addProduct(Request $request)
     {
+        //eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzUzMDg4NTc5LCJleHAiOjE3NTMwOTIxNzksIm5iZiI6MTc1MzA4ODU3OSwianRpIjoicjFXSTdscTZnRlQ4SHh3dyIsInN1YiI6IjEiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.fV4WtxAwWkTzq8wBXCYoyhLxn1YY5sWx7kfFEuxtM0Q
+        $user = Auth::user();
+
+        if ($user->permission !== 1) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Vous n\'avez pas la permission d\'ajouter un produit.'
+            ], 403);
+        }
 
         $validatedData = $request->validate([
             "nom" => "required|string|max:255",
