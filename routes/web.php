@@ -14,6 +14,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Middleware\AdminMiddleware;
 use App\Http\Middleware\ClientMiddleware;
 use App\Http\Middleware\PaymentMiddleware;
+use App\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 use App\Mail\Contact;
@@ -201,12 +202,12 @@ Route::prefix('api')->group(function () {
     );
 
     Route::get(
-        '/product/{id}',
+        '/product/detail/{id}',
         [APIController::class, "oneProduct"]
     );
 
-    Route::get(
-        '/product/new/{nom}/{image}/{prix}',
+    Route::post(
+        '/product/new',
         [APIController::class, "addProduct"]
     );
 
