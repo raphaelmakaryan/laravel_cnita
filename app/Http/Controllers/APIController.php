@@ -61,7 +61,6 @@ class APIController extends Controller
     }
     public function addProduct(Request $request)
     {
-        //eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJpc3MiOiJodHRwOi8vMTI3LjAuMC4xOjgwMDAvYXBpL2xvZ2luIiwiaWF0IjoxNzUzMDg4NTc5LCJleHAiOjE3NTMwOTIxNzksIm5iZiI6MTc1MzA4ODU3OSwianRpIjoicjFXSTdscTZnRlQ4SHh3dyIsInN1YiI6IjEiLCJwcnYiOiIyM2JkNWM4OTQ5ZjYwMGFkYjM5ZTcwMWM0MDA4NzJkYjdhNTk3NmY3In0.fV4WtxAwWkTzq8wBXCYoyhLxn1YY5sWx7kfFEuxtM0Q
         $user = Auth::user();
 
         if ($user->permission !== 1) {
@@ -129,58 +128,74 @@ class APIController extends Controller
             ];
         }
     }
-
-    public function updateProduct($id, $nom, $image, $prix)
+    public function updateProduct(Request $request, $id)
     {
         if (!Auth::check()) {
-            return [
+            return response()->json([
                 "success" => false,
                 "message" => "Vous devez être connecté pour effectuer cette action."
-            ];
+            ], 401);
         }
 
-        if (Auth::user()->permission !== 1) {
-            return [
+        $user = Auth::user();
+
+        if ($user->permission !== 1) {
+            return response()->json([
                 "success" => false,
-                "message" => "Vous n'avez pas les permissions requises pour modifier un produit."
-            ];
+                "message" => "Vous n'avez pas la permission de modifier un produit."
+            ], 403);
         }
+
+        $validatedData = $request->validate([
+            "nom" => "required|string|max:255",
+            "image" => "required|image|max:2048",
+            "prix" => "required|numeric"
+        ]);
 
         try {
             $updateData = [];
 
-            if ($nom !== "null") {
-                $updateData['nom'] = $nom;
+            if ($request->filled('nom')) {
+                $updateData['nom'] = $validatedData['nom'];
             }
 
-            if ($image !== "null") {
-                $updateData['image'] = $image;
+            if ($request->hasFile('image')) {
+                $updateData['image'] = $this->storeImage($request->file('image'));
             }
 
-            if ($prix != 0) {
-                $updateData['prix'] = (int) $prix;
+            if ($request->filled('prix')) {
+                $updateData['prix'] = $validatedData['prix'];
             }
 
             if (empty($updateData)) {
-                return [
+                return response()->json([
                     "success" => false,
                     "message" => "Aucune donnée à mettre à jour."
-                ];
+                ], 400);
             }
 
-            Product::where("ID", "=", $id)->update($updateData);
+            $product = Product::find($id);
 
-            return [
+            if (!$product) {
+                return response()->json([
+                    "success" => false,
+                    "message" => "Produit introuvable."
+                ], 404);
+            }
+
+            $product::where("ID", "=", $id)->update($updateData);
+
+            return response()->json([
                 "success" => true,
-                "message" => "Produit mis à jour avec succès."
-            ];
+                "message" => "Produit mis à jour avec succès.",
+                "product" => $product
+            ]);
         } catch (Exception $e) {
-            return [
+            return response()->json([
                 "success" => false,
                 "message" => "Une erreur est survenue lors de la modification du produit.",
-                "error" => $e->getMessage(),
-                "result" => $updateData
-            ];
+                "error" => $e->getMessage()
+            ], 500);
         }
     }
 }

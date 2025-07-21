@@ -240,7 +240,7 @@ Route::prefix('api')->group(function () {
     // GROUPE PRIVÉ DANS /api, protégé par JWT
     Route::middleware('auth:api')->group(function () {
         Route::post('product/new', [APIController::class, 'addProduct']);
-        Route::put('product/edit/{id}', [APIController::class, 'updateProduct']);
+        Route::post('product/edit/{id}', [APIController::class, 'updateProduct']);
         Route::delete('product/delete/{id}', [APIController::class, 'deleteProduct']);
     });
 });
